@@ -2,385 +2,398 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sarkari Photo Tool | Smart Exam Resizer</title>
-    <meta name="description" content="Official tool to resize photos and signatures for SSC, UPSC, IBPS, Railways and other Indian Government Exams.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sarkari Exam Photo Tool</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Google Font: Inter for clean UI -->
+    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; -webkit-tap-highlight-color: transparent; }
         
-        /* Shiny "HD" Button Effect */
-        .btn-shine {
-            position: relative;
-            overflow: hidden;
-        }
+        /* Shiny Button Effect */
+        .btn-shine { position: relative; overflow: hidden; }
         .btn-shine::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 50%;
-            height: 100%;
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
             background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
-            transform: skewX(-20deg);
-            animation: shine 3s infinite;
+            transform: skewX(-20deg); animation: shine 3s infinite;
         }
-        @keyframes shine {
-            0% { left: -100%; }
-            20% { left: 200%; }
-            100% { left: 200%; }
-        }
+        @keyframes shine { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
 
-        /* Hide scrollbar for clean UI */
-        ::-webkit-scrollbar { width: 0px; background: transparent; }
+        /* Custom Modal Scrollbar */
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+        /* Animation for Popup */
+        .modal-enter { opacity: 0; transform: translateY(100%); }
+        .modal-enter-active { opacity: 1; transform: translateY(0); transition: all 0.3s ease-out; }
+        .modal-exit { opacity: 1; transform: translateY(0); }
+        .modal-exit-active { opacity: 0; transform: translateY(100%); transition: all 0.2s ease-in; }
     </style>
 </head>
-<body class="text-slate-800 antialiased min-h-screen flex flex-col items-center">
+<body class="text-slate-800 h-screen flex flex-col">
 
     <!-- Header -->
-    <header class="w-full bg-slate-900 text-white shadow-md">
-        <div class="max-w-md mx-auto px-4 py-4 flex items-center justify-between">
+    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-10">
+        <div class="px-4 py-3 flex items-center justify-between">
             <div class="flex items-center gap-2">
-                <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                <h1 class="font-bold text-lg tracking-wide">Sarkari<span class="text-blue-400">Photo</span>Tool</h1>
+                <div class="bg-blue-600 text-white p-1.5 rounded-lg">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight text-slate-800">Sarkari Resizer</h1>
+                    <p class="text-[10px] text-slate-500 font-medium">Safe & Fast • No Upload</p>
+                </div>
             </div>
-            <span class="text-xs bg-blue-900 px-2 py-1 rounded border border-blue-700">Safe Mode</span>
         </div>
     </header>
 
-    <!-- Main Container -->
-    <main class="w-full max-w-md p-4 pb-24 flex-grow">
+    <!-- Main Content -->
+    <main class="flex-grow p-4 overflow-y-auto pb-32">
         
-        <!-- STEP 1: Select Exam (The Master Dropdown) -->
-        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 mb-4">
-            <label class="block text-sm font-semibold text-slate-600 mb-2 uppercase tracking-wider">Step 1: Select Exam Purpose</label>
-            <div class="relative">
-                <select id="examSelect" class="w-full p-4 pr-10 appearance-none bg-slate-50 border-2 border-slate-200 rounded-lg text-slate-900 font-medium focus:outline-none focus:border-blue-600 focus:bg-white transition-colors cursor-pointer text-base">
-                    <option value="" disabled selected>Select an Exam to Start...</option>
-                    <!-- Options populated by JS -->
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        <!-- STEP 1: Custom Selector (Fixes the Native Select Issue) -->
+        <div class="mb-5">
+            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 block">Step 1: Choose Exam</label>
+            
+            <button id="examTriggerBtn" class="w-full bg-white border-2 border-blue-100 rounded-xl p-4 flex items-center justify-between shadow-sm active:bg-blue-50 transition-colors group">
+                <div class="text-left">
+                    <span id="selectedExamLabel" class="block font-bold text-slate-700 text-lg">Select Exam Here</span>
+                    <span id="selectedExamDetail" class="text-xs text-slate-400">Tap to search SSC, UPSC, IBPS...</span>
                 </div>
-            </div>
-            <p id="presetDescription" class="text-xs text-blue-600 mt-2 font-medium h-4"></p>
-        </div>
-
-        <!-- STEP 2: Upload -->
-        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 mb-4">
-            <label class="block text-sm font-semibold text-slate-600 mb-2 uppercase tracking-wider">Step 2: Upload Photo/Sign</label>
-            <div id="dropZone" class="border-2 border-dashed border-slate-300 rounded-lg p-8 text-center bg-slate-50 hover:bg-blue-50 hover:border-blue-400 transition-all cursor-pointer relative">
-                <input type="file" id="fileInput" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
-                <div class="pointer-events-none">
-                    <svg class="w-10 h-10 text-slate-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
-                    <span class="text-sm font-medium text-slate-600">Tap to Upload Image</span>
+                <div class="bg-blue-50 text-blue-600 p-2 rounded-full group-active:bg-blue-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
-            </div>
-        </div>
-
-        <!-- Advanced Toggle -->
-        <div class="flex justify-end mb-2">
-            <button id="toggleAdvanced" class="text-xs text-slate-500 hover:text-blue-600 underline flex items-center gap-1">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                Advanced Settings
             </button>
         </div>
 
-        <!-- Manual Settings (Hidden by default) -->
-        <div id="advancedPanel" class="hidden bg-slate-100 p-4 rounded-lg border border-slate-200 mb-4 transition-all">
-            <div class="grid grid-cols-3 gap-3">
-                <div>
-                    <label class="text-xs font-bold text-slate-500 block mb-1">Width (px)</label>
-                    <input type="number" id="inputWidth" class="w-full text-sm border border-slate-300 rounded p-2 focus:border-blue-500 outline-none">
+        <!-- STEP 2: Upload Box -->
+        <div id="uploadSection" class="mb-5 opacity-50 pointer-events-none transition-opacity">
+            <label class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 block">Step 2: Upload Photo</label>
+            <div class="relative w-full h-40 bg-slate-50 border-2 border-dashed border-slate-300 rounded-xl flex flex-col items-center justify-center text-center hover:bg-white hover:border-blue-400 transition-all">
+                <input type="file" id="fileInput" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 z-20 cursor-pointer" disabled>
+                <div class="bg-white p-3 rounded-full shadow-sm mb-2">
+                    <svg class="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                 </div>
-                <div>
-                    <label class="text-xs font-bold text-slate-500 block mb-1">Height (px)</label>
-                    <input type="number" id="inputHeight" class="w-full text-sm border border-slate-300 rounded p-2 focus:border-blue-500 outline-none">
-                </div>
-                <div>
-                    <label class="text-xs font-bold text-slate-500 block mb-1">Max Size (KB)</label>
-                    <input type="number" id="inputKB" class="w-full text-sm border border-slate-300 rounded p-2 focus:border-blue-500 outline-none">
-                </div>
+                <p class="text-sm font-semibold text-slate-600">Tap to Upload</p>
+                <p class="text-[10px] text-slate-400 mt-1">Supports JPG, PNG</p>
             </div>
         </div>
 
-        <!-- Preview Area -->
-        <div id="previewContainer" class="hidden bg-white rounded-xl shadow-lg overflow-hidden border border-slate-200 mt-4">
-            <div class="bg-slate-50 px-4 py-2 border-b border-slate-200 flex justify-between items-center">
-                <span class="text-xs font-bold text-slate-600 uppercase">Preview</span>
-                <span id="finalSize" class="text-xs font-bold text-green-600 bg-green-100 px-2 py-1 rounded">0 KB</span>
-            </div>
-            <div class="p-4 flex gap-4 justify-center items-center bg-slate-800/5">
-                <!-- Original (Hidden visually but kept for logic if needed, or small) -->
-                <div class="text-center w-1/2">
-                    <p class="text-[10px] text-slate-500 mb-1">Original</p>
-                    <img id="previewOriginal" class="h-32 object-contain mx-auto border border-slate-300 bg-white shadow-sm">
-                </div>
-                <!-- Processed -->
-                <div class="text-center w-1/2 relative">
-                    <p class="text-[10px] text-blue-600 font-bold mb-1">Ready for Upload</p>
-                    <img id="previewProcessed" class="h-32 object-contain mx-auto border-2 border-blue-500 bg-white shadow-md">
-                    <!-- Loading Spinner -->
-                    <div id="spinner" class="absolute inset-0 bg-white/80 flex items-center justify-center hidden">
-                        <svg class="animate-spin h-6 w-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                    </div>
-                </div>
-            </div>
+        <!-- Hidden Inputs for Logic -->
+        <input type="hidden" id="inputWidth">
+        <input type="hidden" id="inputHeight">
+        <input type="hidden" id="inputKB">
 
-            <!-- ACTION BUTTONS (The Trap) -->
-            <div class="p-4 bg-white grid grid-cols-1 gap-3">
+        <!-- PREVIEW AREA (Appears after upload) -->
+        <div id="previewContainer" class="hidden bg-white rounded-xl shadow-lg border border-slate-100 overflow-hidden mb-6">
+            <div class="bg-blue-600 px-4 py-2 flex justify-between items-center text-white">
+                <span class="text-xs font-bold uppercase tracking-wide">Result Preview</span>
+                <span id="finalSize" class="text-xs font-mono bg-blue-800 px-2 py-0.5 rounded text-white">Calculating...</span>
+            </div>
+            
+            <div class="p-4 flex flex-col items-center justify-center bg-slate-50 min-h-[200px] relative">
+                <!-- Loader -->
+                <div id="spinner" class="absolute inset-0 z-10 bg-white/90 flex flex-col items-center justify-center hidden">
+                    <div class="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mb-2"></div>
+                    <span class="text-xs font-medium text-blue-600">Compressing...</span>
+                </div>
+
+                <img id="previewProcessed" class="max-h-48 object-contain shadow-md border border-slate-200 rounded" alt="Result">
                 
-                <!-- Trap Button (HD) -->
-                <button id="btnHD" class="btn-shine w-full py-3.5 bg-gradient-to-r from-emerald-500 to-green-600 text-white rounded-lg font-bold shadow-lg shadow-green-500/30 active:scale-95 transition-transform flex items-center justify-center gap-2 border-b-4 border-green-700">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    Download HD Quality
-                    <span class="text-[10px] bg-white/20 px-1 rounded ml-1">REC</span>
-                </button>
-
-                <!-- Normal Button -->
-                <button id="btnNormal" class="w-full py-3 bg-slate-100 text-slate-600 rounded-lg font-semibold border border-slate-300 hover:bg-slate-200 transition-colors flex items-center justify-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                    Standard Download
-                </button>
+                <div class="mt-4 w-full grid grid-cols-1 gap-3">
+                    <!-- Trap Button (HD) -->
+                    <button id="btnHD" class="btn-shine w-full py-4 bg-emerald-500 text-white rounded-xl font-bold text-lg shadow-lg shadow-emerald-200 active:scale-95 transition-transform flex items-center justify-center gap-2 border-b-4 border-emerald-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        Download HD Quality
+                    </button>
+                    
+                    <!-- Normal Button -->
+                    <button id="btnNormal" class="w-full py-3 bg-white text-slate-500 rounded-xl font-medium border border-slate-200 text-sm flex items-center justify-center gap-2">
+                        Download Standard (Low Res)
+                    </button>
+                </div>
             </div>
         </div>
-
     </main>
 
-    <!-- Footer -->
-    <footer class="w-full text-center py-4 text-xs text-slate-400 border-t border-slate-200">
-        AI-Powered Image Optimization • Secure Client-Side Processing
-    </footer>
+    <!-- FULL SCREEN EXAM SELECTOR MODAL -->
+    <div id="examModal" class="fixed inset-0 z-50 bg-black/50 hidden flex items-end sm:items-center justify-center backdrop-blur-sm">
+        <div id="modalContent" class="bg-white w-full sm:w-[400px] sm:rounded-2xl rounded-t-2xl h-[85vh] sm:h-[600px] flex flex-col shadow-2xl transform transition-transform duration-300 translate-y-full">
+            
+            <!-- Modal Header -->
+            <div class="p-4 border-b border-slate-100 flex justify-between items-center bg-white rounded-t-2xl">
+                <h2 class="font-bold text-lg">Select Purpose</h2>
+                <button id="closeModal" class="p-2 bg-slate-100 rounded-full text-slate-500 hover:bg-slate-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <!-- List Container -->
+            <div id="examListContainer" class="flex-grow overflow-y-auto custom-scroll p-2 bg-slate-50">
+                <!-- JS will inject list here -->
+            </div>
+        </div>
+    </div>
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // --- CONFIGURATION ---
-        const monetagUrl = "https://google.com"; // REPLACE with your direct link
+        // --- CONFIG ---
+        const monetagUrl = "https://google.com"; // Apka Direct Link yahan dalein
         
-        // --- PRESET DATA (Government Exam Specs) ---
+        // --- DATA PRESETS ---
         const presets = [
             {
-                category: "SSC (Staff Selection Commission)",
+                category: "SSC (CGL, CHSL, MTS, GD)",
+                color: "bg-blue-100 text-blue-800",
                 exams: [
-                    { name: "SSC CGL/CHSL - Photo", w: 350, h: 450, kb: 50 },
-                    { name: "SSC CGL/CHSL - Signature", w: 400, h: 200, kb: 20 }
+                    { name: "SSC Photo (Live)", detail: "350x450px | 20-50KB", w: 350, h: 450, kb: 50 },
+                    { name: "SSC Signature", detail: "400x200px | 10-20KB", w: 400, h: 200, kb: 20 }
                 ]
             },
             {
-                category: "UPSC (Civil Services/IAS)",
+                category: "UPSC (IAS, IPS, CDS, NDA)",
+                color: "bg-orange-100 text-orange-800",
                 exams: [
-                    { name: "UPSC IAS - Photo", w: 350, h: 350, kb: 300 },
-                    { name: "UPSC IAS - Signature", w: 350, h: 115, kb: 40 }
+                    { name: "UPSC Photo", detail: "350x350px | 20-300KB", w: 350, h: 350, kb: 300 },
+                    { name: "UPSC Signature", detail: "350x115px | No limit", w: 350, h: 115, kb: 40 }
                 ]
             },
             {
-                category: "Banking (IBPS/SBI)",
+                category: "Railways (RRB NTPC, Group D)",
+                color: "bg-red-100 text-red-800",
                 exams: [
-                    { name: "IBPS/SBI PO - Photo", w: 200, h: 230, kb: 50 },
-                    { name: "IBPS/SBI PO - Signature", w: 140, h: 60, kb: 20 },
-                    { name: "IBPS Thumb Impression", w: 240, h: 240, kb: 20 }
+                    { name: "RRB Photo", detail: "35mm x 45mm | 15-40KB", w: 320, h: 400, kb: 40 },
+                    { name: "RRB Signature", detail: "Standard Sign | 10-20KB", w: 200, h: 100, kb: 20 }
                 ]
             },
             {
-                category: "Railways (RRB)",
+                category: "Banking (IBPS PO/Clerk, SBI)",
+                color: "bg-emerald-100 text-emerald-800",
                 exams: [
-                    { name: "RRB NTPC - Photo", w: 320, h: 400, kb: 30 }, // Approx for 35mm x 45mm
-                    { name: "RRB NTPC - Signature", w: 200, h: 100, kb: 20 }
+                    { name: "IBPS/SBI Photo", detail: "200x230px | 20-50KB", w: 200, h: 230, kb: 50 },
+                    { name: "IBPS/SBI Signature", detail: "140x60px | 10-20KB", w: 140, h: 60, kb: 20 },
+                    { name: "Thumb Impression", detail: "240x240px | 20-50KB", w: 240, h: 240, kb: 20 }
                 ]
             },
             {
-                category: "Common Entrance Exams",
+                category: "Entrance Exams (NEET, JEE, GATE)",
+                color: "bg-purple-100 text-purple-800",
                 exams: [
-                    { name: "NEET UG - Photo", w: 400, h: 600, kb: 200 }, // Postcard size supported often
-                    { name: "JEE Main - Photo", w: 350, h: 450, kb: 200 },
-                    { name: "GATE - Photo", w: 480, h: 640, kb: 200 }
+                    { name: "NEET/JEE Photo", detail: "Passport Size | 10-200KB", w: 350, h: 450, kb: 200 },
+                    { name: "Postcard Photo", detail: "4x6 inch | 50-300KB", w: 400, h: 600, kb: 300 }
                 ]
             },
             {
-                category: "General Documents",
+                category: "Common Documents",
+                color: "bg-gray-200 text-gray-800",
                 exams: [
-                    { name: "PAN Card Application", w: 213, h: 213, kb: 30 },
-                    { name: "Passport Size (Standard)", w: 350, h: 450, kb: 100 }
+                    { name: "PAN Card Photo", detail: "213x213px | 30KB", w: 213, h: 213, kb: 30 },
+                    { name: "Aadhaar / Generic", detail: "Passport Size | 100KB", w: 350, h: 450, kb: 100 }
                 ]
             }
         ];
 
-        // --- DOM ELEMENTS ---
-        const examSelect = document.getElementById('examSelect');
+        // --- ELEMENTS ---
+        const examTriggerBtn = document.getElementById('examTriggerBtn');
+        const examModal = document.getElementById('examModal');
+        const modalContent = document.getElementById('modalContent');
+        const closeModal = document.getElementById('closeModal');
+        const examListContainer = document.getElementById('examListContainer');
+        const selectedExamLabel = document.getElementById('selectedExamLabel');
+        const selectedExamDetail = document.getElementById('selectedExamDetail');
+        
+        const uploadSection = document.getElementById('uploadSection');
         const fileInput = document.getElementById('fileInput');
-        const inputWidth = document.getElementById('inputWidth');
-        const inputHeight = document.getElementById('inputHeight');
-        const inputKB = document.getElementById('inputKB');
         const previewContainer = document.getElementById('previewContainer');
-        const previewOriginal = document.getElementById('previewOriginal');
-        const previewProcessed = document.getElementById('previewProcessed');
+        const previewImg = document.getElementById('previewProcessed');
         const finalSizeLabel = document.getElementById('finalSize');
         const spinner = document.getElementById('spinner');
-        const presetDescription = document.getElementById('presetDescription');
 
-        // --- INITIALIZATION ---
-        
-        // Populate Dropdown
-        presets.forEach(group => {
-            const optgroup = document.createElement('optgroup');
-            optgroup.label = group.category;
-            group.exams.forEach((exam, index) => {
-                const option = document.createElement('option');
-                option.text = exam.name;
-                // Store config in value as JSON string for easy retrieval
-                option.value = JSON.stringify({ w: exam.w, h: exam.h, kb: exam.kb });
-                optgroup.appendChild(option);
-            });
-            examSelect.appendChild(optgroup);
-        });
+        const inputW = document.getElementById('inputWidth');
+        const inputH = document.getElementById('inputHeight');
+        const inputKB = document.getElementById('inputKB');
 
-        // Add "Custom" option
-        const customOpt = document.createElement('option');
-        customOpt.text = "Custom / Other Exam";
-        customOpt.value = "custom";
-        examSelect.appendChild(customOpt);
+        // --- RENDER LIST ---
+        function renderExamList() {
+            examListContainer.innerHTML = "";
+            
+            presets.forEach(group => {
+                // Render Header
+                const header = document.createElement('div');
+                header.className = `sticky top-0 z-10 px-4 py-2 text-xs font-bold uppercase tracking-wider ${group.color} mt-2 first:mt-0 rounded-md mx-2`;
+                header.innerText = group.category;
+                examListContainer.appendChild(header);
 
-        // Variables
-        let originalImage = new Image();
-        let processedDataUrl = "";
-        let isCustom = false;
-
-        // --- EVENT LISTENERS ---
-
-        // 1. Exam Selection
-        examSelect.addEventListener('change', (e) => {
-            if(e.target.value === "custom") {
-                isCustom = true;
-                presetDescription.innerText = "Manual settings enabled. Check Advanced.";
-                document.getElementById('advancedPanel').classList.remove('hidden');
-            } else {
-                isCustom = false;
-                const config = JSON.parse(e.target.value);
-                inputWidth.value = config.w;
-                inputHeight.value = config.h;
-                inputKB.value = config.kb;
-                presetDescription.innerText = `Auto-Set: ${config.w}x${config.h}px | Max ${config.kb}KB`;
-                // If image already loaded, re-process
-                if(originalImage.src) processImage();
-            }
-        });
-
-        // 2. File Upload
-        fileInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                originalImage.onload = () => {
-                    previewOriginal.src = originalImage.src;
-                    previewContainer.classList.remove('hidden');
+                // Render Options
+                group.exams.forEach(exam => {
+                    const btn = document.createElement('button');
+                    btn.className = "w-full text-left bg-white p-4 border-b border-slate-100 hover:bg-slate-50 active:bg-blue-50 transition-colors flex items-center justify-between";
+                    btn.innerHTML = `
+                        <div>
+                            <div class="font-semibold text-slate-800 text-sm">${exam.name}</div>
+                            <div class="text-xs text-slate-400 mt-0.5">${exam.detail}</div>
+                        </div>
+                        <div class="w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center">
+                            <div class="w-2.5 h-2.5 rounded-full bg-blue-600 hidden check-dot"></div>
+                        </div>
+                    `;
                     
-                    // If no exam selected, force user attention or set defaults
-                    if(!inputWidth.value) {
-                        alert("Please select an Exam Purpose first!");
-                        examSelect.focus();
-                        return;
-                    }
-                    processImage();
-                };
-                originalImage.src = event.target.result;
-            };
-            reader.readAsDataURL(file);
-        });
-
-        // 3. Manual Inputs
-        [inputWidth, inputHeight, inputKB].forEach(inp => {
-            inp.addEventListener('change', () => {
-                if(originalImage.src) processImage();
+                    btn.onclick = () => selectExam(exam, btn);
+                    examListContainer.appendChild(btn);
+                });
             });
-        });
-
-        // 4. Toggle Advanced
-        document.getElementById('toggleAdvanced').addEventListener('click', () => {
-            document.getElementById('advancedPanel').classList.toggle('hidden');
-        });
-
-        // --- CORE LOGIC ---
-
-        async function processImage() {
-            spinner.classList.remove('hidden');
-            
-            // Allow UI update
-            await new Promise(r => setTimeout(r, 50));
-
-            const targetW = parseInt(inputWidth.value);
-            const targetH = parseInt(inputHeight.value);
-            const targetKB = parseInt(inputKB.value);
-
-            const canvas = document.createElement('canvas');
-            canvas.width = targetW;
-            canvas.height = targetH;
-            const ctx = canvas.getContext('2d');
-
-            // Force Resize (Fill) - Govt portals usually expect exact dimensions
-            // High quality smoothing
-            ctx.imageSmoothingEnabled = true;
-            ctx.imageSmoothingQuality = 'high';
-            ctx.drawImage(originalImage, 0, 0, targetW, targetH);
-
-            // Compression Loop
-            let quality = 0.95;
-            let dataUrl = canvas.toDataURL('image/jpeg', quality);
-            let blob = await (await fetch(dataUrl)).blob();
-
-            // Simple decrement loop to fit under target KB
-            // Limit iterations to prevent freezing
-            let iterations = 0;
-            while (blob.size > targetKB * 1024 && quality > 0.1 && iterations < 20) {
-                quality -= 0.05;
-                dataUrl = canvas.toDataURL('image/jpeg', quality);
-                blob = await (await fetch(dataUrl)).blob();
-                iterations++;
-            }
-
-            processedDataUrl = dataUrl;
-            
-            // Update UI
-            previewProcessed.src = dataUrl;
-            finalSizeLabel.innerText = (blob.size / 1024).toFixed(1) + " KB";
-            spinner.classList.add('hidden');
         }
 
-        // --- DOWNLOAD & TRAP LOGIC ---
+        // --- MODAL LOGIC ---
+        function openModal() {
+            examModal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.remove('translate-y-full');
+            }, 10);
+        }
 
-        function downloadImage(prefix) {
-            if (!processedDataUrl) return;
+        function closeModalFunc() {
+            modalContent.classList.add('translate-y-full');
+            setTimeout(() => {
+                examModal.classList.add('hidden');
+            }, 300);
+        }
+
+        examTriggerBtn.addEventListener('click', openModal);
+        closeModal.addEventListener('click', closeModalFunc);
+        examModal.addEventListener('click', (e) => {
+            if (e.target === examModal) closeModalFunc();
+        });
+
+        // --- SELECTION LOGIC ---
+        function selectExam(exam, btnElement) {
+            // Visual Update in Modal
+            document.querySelectorAll('.check-dot').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.border-blue-500').forEach(el => el.classList.remove('border-blue-500'));
+            
+            btnElement.querySelector('.check-dot').classList.remove('hidden');
+            btnElement.querySelector('.w-5').classList.add('border-blue-500');
+
+            // Update Logic
+            inputW.value = exam.w;
+            inputH.value = exam.h;
+            inputKB.value = exam.kb;
+
+            // Update UI Trigger Button
+            selectedExamLabel.innerText = exam.name;
+            selectedExamLabel.classList.add('text-blue-600');
+            selectedExamDetail.innerText = exam.detail;
+
+            // Enable Upload
+            uploadSection.classList.remove('opacity-50', 'pointer-events-none');
+            fileInput.disabled = false;
+
+            // Close Modal
+            setTimeout(closeModalFunc, 200);
+
+            // Re-process if file exists
+            if (currentFile) processImage(currentFile);
+        }
+
+        // Initialize List
+        renderExamList();
+
+        // --- IMAGE PROCESSING LOGIC ---
+        let currentFile = null;
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files[0]) {
+                currentFile = e.target.files[0];
+                processImage(currentFile);
+            }
+        });
+
+        async function processImage(file) {
+            previewContainer.classList.remove('hidden');
+            spinner.classList.remove('hidden');
+            previewImg.style.opacity = '0.5';
+
+            // Allow UI to breathe
+            await new Promise(r => setTimeout(r, 100));
+
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            
+            reader.onload = async (e) => {
+                const img = new Image();
+                img.src = e.target.result;
+                
+                img.onload = async () => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    
+                    const w = parseInt(inputW.value);
+                    const h = parseInt(inputH.value);
+                    const maxKB = parseInt(inputKB.value);
+
+                    canvas.width = w;
+                    canvas.height = h;
+
+                    ctx.fillStyle = '#FFFFFF';
+                    ctx.fillRect(0,0,w,h);
+                    ctx.drawImage(img, 0, 0, w, h);
+
+                    // Compression
+                    let quality = 0.95;
+                    let dataUrl = canvas.toDataURL('image/jpeg', quality);
+                    let size = await getKB(dataUrl);
+
+                    // Simple Optimization Loop
+                    let iterations = 0;
+                    while(size > maxKB && quality > 0.1 && iterations < 15) {
+                        quality -= 0.05;
+                        dataUrl = canvas.toDataURL('image/jpeg', quality);
+                        size = await getKB(dataUrl);
+                        iterations++;
+                    }
+
+                    // Done
+                    previewImg.src = dataUrl;
+                    previewImg.dataset.dl = dataUrl;
+                    finalSizeLabel.innerText = size.toFixed(1) + " KB";
+                    
+                    spinner.classList.add('hidden');
+                    previewImg.style.opacity = '1';
+                };
+            };
+        }
+
+        function getKB(base64) {
+            return new Promise(resolve => {
+                const len = base64.length * (3/4) - 2;
+                resolve(len / 1024);
+            });
+        }
+
+        // --- DOWNLOAD & TRAP ---
+        function dl(dataUrl, prefix) {
             const link = document.createElement('a');
-            link.href = processedDataUrl;
-            link.download = `${prefix}_${Date.now()}.jpg`;
+            link.href = dataUrl;
+            link.download = `SarkariTool_${prefix}_${Date.now()}.jpg`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
         }
 
-        // Normal Button
-        document.getElementById('btnNormal').addEventListener('click', () => {
-            downloadImage('compressed');
-        });
+        document.getElementById('btnNormal').onclick = () => {
+            if(previewImg.dataset.dl) dl(previewImg.dataset.dl, 'std');
+        };
 
-        // HD Trap Button
-        document.getElementById('btnHD').addEventListener('click', () => {
-            // 1. Open Monetag Link in New Tab
+        document.getElementById('btnHD').onclick = () => {
+            if(!previewImg.dataset.dl) return;
             window.open(monetagUrl, '_blank');
-
-            // 2. Download Image in Current Tab
-            // Small delay to ensure browser processes the click event for the popup first
             setTimeout(() => {
-                downloadImage('HD_Quality_Govt');
-            }, 500);
-        });
+                dl(previewImg.dataset.dl, 'HD');
+            }, 800);
+        };
 
     </script>
 </body>
