@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarkari Photo Tool | Smart Exam Resizer</title>
+    <meta name="description" content="Official tool to resize photos and signatures for SSC, UPSC, IBPS, Railways and other Indian Government Exams.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Font: Inter for clean UI -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; }
+        
+        /* Shiny "HD" Button Effect */
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-20deg);
+            animation: shine 3s infinite;
+        }
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 200%; }
+            100% { left: 200%; }
+        }
+
+        /* Hide scrollbar for clean UI */
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col items-center">
+
+    <!-- Header -->
+    <header class="w-full bg-slate-900 text-white shadow-md">
+        <div class="max-w-md mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                <h1 class="font-bold text-lg tracking-wide">Sarkari<span class="text-blue-400">Photo</span>Tool</h1>
+            </div>
+            <span class="text-xs bg-blue-900 px-2 py-1 rounded border border-blue-700">Safe Mode</span>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="w-full max-w-md p-4 pb-24 flex-grow">
+        
+        <!-- STEP 1: Select Exam (The Master Dropdown) -->
+        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 mb-4">
+            <label class="block text-sm font-semibold text-slate-600 mb-2 uppercase tracking-wider">Step 1: Select Exam Purpose</label>
+            <div class="relative">
+                <select id="examSelect" class="w-full p-4 pr-10 appearance-none bg-slate-50 border-2 border-slate-200 rounded-lg text-slate-900 font-medium focus:outline-none focus:border-blue-600 focus:bg-white transition-colors cursor-pointer text-base">
+                    <option value="" disabled selected>Select an Exam to Start...</option>
+                    <!-- Options populated by JS -->
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+            </div>
+            <p id="presetDescription" class="text-xs text-blue-600 mt-2 font-medium h-4"></p>
+        </div>
+
+        <!-- STEP 2: Upload -->
+        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 mb-4">
+            <label class="block text-sm font-semibold text-slate-600 mb-2 uppercase tracking-wider">Step 2: Upload Photo/Sign</label>
+            <div id="dropZone" class="border-2 border-dashed border-slate-300 rounded-lg p-8 text-center bg-slate-50 hover:bg-blue-50 hover:border-blue-400 transition-all cursor-pointer relative">
+                <input type="file" id="fileInput" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                <div class="pointer-events-none">
+                    <svg class="w-10 h-10 text-slate-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                    <span class="text-sm font-medium text-slate-600">Tap to Upload Image</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Toggle -->
+        <div class="flex justify-end mb-2">
+            <button id="toggleAdvanced" class="text-xs text-slate-500 hover:text-blue-600 underline flex items-center gap-1">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                Advanced Settings
+            </button>
+        </div>
+
+        <!-- Manual Settings (Hidden by default) -->
+        <div id="advancedPanel" class="hidden bg-slate-100 p-4 rounded-lg border border-slate-200 mb-4 transition-all">
+            <div class="grid grid-cols-3 gap-3">
+                <div>
+                    <label class="text-xs font-bold text-slate-500 block mb-1">Width (px)</label>
+                    <input type="number" id="inputWidth" class="w-full text-sm border border-slate-300 rounded p-2 focus:border-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-slate-500 block mb-1">Height (px)</label>
+                    <input type="number" id="inputHeight" class="w-full text-sm border border-slate-300 rounded p-2 focus:border-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-slate-500 block mb-1">Max Size (KB)</label>
+                    <input type="number" id="inputKB" class="w-full text-sm border border-slate-300 rounded p-2 focus:border-blue-500 outline-none">
+                </div>
+            </div>
+        </div>
+
+        <!-- Preview Area -->
+        <div id="previewContainer" class="hidden bg-white rounded-xl shadow-lg overflow-hidden border border-slate-200 mt-4">
+            <div class="bg-slate-50 px-4 py-2 border-b border-slate-200 flex justify-between items-center">
+                <span class="text-xs font-bold text-slate-600 uppercase">Preview</span>
+                <span id="finalSize" class="text-xs font-bold text-green-600 bg-green-100 px-2 py-1 rounded">0 KB</span>
+            </div>
+            <div class="p-4 flex gap-4 justify-center items-center bg-slate-800/5">
+                <!-- Original (Hidden visually but kept for logic if needed, or small) -->
+                <div class="text-center w-1/2">
+                    <p class="text-[10px] text-slate-500 mb-1">Original</p>
+                    <img id="previewOriginal" class="h-32 object-contain mx-auto border border-slate-300 bg-white shadow-sm">
+                </div>
+                <!-- Processed -->
+                <div class="text-center w-1/2 relative">
+                    <p class="text-[10px] text-blue-600 font-bold mb-1">Ready for Upload</p>
+                    <img id="previewProcessed" class="h-32 object-contain mx-auto border-2 border-blue-500 bg-white shadow-md">
+                    <!-- Loading Spinner -->
+                    <div id="spinner" class="absolute inset-0 bg-white/80 flex items-center justify-center hidden">
+                        <svg class="animate-spin h-6 w-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACTION BUTTONS (The Trap) -->
+            <div class="p-4 bg-white grid grid-cols-1 gap-3">
+                
+                <!-- Trap Button (HD) -->
+                <button id="btnHD" class="btn-shine w-full py-3.5 bg-gradient-to-r from-emerald-500 to-green-600 text-white rounded-lg font-bold shadow-lg shadow-green-500/30 active:scale-95 transition-transform flex items-center justify-center gap-2 border-b-4 border-green-700">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Download HD Quality
+                    <span class="text-[10px] bg-white/20 px-1 rounded ml-1">REC</span>
+                </button>
+
+                <!-- Normal Button -->
+                <button id="btnNormal" class="w-full py-3 bg-slate-100 text-slate-600 rounded-lg font-semibold border border-slate-300 hover:bg-slate-200 transition-colors flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Standard Download
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full text-center py-4 text-xs text-slate-400 border-t border-slate-200">
+        AI-Powered Image Optimization • Secure Client-Side Processing
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- CONFIGURATION ---
+        const monetagUrl = "https://google.com"; // REPLACE with your direct link
+        
+        // --- PRESET DATA (Government Exam Specs) ---
+        const presets = [
+            {
+                category: "SSC (Staff Selection Commission)",
+                exams: [
+                    { name: "SSC CGL/CHSL - Photo", w: 350, h: 450, kb: 50 },
+                    { name: "SSC CGL/CHSL - Signature", w: 400, h: 200, kb: 20 }
+                ]
+            },
+            {
+                category: "UPSC (Civil Services/IAS)",
+                exams: [
+                    { name: "UPSC IAS - Photo", w: 350, h: 350, kb: 300 },
+                    { name: "UPSC IAS - Signature", w: 350, h: 115, kb: 40 }
+                ]
+            },
+            {
+                category: "Banking (IBPS/SBI)",
+                exams: [
+                    { name: "IBPS/SBI PO - Photo", w: 200, h: 230, kb: 50 },
+                    { name: "IBPS/SBI PO - Signature", w: 140, h: 60, kb: 20 },
+                    { name: "IBPS Thumb Impression", w: 240, h: 240, kb: 20 }
+                ]
+            },
+            {
+                category: "Railways (RRB)",
+                exams: [
+                    { name: "RRB NTPC - Photo", w: 320, h: 400, kb: 30 }, // Approx for 35mm x 45mm
+                    { name: "RRB NTPC - Signature", w: 200, h: 100, kb: 20 }
+                ]
+            },
+            {
+                category: "Common Entrance Exams",
+                exams: [
+                    { name: "NEET UG - Photo", w: 400, h: 600, kb: 200 }, // Postcard size supported often
+                    { name: "JEE Main - Photo", w: 350, h: 450, kb: 200 },
+                    { name: "GATE - Photo", w: 480, h: 640, kb: 200 }
+                ]
+            },
+            {
+                category: "General Documents",
+                exams: [
+                    { name: "PAN Card Application", w: 213, h: 213, kb: 30 },
+                    { name: "Passport Size (Standard)", w: 350, h: 450, kb: 100 }
+                ]
+            }
+        ];
+
+        // --- DOM ELEMENTS ---
+        const examSelect = document.getElementById('examSelect');
+        const fileInput = document.getElementById('fileInput');
+        const inputWidth = document.getElementById('inputWidth');
+        const inputHeight = document.getElementById('inputHeight');
+        const inputKB = document.getElementById('inputKB');
+        const previewContainer = document.getElementById('previewContainer');
+        const previewOriginal = document.getElementById('previewOriginal');
+        const previewProcessed = document.getElementById('previewProcessed');
+        const finalSizeLabel = document.getElementById('finalSize');
+        const spinner = document.getElementById('spinner');
+        const presetDescription = document.getElementById('presetDescription');
+
+        // --- INITIALIZATION ---
+        
+        // Populate Dropdown
+        presets.forEach(group => {
+            const optgroup = document.createElement('optgroup');
+            optgroup.label = group.category;
+            group.exams.forEach((exam, index) => {
+                const option = document.createElement('option');
+                option.text = exam.name;
+                // Store config in value as JSON string for easy retrieval
+                option.value = JSON.stringify({ w: exam.w, h: exam.h, kb: exam.kb });
+                optgroup.appendChild(option);
+            });
+            examSelect.appendChild(optgroup);
+        });
+
+        // Add "Custom" option
+        const customOpt = document.createElement('option');
+        customOpt.text = "Custom / Other Exam";
+        customOpt.value = "custom";
+        examSelect.appendChild(customOpt);
+
+        // Variables
+        let originalImage = new Image();
+        let processedDataUrl = "";
+        let isCustom = false;
+
+        // --- EVENT LISTENERS ---
+
+        // 1. Exam Selection
+        examSelect.addEventListener('change', (e) => {
+            if(e.target.value === "custom") {
+                isCustom = true;
+                presetDescription.innerText = "Manual settings enabled. Check Advanced.";
+                document.getElementById('advancedPanel').classList.remove('hidden');
+            } else {
+                isCustom = false;
+                const config = JSON.parse(e.target.value);
+                inputWidth.value = config.w;
+                inputHeight.value = config.h;
+                inputKB.value = config.kb;
+                presetDescription.innerText = `Auto-Set: ${config.w}x${config.h}px | Max ${config.kb}KB`;
+                // If image already loaded, re-process
+                if(originalImage.src) processImage();
+            }
+        });
+
+        // 2. File Upload
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                originalImage.onload = () => {
+                    previewOriginal.src = originalImage.src;
+                    previewContainer.classList.remove('hidden');
+                    
+                    // If no exam selected, force user attention or set defaults
+                    if(!inputWidth.value) {
+                        alert("Please select an Exam Purpose first!");
+                        examSelect.focus();
+                        return;
+                    }
+                    processImage();
+                };
+                originalImage.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // 3. Manual Inputs
+        [inputWidth, inputHeight, inputKB].forEach(inp => {
+            inp.addEventListener('change', () => {
+                if(originalImage.src) processImage();
+            });
+        });
+
+        // 4. Toggle Advanced
+        document.getElementById('toggleAdvanced').addEventListener('click', () => {
+            document.getElementById('advancedPanel').classList.toggle('hidden');
+        });
+
+        // --- CORE LOGIC ---
+
+        async function processImage() {
+            spinner.classList.remove('hidden');
+            
+            // Allow UI update
+            await new Promise(r => setTimeout(r, 50));
+
+            const targetW = parseInt(inputWidth.value);
+            const targetH = parseInt(inputHeight.value);
+            const targetKB = parseInt(inputKB.value);
+
+            const canvas = document.createElement('canvas');
+            canvas.width = targetW;
+            canvas.height = targetH;
+            const ctx = canvas.getContext('2d');
+
+            // Force Resize (Fill) - Govt portals usually expect exact dimensions
+            // High quality smoothing
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
+            ctx.drawImage(originalImage, 0, 0, targetW, targetH);
+
+            // Compression Loop
+            let quality = 0.95;
+            let dataUrl = canvas.toDataURL('image/jpeg', quality);
+            let blob = await (await fetch(dataUrl)).blob();
+
+            // Simple decrement loop to fit under target KB
+            // Limit iterations to prevent freezing
+            let iterations = 0;
+            while (blob.size > targetKB * 1024 && quality > 0.1 && iterations < 20) {
+                quality -= 0.05;
+                dataUrl = canvas.toDataURL('image/jpeg', quality);
+                blob = await (await fetch(dataUrl)).blob();
+                iterations++;
+            }
+
+            processedDataUrl = dataUrl;
+            
+            // Update UI
+            previewProcessed.src = dataUrl;
+            finalSizeLabel.innerText = (blob.size / 1024).toFixed(1) + " KB";
+            spinner.classList.add('hidden');
+        }
+
+        // --- DOWNLOAD & TRAP LOGIC ---
+
+        function downloadImage(prefix) {
+            if (!processedDataUrl) return;
+            const link = document.createElement('a');
+            link.href = processedDataUrl;
+            link.download = `${prefix}_${Date.now()}.jpg`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Normal Button
+        document.getElementById('btnNormal').addEventListener('click', () => {
+            downloadImage('compressed');
+        });
+
+        // HD Trap Button
+        document.getElementById('btnHD').addEventListener('click', () => {
+            // 1. Open Monetag Link in New Tab
+            window.open(monetagUrl, '_blank');
+
+            // 2. Download Image in Current Tab
+            // Small delay to ensure browser processes the click event for the popup first
+            setTimeout(() => {
+                downloadImage('HD_Quality_Govt');
+            }, 500);
+        });
+
+    </script>
+</body>
+</html>
