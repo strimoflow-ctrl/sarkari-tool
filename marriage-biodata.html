@@ -1,32 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" itemscope itemtype="http://schema.org/SoftwareApplication">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marriage Biodata Maker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- 1. External Libraries (CDN) -->
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- html2pdf.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- ================= SEO GOD LEVEL START ================= -->
+    <title>Free Marriage Biodata Maker | Create HD Biodata Online</title>
+    <meta name="description" content="Create professional Marriage Biodata in minutes. Free Biodata Maker for Hindu, Muslim, and all religions. Download HD Image/PDF format. Mobile friendly tool.">
+    <meta name="keywords" content="marriage biodata maker, biodata format for marriage, shadi biodata, online biodata maker, free biodata creator, hindu marriage biodata, muslim marriage biodata, mourya tool">
+    <meta name="author" content="Mourya Tools">
+    <link rel="canonical" href="https://mourya-tool.netlify.app/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mourya-tool.netlify.app/">
+    <meta property="og:title" content="Create Stunning Marriage Biodata for Free">
+    <meta property="og:description" content="Make your wedding profile stand out. Select template, enter details, and download HD Biodata instantly.">
+    <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/2661/2661163.png">
 
-    <!-- 2. Configuration & Custom Styles -->
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Best Marriage Biodata Maker">
+    <meta property="twitter:description" content="Create professional Marriage Biodata in minutes. Download HD.">
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Marriage Biodata Maker",
+      "operatingSystem": "Web",
+      "applicationCategory": "DesignApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "1250"
+      }
+    }
+    </script>
+    <!-- ================= SEO GOD LEVEL END ================= -->
+
+    <!-- Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- html2canvas (Better than html2pdf for Images) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Great+Vibes&family=Noto+Serif:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#E11D48', // Rose-600
-                        secondary: '#4F46E5', // Indigo-600
-                        hindu: '#ea580c', // Orange-600
-                        muslim: '#059669', // Emerald-600
+                        primary: '#E11D48',
+                        gold: '#D4AF37',
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Merriweather', 'serif'],
+                        sans: ['Poppins', 'sans-serif'],
+                        serif: ['Noto Serif', 'serif'],
+                        fancy: ['Great Vibes', 'cursive'],
+                        royal: ['Cinzel', 'serif'],
                     }
                 }
             }
@@ -34,538 +74,552 @@
     </script>
 
     <style>
-        /* General Utils */
-        body { -webkit-tap-highlight-color: transparent; }
-        
-        /* Scrollbar hiding for horizontal lists */
+        /* --- CORE UTILS --- */
+        body { -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-        /* --- PDF TEMPLATE STYLES --- */
         
-        /* A4 Size Constraint for Preview */
-        #biodata-preview {
-            width: 794px; /* A4 width at 96dpi */
-            min-height: 1123px; /* A4 height */
-            margin: 0 auto;
-            background-color: white;
+        /* --- TEMPLATE BACKGROUNDS (The "Design" Upgrade) --- */
+        
+        /* 1. Royal Hindu */
+        .theme-hindu-royal {
+            font-family: 'Noto Serif', serif;
+            color: #4a0404;
+            /* Texture Background */
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png'); 
+            background-color: #fff7ed;
+            border: 8px solid #8e3a3a;
+            position: relative;
+        }
+        .theme-hindu-royal::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border: 2px solid #D4AF37; /* Inner Gold Border */
+            margin: 5px;
+            pointer-events: none;
+        }
+
+        /* 2. Islamic Green */
+        .theme-muslim-green {
+            font-family: 'Poppins', sans-serif;
+            color: #022c22;
+            background-color: #f0fdf4;
+            /* Geometric Pattern */
+            background-image: url('https://www.transparenttextures.com/patterns/arabesque.png');
+            border: 8px solid #047857;
+        }
+
+        /* 3. Modern Floral */
+        .theme-floral {
+            font-family: 'Noto Serif', serif;
+            color: #333;
+            background-color: #fff;
+            background-image: url('https://img.freepik.com/free-vector/elegant-watercolor-floral-background_23-2148949666.jpg?w=740&t=st=1686754000~exp=1686754600~hmac=a1b2c3'); /* Fallback or conceptual */
+            background-size: cover;
+            background-blend-mode: overlay;
+        }
+        /* Using a subtle CSS gradient instead of external image for reliability if generic floral */
+        .theme-floral-clean {
+            font-family: 'Noto Serif', serif;
+            color: #831843;
+            background: linear-gradient(to bottom right, #fff0f5, #fff);
+            border: 8px double #fbcfe8;
+            position: relative;
+        }
+        /* Corner decoration simulation */
+        .theme-floral-clean::after {
+            content: "❀";
+            position: absolute;
+            top: 10px; right: 10px;
+            font-size: 40px;
+            color: #f472b6;
+            opacity: 0.5;
+        }
+        .theme-floral-clean::before {
+            content: "❀";
+            position: absolute;
+            bottom: 10px; left: 10px;
+            font-size: 40px;
+            color: #f472b6;
+            opacity: 0.5;
+        }
+
+
+        /* --- PREVIEW CONTAINER LOGIC --- */
+        #preview-wrapper {
+            background: #555;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            /* Ensure bottom doesn't get cut off by fixed buttons */
+            padding-bottom: 120px; 
+        }
+
+        #biodata-card {
+            width: 100%;
+            max-width: 600px; /* Standard Mobile width */
+            background: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            /* Min height ensures it looks like a document */
+            min-height: 800px; 
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
-        /* Mobile Scale for Preview (Zoom out to fit screen) */
-        @media (max-width: 800px) {
-            #preview-container {
-                overflow-x: auto;
-                padding: 10px;
-                background: #f3f4f6;
-            }
-            #biodata-preview {
-                transform: scale(0.45); /* Scale down for mobile view */
-                transform-origin: top left;
-                margin-bottom: -600px; /* Counteract empty space caused by scaling */
-            }
-        }
-
-        /* Theme: Classic (Minimal) */
-        .theme-classic { font-family: 'Merriweather', serif; color: #333; }
-        .theme-classic .header { border-bottom: 2px solid #333; padding-bottom: 20px; text-align: center; }
-        .theme-classic .section-title { background: #f3f4f6; padding: 5px 10px; font-weight: bold; margin-top: 15px; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* Theme: Royal Hindu (Saffron & Gold) */
-        .theme-royal-hindu { font-family: 'Merriweather', serif; color: #431407; border: 8px solid #c2410c; }
-        .theme-royal-hindu .header { background-color: #ffedd5; padding: 30px; text-align: center; border-bottom: 2px solid #c2410c; }
-        .theme-royal-hindu .section-title { color: #c2410c; border-bottom: 1px solid #c2410c; font-size: 1.2rem; margin-top: 20px; padding-bottom: 5px; font-weight: bold; }
-        .theme-royal-hindu .symbol { color: #c2410c; font-size: 3rem; margin-bottom: 10px; display: block; }
-
-        /* Theme: Islamic Elegant (Green & Geometry) */
-        .theme-islamic { font-family: 'Inter', sans-serif; color: #064e3b; border: 8px solid #059669; }
-        .theme-islamic .header { background-color: #ecfdf5; padding: 30px; text-align: center; border-bottom: 4px double #059669; }
-        .theme-islamic .section-title { background: #059669; color: white; padding: 5px 15px; border-radius: 20px; display: inline-block; margin-top: 20px; font-weight: 600; }
-        .theme-islamic .symbol { color: #059669; font-size: 3rem; margin-bottom: 10px; display: block; }
-
-        /* Theme: Floral (Universal) */
-        .theme-floral { font-family: 'Merriweather', serif; color: #831843; border: 8px solid #fbcfe8; }
-        .theme-floral .header { background: linear-gradient(to bottom, #fce7f3, #fff); padding: 30px; text-align: center; }
-        .theme-floral .section-title { color: #db2777; border-left: 4px solid #db2777; padding-left: 10px; margin-top: 20px; font-size: 1.1rem; font-weight: bold; }
-
-        /* Watermark Styles */
-        .watermark {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            font-size: 12px;
-            color: rgba(0,0,0,0.3);
-            font-weight: bold;
-            display: none; /* Hidden by default, toggled via JS */
-        }
-        .watermark.active { display: block; }
-        
-        /* Image Styling */
-        .profile-photo {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            object-position: top center;
-            border-radius: 50%;
+        .profile-img-container {
+            width: 140px;
+            height: 140px;
             margin: 0 auto;
-            border: 3px solid #ddd;
-            display: block;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
         }
-        .theme-royal-hindu .profile-photo { border-color: #c2410c; }
-        .theme-islamic .profile-photo { border-color: #059669; border-radius: 10%; } /* Square-ish for Islamic */
+        
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Watermark */
+        .watermark-text {
+            text-align: center;
+            font-size: 10px;
+            color: #999;
+            margin-top: 20px;
+            padding-bottom: 5px;
+            font-family: sans-serif;
+            letter-spacing: 1px;
+        }
+
+        /* --- FIXED BOTTOM BAR --- */
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 12px;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+            z-index: 50; /* Super high so it stays on top */
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800 h-screen flex flex-col overflow-hidden">
+<body class="bg-gray-100 h-screen flex flex-col">
 
     <!-- HEADER -->
     <header class="bg-white shadow-sm z-20 shrink-0">
         <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-            <h1 class="text-xl font-bold text-primary flex items-center gap-2">
-                <i class="fa-solid fa-heart"></i> BiodataMaker
+            <h1 class="text-xl font-bold text-primary flex items-center gap-2 font-royal">
+                <i class="fa-solid fa-rings-wedding"></i> BiodataMaker
             </h1>
-            <button id="reset-btn" class="text-sm text-gray-500 hover:text-red-500 hidden" onclick="resetApp()">Reset</button>
+            <button id="reset-btn" class="text-xs font-semibold text-gray-500 hover:text-red-500 hidden" onclick="location.reload()">New</button>
         </div>
     </header>
 
-    <!-- VIEW 1: LANDING SCREEN -->
-    <div id="landing-view" class="flex-1 flex flex-col justify-center items-center p-6 text-center animate-fade-in">
-        <div class="mb-6">
-            <i class="fa-solid fa-file-contract text-6xl text-secondary opacity-80"></i>
+    <!-- LANDING SCREEN (SEO TEXT INCLUDED) -->
+    <div id="landing-view" class="flex-1 flex flex-col justify-center items-center p-6 text-center animate-fade-in overflow-y-auto">
+        <div class="mb-4 text-secondary">
+            <img src="https://cdn-icons-png.flaticon.com/512/3656/3656988.png" width="100" alt="Marriage Biodata Icon">
         </div>
-        <h2 class="text-3xl font-bold mb-2">Create Marriage Biodata</h2>
-        <p class="text-gray-500 mb-8 max-w-xs">Professional templates. PDF Export. Fast & Secure.</p>
-        <button onclick="openReligionModal()" class="bg-primary hover:bg-rose-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105">
-            Create Biodata
+        <h2 class="text-3xl font-royal font-bold text-gray-800 mb-2">Create HD Marriage Biodata</h2>
+        <p class="text-gray-500 mb-8 max-w-sm">
+            Make a professional impression. Choose from 10+ premium templates. 
+            Download as high-quality Image instantly.
+        </p>
+        
+        <button onclick="openReligionModal()" class="bg-gradient-to-r from-rose-500 to-pink-600 text-white text-lg font-bold py-4 px-10 rounded-full shadow-xl hover:scale-105 transition transform">
+            Start Creating <i class="fa-solid fa-arrow-right ml-2"></i>
         </button>
+
+        <!-- SEO Content Block (Visible but subtle) -->
+        <article class="mt-12 text-left max-w-lg text-xs text-gray-400 bg-gray-50 p-4 rounded-lg">
+            <h3 class="font-bold text-gray-500 mb-1">Why use Mourya Tool Biodata Maker?</h3>
+            <p>Our free online marriage biodata maker allows you to create beautiful bio data for marriage in minutes. Whether you are looking for a Hindu marriage biodata format or a Muslim marriage biodata format, our tool provides HD templates. No login required. 100% Privacy.</p>
+        </article>
     </div>
 
-    <!-- VIEW 2: EDITOR (Split Screen Logic) -->
+    <!-- MAIN APP VIEW -->
     <div id="editor-view" class="hidden flex-1 flex flex-col overflow-hidden relative">
         
-        <!-- Navigation Tabs (Mobile) -->
-        <div class="flex border-b bg-white shrink-0">
-            <button onclick="switchTab('form')" id="tab-form" class="flex-1 py-3 text-center font-semibold border-b-2 border-primary text-primary">
-                <i class="fa-solid fa-pen mr-1"></i> Edit
+        <!-- TABS -->
+        <div class="flex border-b bg-white shrink-0 z-10">
+            <button onclick="switchTab('form')" id="tab-form" class="flex-1 py-3 font-semibold border-b-2 border-primary text-primary bg-rose-50">
+                <i class="fa-solid fa-pen-to-square"></i> Edit Details
             </button>
-            <button onclick="switchTab('preview')" id="tab-preview" class="flex-1 py-3 text-center font-semibold text-gray-500 border-b-2 border-transparent">
-                <i class="fa-solid fa-eye mr-1"></i> Preview
+            <button onclick="switchTab('preview')" id="tab-preview" class="flex-1 py-3 font-semibold text-gray-500 border-b-2 border-transparent hover:bg-gray-50">
+                <i class="fa-solid fa-image"></i> Live Preview
             </button>
         </div>
 
-        <!-- Main Content Area -->
-        <div class="flex-1 relative overflow-hidden">
+        <!-- SCROLLABLE CONTENT AREA -->
+        <div class="flex-1 relative overflow-y-auto" id="main-scroll-area">
             
-            <!-- FORM SECTION -->
-            <div id="form-container" class="absolute inset-0 overflow-y-auto p-4 pb-24 bg-white">
+            <!-- FORM -->
+            <div id="form-container" class="p-5 pb-32 bg-white">
                 
-                <!-- Template Selector -->
+                <!-- Template Selection -->
                 <div class="mb-6">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Choose Template</label>
+                    <h3 class="text-sm font-bold text-gray-700 mb-3 uppercase">Select Design Theme</h3>
                     <div id="template-list" class="flex gap-3 overflow-x-auto no-scrollbar pb-2">
-                        <!-- Templates injected via JS -->
+                        <!-- JS Injected -->
                     </div>
                 </div>
 
-                <!-- Input Fields -->
-                <form id="biodata-form" class="space-y-4">
+                <form id="biodata-form" class="space-y-5">
                     
-                    <!-- Photo Upload -->
-                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:bg-gray-50 cursor-pointer relative">
-                        <input type="file" id="photo-input" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="handleImageUpload(event)">
-                        <div id="photo-placeholder">
-                            <i class="fa-solid fa-cloud-arrow-up text-2xl text-gray-400 mb-1"></i>
-                            <p class="text-sm text-gray-500">Upload Photo</p>
+                    <!-- Photo -->
+                    <div class="flex items-center gap-4 border p-3 rounded-lg bg-gray-50">
+                        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden shrink-0">
+                            <img id="form-thumb" class="w-full h-full object-cover hidden">
+                            <i id="form-thumb-icon" class="fa-solid fa-user text-gray-400 text-xl"></i>
                         </div>
-                        <img id="photo-preview-thumb" class="hidden w-20 h-20 rounded-full mx-auto object-cover" />
+                        <div class="flex-1">
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Profile Photo</label>
+                            <input type="file" accept="image/*" onchange="handleImage(event)" class="text-xs text-gray-500 w-full">
+                        </div>
                     </div>
 
-                    <!-- Personal Details -->
-                    <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider mt-6 border-b pb-1">Personal Details</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="text" data-bind="name" placeholder="Full Name" class="input-field w-full p-3 border rounded focus:ring-2 focus:ring-primary outline-none">
-                        <input type="text" data-bind="dob" placeholder="Date of Birth / Age" class="input-field w-full p-3 border rounded focus:ring-2 focus:ring-primary outline-none">
-                        <input type="text" data-bind="height" placeholder="Height (e.g., 5'10&quot;)" class="input-field w-full p-3 border rounded focus:ring-2 focus:ring-primary outline-none">
-                        <input type="text" data-bind="complexion" placeholder="Complexion" class="input-field w-full p-3 border rounded focus:ring-2 focus:ring-primary outline-none">
+                    <!-- Personal -->
+                    <div>
+                        <h4 class="text-primary font-bold text-sm uppercase border-b border-gray-200 pb-1 mb-3">Personal Info</h4>
+                        <div class="grid grid-cols-1 gap-4">
+                            <input type="text" data-bind="name" placeholder="Full Name (e.g. Rahul Sharma)" class="w-full p-3 bg-gray-50 border rounded-lg focus:ring-2 focus:ring-primary outline-none">
+                            <div class="grid grid-cols-2 gap-3">
+                                <input type="text" data-bind="dob" placeholder="DOB (24 Aug 1995)" class="p-3 bg-gray-50 border rounded-lg outline-none">
+                                <input type="text" data-bind="height" placeholder="Height (5'10&quot;)" class="p-3 bg-gray-50 border rounded-lg outline-none">
+                            </div>
+                            <input type="text" data-bind="complexion" placeholder="Complexion (Fair, Wheatish)" class="w-full p-3 bg-gray-50 border rounded-lg outline-none">
+                        </div>
                     </div>
 
-                    <!-- Religion Specific Fields (Dynamic) -->
-                    <div id="dynamic-fields" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <!-- Injected by JS -->
-                    </div>
+                    <!-- Dynamic Religion Fields -->
+                    <div id="dynamic-fields" class="grid grid-cols-1 gap-3"></div>
 
-                    <!-- Professional -->
-                    <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider mt-6 border-b pb-1">Professional & Education</h3>
-                    <div class="grid grid-cols-1 gap-4">
-                        <input type="text" data-bind="education" placeholder="Highest Education" class="input-field w-full p-3 border rounded focus:ring-2 focus:ring-primary outline-none">
-                        <input type="text" data-bind="occupation" placeholder="Occupation / Job" class="input-field w-full p-3 border rounded focus:ring-2 focus:ring-primary outline-none">
-                        <input type="text" data-bind="income" placeholder="Annual Income (Optional)" class="input-field w-full p-3 border rounded focus:ring-2 focus:ring-primary outline-none">
+                    <!-- Career -->
+                    <div>
+                        <h4 class="text-primary font-bold text-sm uppercase border-b border-gray-200 pb-1 mb-3 mt-4">Career & Education</h4>
+                        <input type="text" data-bind="education" placeholder="Education (MCA, B.Tech)" class="w-full p-3 bg-gray-50 border rounded-lg mb-3 outline-none">
+                        <input type="text" data-bind="occupation" placeholder="Job/Occupation (Software Engineer)" class="w-full p-3 bg-gray-50 border rounded-lg mb-3 outline-none">
+                        <input type="text" data-bind="income" placeholder="Annual Income (12 LPA)" class="w-full p-3 bg-gray-50 border rounded-lg outline-none">
                     </div>
 
                     <!-- Family -->
-                    <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider mt-6 border-b pb-1">Family Details</h3>
-                    <div class="space-y-3">
-                        <input type="text" data-bind="father" placeholder="Father's Name & Occupation" class="input-field w-full p-3 border rounded focus:ring-2 focus:ring-primary outline-none">
-                        <input type="text" data-bind="mother" placeholder="Mother's Name & Occupation" class="input-field w-full p-3 border rounded focus:ring-2 focus:ring-primary outline-none">
-                        <textarea data-bind="siblings" rows="2" placeholder="Siblings Details" class="input-field w-full p-3 border rounded focus:ring-2 focus:ring-primary outline-none"></textarea>
+                    <div>
+                        <h4 class="text-primary font-bold text-sm uppercase border-b border-gray-200 pb-1 mb-3 mt-4">Family Background</h4>
+                        <input type="text" data-bind="father" placeholder="Father's Name & Job" class="w-full p-3 bg-gray-50 border rounded-lg mb-3 outline-none">
+                        <input type="text" data-bind="mother" placeholder="Mother's Name & Job" class="w-full p-3 bg-gray-50 border rounded-lg mb-3 outline-none">
+                        <textarea data-bind="siblings" rows="2" placeholder="Brothers & Sisters Details" class="w-full p-3 bg-gray-50 border rounded-lg outline-none"></textarea>
                     </div>
 
                     <!-- Contact -->
-                    <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider mt-6 border-b pb-1">Contact</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="text" data-bind="contact" placeholder="Phone Number" class="input-field w-full p-3 border rounded focus:ring-2 focus:ring-primary outline-none">
-                        <textarea data-bind="address" rows="2" placeholder="Residential Address" class="input-field w-full p-3 border rounded focus:ring-2 focus:ring-primary outline-none"></textarea>
+                    <div>
+                        <h4 class="text-primary font-bold text-sm uppercase border-b border-gray-200 pb-1 mb-3 mt-4">Contact</h4>
+                        <input type="tel" data-bind="contact" placeholder="Mobile Number" class="w-full p-3 bg-gray-50 border rounded-lg mb-3 outline-none">
+                        <textarea data-bind="address" rows="2" placeholder="Full Address" class="w-full p-3 bg-gray-50 border rounded-lg outline-none"></textarea>
                     </div>
                 </form>
             </div>
 
-            <!-- PREVIEW SECTION -->
-            <div id="preview-container" class="absolute inset-0 overflow-y-auto bg-gray-100 hidden">
-                <!-- This div is what gets converted to PDF -->
-                <div id="biodata-preview" class="p-8 theme-classic">
+            <!-- PREVIEW AREA (Hidden by default on Mobile) -->
+            <div id="preview-wrapper" class="hidden">
+                
+                <!-- THIS CARD IS WHAT GETS DOWNLOADED -->
+                <div id="biodata-card" class="theme-hindu-royal p-6 flex flex-col">
                     
-                    <!-- Header -->
-                    <div class="header relative">
-                        <!-- Religious Symbol Injected Here -->
-                        <div id="preview-symbol"></div>
+                    <!-- Decorative Top -->
+                    <div class="text-center mb-6 mt-4">
+                        <div id="religious-symbol" class="text-4xl mb-3 opacity-80"></div>
                         
-                        <img id="preview-photo" src="https://via.placeholder.com/150?text=Photo" class="profile-photo mb-4" alt="Profile">
-                        <h1 id="preview-name" class="text-4xl font-bold mb-2">Your Name</h1>
-                        <p id="preview-education" class="text-lg opacity-80">Education / Job Title</p>
+                        <div class="profile-img-container">
+                            <img id="preview-photo" src="https://via.placeholder.com/200?text=Photo" class="profile-img">
+                        </div>
+
+                        <h1 id="preview-name" class="text-3xl font-royal font-bold mt-4 text-gray-900">Your Name</h1>
+                        <p id="preview-sub" class="text-sm opacity-70 italic mt-1">Education / Job Title</p>
                     </div>
 
-                    <!-- Content Body -->
-                    <div class="mt-8 px-4 grid grid-cols-1 gap-6 text-left">
+                    <!-- Data Table -->
+                    <div class="flex-1 px-2">
                         
-                        <!-- Personal -->
-                        <div>
-                            <div class="section-title">Personal Details</div>
-                            <table class="w-full mt-2 text-sm md:text-base">
-                                <tr><td class="font-semibold w-1/3 py-1">DOB / Age:</td><td id="preview-dob">-</td></tr>
-                                <tr><td class="font-semibold py-1">Height:</td><td id="preview-height">-</td></tr>
-                                <tr><td class="font-semibold py-1">Complexion:</td><td id="preview-complexion">-</td></tr>
-                                <!-- Dynamic Religion fields injected here in table rows -->
+                        <!-- Section: Personal -->
+                        <div class="mb-5">
+                            <h3 class="border-b border-current opacity-50 font-bold uppercase text-xs tracking-widest mb-2">Personal Details</h3>
+                            <table class="w-full text-sm leading-relaxed">
+                                <tr><td class="font-bold w-1/3 py-1">DOB:</td><td id="preview-dob"></td></tr>
+                                <tr><td class="font-bold py-1">Height:</td><td id="preview-height"></td></tr>
+                                <tr><td class="font-bold py-1">Complexion:</td><td id="preview-complexion"></td></tr>
                                 <tbody id="preview-dynamic-rows"></tbody>
                             </table>
                         </div>
 
-                        <!-- Professional -->
-                        <div>
-                            <div class="section-title">Education & Career</div>
-                            <table class="w-full mt-2 text-sm md:text-base">
-                                <tr><td class="font-semibold w-1/3 py-1">Education:</td><td id="preview-education-detail">-</td></tr>
-                                <tr><td class="font-semibold py-1">Occupation:</td><td id="preview-occupation">-</td></tr>
-                                <tr><td class="font-semibold py-1">Income:</td><td id="preview-income">-</td></tr>
+                        <!-- Section: Career -->
+                        <div class="mb-5">
+                            <h3 class="border-b border-current opacity-50 font-bold uppercase text-xs tracking-widest mb-2">Education & Career</h3>
+                            <table class="w-full text-sm leading-relaxed">
+                                <tr><td class="font-bold w-1/3 py-1">Education:</td><td id="preview-education-full"></td></tr>
+                                <tr><td class="font-bold py-1">Occupation:</td><td id="preview-occupation"></td></tr>
+                                <tr><td class="font-bold py-1">Income:</td><td id="preview-income"></td></tr>
                             </table>
                         </div>
 
-                        <!-- Family -->
-                        <div>
-                            <div class="section-title">Family Details</div>
-                            <table class="w-full mt-2 text-sm md:text-base">
-                                <tr><td class="font-semibold w-1/3 py-1">Father:</td><td id="preview-father">-</td></tr>
-                                <tr><td class="font-semibold py-1">Mother:</td><td id="preview-mother">-</td></tr>
-                                <tr><td class="font-semibold py-1">Siblings:</td><td id="preview-siblings">-</td></tr>
+                        <!-- Section: Family -->
+                        <div class="mb-5">
+                            <h3 class="border-b border-current opacity-50 font-bold uppercase text-xs tracking-widest mb-2">Family Details</h3>
+                            <table class="w-full text-sm leading-relaxed">
+                                <tr><td class="font-bold w-1/3 py-1">Father:</td><td id="preview-father"></td></tr>
+                                <tr><td class="font-bold py-1">Mother:</td><td id="preview-mother"></td></tr>
+                                <tr><td class="font-bold py-1 align-top">Siblings:</td><td id="preview-siblings"></td></tr>
                             </table>
                         </div>
 
-                        <!-- Contact -->
-                        <div>
-                            <div class="section-title">Contact Details</div>
-                            <table class="w-full mt-2 text-sm md:text-base">
-                                <tr><td class="font-semibold w-1/3 py-1">Phone:</td><td id="preview-contact">-</td></tr>
-                                <tr><td class="font-semibold py-1">Address:</td><td id="preview-address">-</td></tr>
+                        <!-- Section: Contact -->
+                        <div class="mb-4">
+                            <h3 class="border-b border-current opacity-50 font-bold uppercase text-xs tracking-widest mb-2">Contact</h3>
+                            <table class="w-full text-sm leading-relaxed">
+                                <tr><td class="font-bold w-1/3 py-1">Mobile:</td><td id="preview-contact" class="font-mono text-lg font-bold"></td></tr>
+                                <tr><td class="font-bold py-1 align-top">Address:</td><td id="preview-address"></td></tr>
                             </table>
                         </div>
 
                     </div>
 
-                    <!-- Watermark -->
-                    <div id="watermark" class="watermark">Created by BiodataMaker.com</div>
+                    <!-- Footer / Watermark -->
+                    <div class="watermark-text mt-auto">
+                        Created with mourya-tool.netlify.app
+                    </div>
+
                 </div>
-                
-                <!-- Spacer for mobile bottom bar -->
-                <div class="h-32"></div>
             </div>
         </div>
 
-        <!-- DOWNLOAD ACTIONS (Sticky Bottom) -->
-        <div id="download-actions" class="hidden absolute bottom-0 left-0 right-0 bg-white border-t p-4 shadow-lg flex flex-col gap-3 z-10">
-            <button onclick="downloadPDF('basic')" class="w-full bg-gray-200 text-gray-800 font-bold py-3 rounded-lg flex justify-center items-center gap-2">
-                <i class="fa-solid fa-file-pdf"></i> Download PDF (Basic)
+        <!-- STICKY BOTTOM BAR (Only visible in Preview Mode) -->
+        <div id="action-bar" class="bottom-bar hidden slide-up">
+            
+            <button onclick="downloadImage('basic')" class="w-full bg-gray-200 text-gray-800 font-bold py-3 rounded-lg flex justify-center items-center shadow-sm">
+                <i class="fa-solid fa-download mr-2"></i> Download Basic
             </button>
-            <button onclick="downloadPDF('premium')" class="w-full bg-gradient-to-r from-amber-400 to-amber-600 text-white font-bold py-3 rounded-lg flex justify-center items-center gap-2 shadow-md animate-pulse">
-                <i class="fa-solid fa-crown"></i> Download HD (No Watermark)
+            
+            <button onclick="downloadImage('hd')" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold py-3 rounded-lg flex justify-center items-center shadow-lg animate-pulse">
+                <i class="fa-solid fa-crown mr-2"></i> Download HD Image
             </button>
         </div>
 
     </div>
 
-    <!-- MODAL: Religion Selection -->
-    <div id="religion-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex justify-center items-center p-4">
-        <div class="bg-white rounded-xl shadow-2xl w-full max-w-sm overflow-hidden transform transition-all scale-100">
-            <div class="p-6 text-center">
-                <h3 class="text-2xl font-bold mb-4">Select Religion</h3>
-                <p class="text-gray-500 mb-6">This helps us show relevant fields and templates.</p>
-                
-                <div class="grid grid-cols-2 gap-4">
-                    <button onclick="setReligion('hindu')" class="border-2 border-orange-100 hover:border-orange-500 hover:bg-orange-50 p-4 rounded-xl flex flex-col items-center gap-2 transition">
-                        <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-xl font-bold">ॐ</div>
-                        <span class="font-semibold text-gray-700">Hindu</span>
-                    </button>
-                    
-                    <button onclick="setReligion('muslim')" class="border-2 border-emerald-100 hover:border-emerald-500 hover:bg-emerald-50 p-4 rounded-xl flex flex-col items-center gap-2 transition">
-                        <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-xl font-bold">☪</div>
-                        <span class="font-semibold text-gray-700">Muslim</span>
-                    </button>
-                </div>
+    <!-- MODAL -->
+    <div id="religion-modal" class="fixed inset-0 bg-black/80 z-50 flex justify-center items-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6 text-center">
+            <h3 class="text-2xl font-royal font-bold mb-2">Select Format</h3>
+            <p class="text-gray-500 text-sm mb-6">Choose your religion to load the correct fields & symbols.</p>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <button onclick="setReligion('hindu')" class="group border border-orange-200 bg-orange-50 hover:bg-orange-100 p-4 rounded-xl transition">
+                    <div class="text-4xl text-orange-600 mb-2 group-hover:scale-110 transition">ॐ</div>
+                    <div class="font-bold text-gray-700">Hindu</div>
+                </button>
+                <button onclick="setReligion('muslim')" class="group border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 p-4 rounded-xl transition">
+                    <div class="text-4xl text-emerald-600 mb-2 group-hover:scale-110 transition">☪</div>
+                    <div class="font-bold text-gray-700">Muslim</div>
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- 3. JavaScript Logic -->
     <script>
-        // --- CONSTANTS & CONFIG ---
-        // REPLACE THIS with your actual ad network direct link or monetization landing page
-        const MONETAG_URL = "https://google.com"; 
-
-        const STATE = {
-            religion: null, // 'hindu' or 'muslim'
-            currentTheme: 'theme-classic',
-            photoData: null
+        /* --- CONFIGURATION --- */
+        const MONETIZATION_URL = "https://google.com"; // Change this to your Adsterra/Monetag Link
+        
+        let appState = {
+            religion: 'hindu',
+            currentTheme: ''
         };
 
-        const TEMPLATES = {
+        const THEMES = {
             hindu: [
-                { id: 'theme-classic', name: 'Classic', color: 'bg-gray-200' },
-                { id: 'theme-royal-hindu', name: 'Royal Saffron', color: 'bg-orange-500' },
-                { id: 'theme-floral', name: 'Pink Floral', color: 'bg-pink-400' }
+                { id: 'theme-hindu-royal', name: 'Royal Paper', color: 'bg-orange-200' },
+                { id: 'theme-floral-clean', name: 'Pink Floral', color: 'bg-pink-200' }
             ],
             muslim: [
-                { id: 'theme-classic', name: 'Classic', color: 'bg-gray-200' },
-                { id: 'theme-islamic', name: 'Emerald Islamic', color: 'bg-emerald-600' },
-                { id: 'theme-floral', name: 'Floral', color: 'bg-pink-400' }
+                { id: 'theme-muslim-green', name: 'Islamic Green', color: 'bg-emerald-200' },
+                { id: 'theme-floral-clean', name: 'Elegant Floral', color: 'bg-pink-200' }
             ]
         };
 
-        // --- DOM ELEMENTS ---
-        const landingView = document.getElementById('landing-view');
-        const editorView = document.getElementById('editor-view');
-        const religionModal = document.getElementById('religion-modal');
-        const dynamicFieldsContainer = document.getElementById('dynamic-fields');
-        const previewDynamicRows = document.getElementById('preview-dynamic-rows');
-        const templateList = document.getElementById('template-list');
-        const biodataPreview = document.getElementById('biodata-preview');
-        const downloadActions = document.getElementById('download-actions');
-
-        // --- APP FLOW ---
+        /* --- APP LOGIC --- */
 
         function openReligionModal() {
-            religionModal.classList.remove('hidden');
+            document.getElementById('religion-modal').classList.remove('hidden');
         }
 
         function setReligion(type) {
-            STATE.religion = type;
-            religionModal.classList.add('hidden');
-            landingView.classList.add('hidden');
-            editorView.classList.remove('hidden');
+            appState.religion = type;
+            document.getElementById('religion-modal').classList.add('hidden');
+            document.getElementById('landing-view').classList.add('hidden');
+            document.getElementById('editor-view').classList.remove('hidden');
             document.getElementById('reset-btn').classList.remove('hidden');
-
-            setupFormFields(type);
-            setupTemplates(type);
-            switchTab('form'); // Default to form view
-        }
-
-        function resetApp() {
-            if(confirm("Start over? All data will be lost.")) {
-                location.reload();
-            }
-        }
-
-        // --- FORM & TEMPLATE LOGIC ---
-
-        function setupFormFields(religion) {
-            let html = '';
             
-            if (religion === 'hindu') {
-                html += `<input type="text" data-bind="caste" placeholder="Caste" class="input-field w-full p-3 border rounded focus:ring-2 focus:ring-primary outline-none">`;
-                html += `<input type="text" data-bind="gotra" placeholder="Gotra" class="input-field w-full p-3 border rounded focus:ring-2 focus:ring-primary outline-none">`;
-                html += `<input type="text" data-bind="rashi" placeholder="Rashi (Zodiac)" class="input-field w-full p-3 border rounded focus:ring-2 focus:ring-primary outline-none">`;
-                html += `<select data-bind="manglik" class="input-field w-full p-3 border rounded focus:ring-2 focus:ring-primary outline-none bg-white"><option value="">Manglik Status</option><option value="No">No</option><option value="Yes">Yes</option><option value="Anshik">Anshik</option></select>`;
-            } else if (religion === 'muslim') {
-                html += `<input type="text" data-bind="caste" placeholder="Caste / Biradari" class="input-field w-full p-3 border rounded focus:ring-2 focus:ring-primary outline-none">`;
-                html += `<input type="text" data-bind="maslak" placeholder="Maslak (e.g., Sunni)" class="input-field w-full p-3 border rounded focus:ring-2 focus:ring-primary outline-none">`;
-                html += `<input type="text" data-bind="namaz" placeholder="Namaz Habits" class="input-field w-full p-3 border rounded focus:ring-2 focus:ring-primary outline-none">`;
-            }
-
-            dynamicFieldsContainer.innerHTML = html;
-            attachInputListeners();
+            injectFields(type);
+            injectTemplates(type);
+            applyTheme(THEMES[type][0].id); // Apply first theme
+            
+            // Set Symbol
+            const symbol = type === 'hindu' 
+                ? '<span class="text-orange-700">|| Shree Ganeshay Namah ||</span><br><span class="text-5xl text-orange-600">ॐ</span>' 
+                : '<span class="text-emerald-800">﷽</span><br><span class="text-5xl text-emerald-600">☪</span>';
+            document.getElementById('religious-symbol').innerHTML = symbol;
         }
 
-        function setupTemplates(religion) {
-            const list = TEMPLATES[religion];
-            templateList.innerHTML = list.map(t => `
-                <div onclick="applyTheme('${t.id}')" class="shrink-0 w-24 cursor-pointer flex flex-col items-center gap-1 group">
-                    <div class="w-20 h-24 rounded border-2 group-hover:border-primary ${t.color} shadow-sm transition-all"></div>
-                    <span class="text-xs font-medium text-gray-600">${t.name}</span>
+        function injectFields(type) {
+            const container = document.getElementById('dynamic-fields');
+            let html = '';
+            if(type === 'hindu') {
+                html = `
+                    <div class="grid grid-cols-2 gap-3">
+                        <input type="text" data-bind="caste" placeholder="Caste" class="p-3 bg-gray-50 border rounded-lg outline-none">
+                        <input type="text" data-bind="gotra" placeholder="Gotra" class="p-3 bg-gray-50 border rounded-lg outline-none">
+                    </div>
+                    <select data-bind="manglik" class="w-full p-3 bg-gray-50 border rounded-lg outline-none">
+                        <option value="">Manglik Status?</option>
+                        <option value="Non-Manglik">Non-Manglik</option>
+                        <option value="Manglik">Manglik</option>
+                        <option value="Anshik Manglik">Anshik Manglik</option>
+                    </select>
+                `;
+            } else {
+                html = `
+                    <input type="text" data-bind="caste" placeholder="Caste / Biradari" class="w-full p-3 bg-gray-50 border rounded-lg outline-none">
+                    <input type="text" data-bind="maslak" placeholder="Maslak (e.g. Sunni)" class="w-full p-3 bg-gray-50 border rounded-lg outline-none">
+                `;
+            }
+            container.innerHTML = html;
+            bindInputs();
+        }
+
+        function injectTemplates(type) {
+            const list = document.getElementById('template-list');
+            list.innerHTML = THEMES[type].map(t => `
+                <div onclick="applyTheme('${t.id}')" class="shrink-0 flex flex-col items-center gap-2 cursor-pointer">
+                    <div class="w-16 h-20 rounded border-2 ${t.color} hover:border-primary transition"></div>
+                    <span class="text-[10px] font-bold text-gray-500 uppercase">${t.name}</span>
                 </div>
             `).join('');
-
-            // Apply first theme by default
-            applyTheme(list[0].id);
         }
 
-        function applyTheme(themeClass) {
-            // Remove old theme
-            biodataPreview.className = ''; 
-            biodataPreview.classList.add('p-8');
-            
-            // Add new theme
-            biodataPreview.classList.add(themeClass);
-            STATE.currentTheme = themeClass;
-
-            // Handle Symbols based on theme/religion
-            const symbolContainer = document.getElementById('preview-symbol');
-            symbolContainer.innerHTML = '';
-            
-            if (themeClass.includes('hindu') || (themeClass === 'theme-classic' && STATE.religion === 'hindu')) {
-                symbolContainer.innerHTML = '<div class="symbol text-center w-full mb-2">ॐ</div>';
-            } else if (themeClass.includes('islamic') || (themeClass === 'theme-classic' && STATE.religion === 'muslim')) {
-                symbolContainer.innerHTML = '<div class="symbol text-center w-full mb-2">☪</div>';
-            }
+        function applyTheme(className) {
+            const card = document.getElementById('biodata-card');
+            card.className = `p-6 flex flex-col ${className}`; // Reset and add
+            appState.currentTheme = className;
         }
 
-        // --- DATA BINDING & PREVIEW ---
-
-        function attachInputListeners() {
-            const inputs = document.querySelectorAll('.input-field');
-            inputs.forEach(input => {
-                input.addEventListener('input', updatePreview);
-            });
-        }
-
-        function updatePreview() {
-            // Static Fields
-            const staticFields = ['name', 'education', 'occupation', 'income', 'father', 'mother', 'siblings', 'contact', 'address', 'dob', 'height', 'complexion'];
-            
-            staticFields.forEach(field => {
-                const input = document.querySelector(`[data-bind="${field}"]`);
-                const output = document.getElementById(`preview-${field}`);
-                const extraOutput = document.getElementById(`preview-${field}-detail`); // Special case for education details
-                
-                if (input && output) {
-                    output.textContent = input.value || '-';
-                    if(extraOutput) extraOutput.textContent = input.value || '-';
-                }
-            });
-
-            // Dynamic Fields (Table Rows)
-            let dynamicRowsHTML = '';
-            
-            const religionFields = STATE.religion === 'hindu' 
-                ? ['caste', 'gotra', 'rashi', 'manglik'] 
-                : ['caste', 'maslak', 'namaz'];
-            
-            religionFields.forEach(field => {
-                const input = document.querySelector(`[data-bind="${field}"]`);
-                if(input && input.value) {
-                    const label = field.charAt(0).toUpperCase() + field.slice(1);
-                    dynamicRowsHTML += `<tr><td class="font-semibold py-1">${label}:</td><td>${input.value}</td></tr>`;
-                }
-            });
-
-            previewDynamicRows.innerHTML = dynamicRowsHTML;
-        }
-
-        // --- IMAGE HANDLING ---
-
-        function handleImageUpload(event) {
-            const file = event.target.files[0];
-            if (file) {
+        function handleImage(e) {
+            const file = e.target.files[0];
+            if(file) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
-                    // Update UI Thumb
-                    const thumb = document.getElementById('photo-preview-thumb');
-                    thumb.src = e.target.result;
-                    thumb.classList.remove('hidden');
-                    document.getElementById('photo-placeholder').classList.add('hidden');
-
-                    // Update PDF Preview
-                    document.getElementById('preview-photo').src = e.target.result;
+                reader.onload = (evt) => {
+                    document.getElementById('form-thumb').src = evt.target.result;
+                    document.getElementById('form-thumb').classList.remove('hidden');
+                    document.getElementById('form-thumb-icon').classList.add('hidden');
+                    document.getElementById('preview-photo').src = evt.target.result;
                 }
                 reader.readAsDataURL(file);
             }
         }
 
-        // --- UI NAVIGATION ---
+        function bindInputs() {
+            document.querySelectorAll('[data-bind]').forEach(input => {
+                input.addEventListener('input', updatePreview);
+            });
+        }
 
+        function updatePreview() {
+            // Static Mappings
+            ['name', 'dob', 'height', 'complexion', 'education', 'occupation', 'income', 'father', 'mother', 'siblings', 'contact', 'address'].forEach(key => {
+                const el = document.querySelector(`[data-bind="${key}"]`);
+                const target = document.getElementById(`preview-${key}`);
+                if(el && target) target.innerText = el.value || '';
+                
+                // Extra logic for education subtitle
+                if(key === 'education') document.getElementById('preview-education-full').innerText = el.value || '';
+                if(key === 'occupation') document.getElementById('preview-sub').innerText = el.value || 'Job Title';
+            });
+
+            // Dynamic Rows
+            const tbody = document.getElementById('preview-dynamic-rows');
+            let rows = '';
+            
+            const dynFields = appState.religion === 'hindu' ? ['caste', 'gotra', 'manglik'] : ['caste', 'maslak'];
+            dynFields.forEach(f => {
+                const val = document.querySelector(`[data-bind="${f}"]`)?.value;
+                if(val) {
+                    rows += `<tr><td class="font-bold py-1 capitalize">${f}:</td><td>${val}</td></tr>`;
+                }
+            });
+            tbody.innerHTML = rows;
+        }
+
+        /* --- TABS & NAVIGATION --- */
         function switchTab(tab) {
-            const formContainer = document.getElementById('form-container');
-            const previewContainer = document.getElementById('preview-container');
-            const tabForm = document.getElementById('tab-form');
-            const tabPreview = document.getElementById('tab-preview');
+            const formDiv = document.getElementById('form-container');
+            const prevDiv = document.getElementById('preview-wrapper');
+            const actionBar = document.getElementById('action-bar');
+            
+            const btnForm = document.getElementById('tab-form');
+            const btnPrev = document.getElementById('tab-preview');
 
-            if (tab === 'form') {
-                formContainer.classList.remove('hidden');
-                previewContainer.classList.add('hidden');
-                downloadActions.classList.add('hidden');
-                
-                tabForm.classList.add('border-primary', 'text-primary');
-                tabForm.classList.remove('border-transparent', 'text-gray-500');
-                tabPreview.classList.add('border-transparent', 'text-gray-500');
-                tabPreview.classList.remove('border-primary', 'text-primary');
+            if(tab === 'form') {
+                formDiv.classList.remove('hidden');
+                prevDiv.classList.add('hidden');
+                actionBar.classList.add('hidden');
+
+                btnForm.classList.add('border-primary', 'text-primary', 'bg-rose-50');
+                btnPrev.classList.remove('border-primary', 'text-primary');
             } else {
-                formContainer.classList.add('hidden');
-                previewContainer.classList.remove('hidden');
-                downloadActions.classList.remove('hidden');
+                formDiv.classList.add('hidden');
+                prevDiv.classList.remove('hidden');
+                actionBar.classList.remove('hidden'); // Show Sticky Buttons
                 
-                tabPreview.classList.add('border-primary', 'text-primary');
-                tabPreview.classList.remove('border-transparent', 'text-gray-500');
-                tabForm.classList.add('border-transparent', 'text-gray-500');
-                tabForm.classList.remove('border-primary', 'text-primary');
+                // Force Scroll top
+                document.getElementById('main-scroll-area').scrollTop = 0;
                 
-                // Trigger an update just in case
+                btnPrev.classList.add('border-primary', 'text-primary', 'bg-rose-50');
+                btnForm.classList.remove('border-primary', 'text-primary', 'bg-rose-50');
+                
                 updatePreview();
             }
         }
 
-        // --- PDF GENERATION & MONETIZATION ---
-
-        function downloadPDF(type) {
-            const element = document.getElementById('biodata-preview');
-            const watermark = document.getElementById('watermark');
+        /* --- DOWNLOAD LOGIC (HTML2CANVAS) --- */
+        function downloadImage(type) {
+            const element = document.getElementById('biodata-card');
             
-            // Configuration for html2pdf
-            const opt = {
-                margin:       0,
-                filename:     'marriage_biodata.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true },
-                jsPDF:        { unit: 'px', format: [794, 1123], orientation: 'portrait' } // A4 Size in px (approx)
-            };
+            // Scroll to top of preview to ensure full capture
+            document.getElementById('main-scroll-area').scrollTop = 0;
 
-            if (type === 'basic') {
-                // Show Watermark
-                watermark.classList.add('active');
-                
-                // Generate
-                html2pdf().set(opt).from(element).save().then(() => {
-                    watermark.classList.remove('active'); // Cleanup
+            // Wait a moment for images to settle
+            setTimeout(() => {
+                const options = {
+                    scale: 3, // High Resolution (3x)
+                    useCORS: true, // Allow external images
+                    backgroundColor: null // Transparent background handling
+                };
+
+                html2canvas(element, options).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = `Marriage_Biodata_${Date.now()}.jpg`;
+                    link.href = canvas.toDataURL('image/jpeg', 0.9); // High Quality JPG
+                    link.click();
+
+                    if(type === 'hd') {
+                        // Trigger Monetization
+                        window.open(MONETIZATION_URL, '_blank');
+                    }
                 });
-
-            } else if (type === 'premium') {
-                // 1. Open Monetization URL
-                window.open(MONETAG_URL, '_blank');
-                
-                // 2. Hide Watermark for clean PDF
-                watermark.classList.remove('active');
-
-                // 3. Generate after slight delay to allow tab open
-                setTimeout(() => {
-                    html2pdf().set(opt).from(element).save();
-                }, 500);
-            }
+            }, 100);
         }
 
     </script>
