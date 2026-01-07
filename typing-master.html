@@ -31,27 +31,23 @@
     </script>
 
     <style>
-        /* Modern Background Pattern */
         body {
             background-color: #0f172a;
             background-image: linear-gradient(#1e293b 1px, transparent 1px), linear-gradient(90deg, #1e293b 1px, transparent 1px);
             background-size: 40px 40px;
         }
         
-        /* Smooth Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0f172a; }
         ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; }
 
-        /* Typing Highlights */
         .word { padding: 4px 6px; border-radius: 4px; margin-right: 6px; display: inline-block; transition: all 0.1s; }
         .word.current { background-color: #3b82f6; color: white; transform: scale(1.05); box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
         .word.correct { color: #4ade80; }
         .word.wrong { color: #f87171; text-decoration: line-through; background: rgba(248, 113, 113, 0.1); }
 
-        /* Mobile Fixes */
         .glass-card {
-            background: rgba(30, 41, 59, 0.7);
+            background: rgba(30, 41, 59, 0.8); /* Thicker bg to prevent clicks passing through */
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -61,16 +57,16 @@
 <body class="text-slate-200 min-h-[100dvh] flex flex-col overflow-x-hidden selection:bg-blue-500 selection:text-white">
 
     <!-- Navbar -->
-    <nav class="bg-slate-900/90 backdrop-blur-md border-b border-slate-700 sticky top-0 z-50 h-16 flex items-center justify-between px-4 lg:px-8 shadow-lg">
+    <nav class="bg-slate-900/90 backdrop-blur-md border-b border-slate-700 sticky top-0 z-40 h-16 flex items-center justify-between px-4 lg:px-8 shadow-lg">
         <div class="flex items-center gap-2">
             <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-white">T</div>
             <h1 class="text-lg md:text-xl font-bold text-white tracking-tight">Mourya<span class="text-blue-500">Typing</span></h1>
         </div>
-        <div class="text-xs font-mono text-slate-400 bg-slate-800 px-2 py-1 rounded border border-slate-700">v2.0 Pro</div>
+        <div class="text-xs font-mono text-slate-400 bg-slate-800 px-2 py-1 rounded border border-slate-700">v2.1 Fix</div>
     </nav>
 
     <!-- Ad Space 1 -->
-    <div class="w-full max-w-4xl mx-auto mt-4 px-4">
+    <div class="w-full max-w-4xl mx-auto mt-4 px-4 relative z-0">
         <div class="h-[60px] w-full bg-slate-800/50 border border-dashed border-slate-600 rounded flex items-center justify-center text-slate-500 text-xs uppercase tracking-widest">
             Ad Space (Top)
         </div>
@@ -80,7 +76,7 @@
     <main class="flex-grow flex items-center justify-center p-4 relative z-10">
 
         <!-- CONFIGURATION SCREEN -->
-        <div id="config-screen" class="w-full max-w-md glass-card p-6 md:p-8 rounded-2xl shadow-2xl animate-fade-in">
+        <div id="config-screen" class="w-full max-w-md glass-card p-6 md:p-8 rounded-2xl shadow-2xl relative z-20">
             <div class="text-center mb-8">
                 <h2 class="text-3xl font-bold text-white mb-2">Setup Test</h2>
                 <p class="text-slate-400 text-sm">Select your preferences to begin</p>
@@ -90,39 +86,38 @@
                 <!-- Language -->
                 <div class="relative group">
                     <label class="block text-xs font-semibold text-blue-400 uppercase tracking-wider mb-2">Typing Language</label>
-                    <select id="lang-select" class="w-full bg-slate-900/80 border border-slate-600 text-white text-base rounded-xl px-4 py-3 appearance-none focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition shadow-sm">
+                    <select id="lang-select" class="w-full bg-slate-900 border border-slate-600 text-white text-base rounded-xl px-4 py-3 appearance-none focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer relative z-30">
                         <option value="english">English (QWERTY)</option>
                         <option value="hindi_mangal">Hindi - Mangal (Inscript)</option>
                         <option value="hindi_kruti">Hindi - Kruti Dev (Remington)</option>
                     </select>
-                    <!-- Custom Arrow -->
-                    <div class="pointer-events-none absolute right-4 top-[38px] text-slate-400">▼</div>
+                    <div class="pointer-events-none absolute right-4 top-[38px] text-slate-400 z-30">▼</div>
                 </div>
 
                 <!-- Duration -->
                 <div class="relative">
                     <label class="block text-xs font-semibold text-blue-400 uppercase tracking-wider mb-2">Duration</label>
                     <div class="grid grid-cols-4 gap-2">
-                        <button type="button" class="time-btn bg-slate-800 border border-slate-600 hover:bg-slate-700 text-white py-2 rounded-lg text-sm transition focus:ring-2 focus:ring-blue-500" data-val="1">1 M</button>
-                        <button type="button" class="time-btn bg-slate-800 border border-slate-600 hover:bg-slate-700 text-white py-2 rounded-lg text-sm transition focus:ring-2 focus:ring-blue-500" data-val="2">2 M</button>
-                        <button type="button" class="time-btn bg-blue-600 border border-blue-500 text-white py-2 rounded-lg text-sm font-bold shadow-lg ring-2 ring-blue-400" data-val="5">5 M</button>
-                        <button type="button" class="time-btn bg-slate-800 border border-slate-600 hover:bg-slate-700 text-white py-2 rounded-lg text-sm transition focus:ring-2 focus:ring-blue-500" data-val="10">10 M</button>
+                        <button onclick="setTime(1, this)" class="time-btn bg-slate-800 border border-slate-600 hover:bg-slate-700 text-white py-2 rounded-lg text-sm transition relative z-30">1 M</button>
+                        <button onclick="setTime(2, this)" class="time-btn bg-slate-800 border border-slate-600 hover:bg-slate-700 text-white py-2 rounded-lg text-sm transition relative z-30">2 M</button>
+                        <button onclick="setTime(5, this)" class="time-btn bg-blue-600 border border-blue-500 text-white py-2 rounded-lg text-sm font-bold shadow-lg ring-2 ring-blue-400 relative z-30 active-time">5 M</button>
+                        <button onclick="setTime(10, this)" class="time-btn bg-slate-800 border border-slate-600 hover:bg-slate-700 text-white py-2 rounded-lg text-sm transition relative z-30">10 M</button>
                     </div>
                     <input type="hidden" id="time-select" value="5">
                 </div>
 
-                <!-- Start Button (FIXED) -->
-                <button id="btn-start" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-lg py-4 rounded-xl shadow-lg shadow-blue-500/30 transform transition hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-2 mt-4 cursor-pointer z-20">
+                <!-- Start Button (DIRECT CLICK) -->
+                <button onclick="startTest()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold text-lg py-4 rounded-xl shadow-lg shadow-blue-500/30 transform transition active:scale-95 flex items-center justify-center gap-2 mt-4 cursor-pointer relative z-50">
                     <span>Start Typing Test</span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
                 </button>
                 
-                <p class="text-[10px] text-center text-slate-500 mt-2">By clicking start, you agree to focus.</p>
+                <p class="text-[10px] text-center text-slate-500 mt-2">v2.1 Stable</p>
             </div>
         </div>
 
         <!-- TYPING INTERFACE (Hidden) -->
-        <div id="typing-screen" class="hidden w-full max-w-5xl flex flex-col gap-6 animate-fade-in">
+        <div id="typing-screen" class="hidden w-full max-w-5xl flex flex-col gap-6 relative z-20">
             
             <!-- Dashboard -->
             <div class="grid grid-cols-3 gap-3 md:gap-6">
@@ -142,29 +137,26 @@
 
             <!-- Text Box -->
             <div class="relative">
-                <div class="absolute -top-3 left-4 bg-slate-800 px-2 text-xs text-blue-400 font-bold border border-slate-600 rounded">TEXT TO TYPE</div>
-                <div id="text-container" class="w-full h-[30vh] md:h-[40vh] bg-slate-900/90 rounded-xl border border-slate-600 overflow-y-auto p-6 md:p-8 text-xl md:text-3xl leading-[2.5] select-none shadow-inner scroll-smooth">
+                <div class="absolute -top-3 left-4 bg-slate-800 px-2 text-xs text-blue-400 font-bold border border-slate-600 rounded z-30">TEXT TO TYPE</div>
+                <div id="text-container" class="w-full h-[30vh] md:h-[40vh] bg-slate-900/90 rounded-xl border border-slate-600 overflow-y-auto p-6 md:p-8 text-xl md:text-3xl leading-[2.5] select-none shadow-inner scroll-smooth relative z-20">
                     <!-- Text Injected Here -->
                 </div>
-                <!-- Fade effect at bottom -->
-                <div class="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-slate-900 to-transparent pointer-events-none rounded-b-xl"></div>
             </div>
 
             <!-- Input Box -->
             <div class="relative group">
                 <input type="text" id="typing-input" 
-                    class="w-full bg-slate-800 text-white text-xl md:text-2xl p-5 pl-6 rounded-xl border-2 border-slate-600 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 placeholder-slate-500 outline-none transition shadow-2xl"
+                    class="w-full bg-slate-800 text-white text-xl md:text-2xl p-5 pl-6 rounded-xl border-2 border-slate-600 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 placeholder-slate-500 outline-none transition shadow-2xl relative z-30"
                     placeholder="Start typing here..." autocomplete="off" spellcheck="false" onpaste="return false">
-                <div class="absolute right-6 top-1/2 transform -translate-y-1/2 text-sm text-slate-500 hidden md:block font-mono bg-slate-700 px-2 py-1 rounded">SPACE to Next</div>
             </div>
 
-            <button onclick="location.reload()" class="mx-auto text-sm text-red-400 hover:text-red-300 underline mt-2">Abort Test</button>
+            <button onclick="location.reload()" class="mx-auto text-sm text-red-400 hover:text-red-300 underline mt-2 relative z-30 cursor-pointer">Abort Test</button>
         </div>
 
     </main>
 
     <!-- Ad Space 2 -->
-    <div class="w-full max-w-4xl mx-auto mb-4 px-4">
+    <div class="w-full max-w-4xl mx-auto mb-4 px-4 relative z-0">
         <div class="h-[60px] w-full bg-slate-800/50 border border-dashed border-slate-600 rounded flex items-center justify-center text-slate-500 text-xs uppercase tracking-widest">
             Ad Space (Bottom)
         </div>
@@ -173,17 +165,13 @@
     <!-- RESULT MODAL -->
     <div id="result-modal" class="fixed inset-0 bg-slate-900/95 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
         <div class="bg-slate-800 w-full max-w-lg rounded-2xl border border-slate-600 shadow-2xl overflow-hidden animate-bounce-in">
-            <div class="bg-gradient-to-br from-blue-900 to-slate-900 p-8 text-center border-b border-slate-700 relative overflow-hidden">
-                <!-- Confetti decoration -->
-                <div class="absolute top-0 left-0 w-full h-full opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0wIDQwaDQwVjBIMHY0MHptMjAgMjBoMjBWMjBIMjB2MjB6TTAgMjBoMjBWMHgyMHYyMHoiIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIi8+PC9nPjwvc3ZnPg==')]"></div>
-                <h2 class="text-3xl font-extrabold text-white relative z-10">Test Completed!</h2>
-                <p class="text-blue-200 text-sm mt-1 relative z-10">Here is your performance report</p>
+            <div class="bg-gradient-to-br from-blue-900 to-slate-900 p-8 text-center border-b border-slate-700">
+                <h2 class="text-3xl font-extrabold text-white">Test Completed!</h2>
             </div>
             <div class="p-6">
                 <div class="flex items-end justify-center gap-2 mb-6">
                     <span id="res-wpm" class="text-6xl font-black text-blue-500 leading-none">0</span>
                     <span class="text-xl text-slate-400 font-bold mb-2">WPM</span>
-                    <span class="text-sm text-slate-500 mb-2 ml-2">(Net Speed)</span>
                 </div>
                 
                 <div class="grid grid-cols-2 gap-4 text-sm mb-8">
@@ -192,21 +180,13 @@
                         <span id="res-acc" class="font-bold text-green-400">0%</span>
                     </div>
                     <div class="bg-slate-900 p-3 rounded border border-slate-700 flex justify-between">
-                        <span class="text-slate-400">Gross Speed</span>
-                        <span id="res-gross" class="font-bold text-white">0</span>
-                    </div>
-                    <div class="bg-slate-900 p-3 rounded border border-slate-700 flex justify-between">
                         <span class="text-slate-400">Errors</span>
                         <span id="res-errors" class="font-bold text-red-400">0</span>
-                    </div>
-                    <div class="bg-slate-900 p-3 rounded border border-slate-700 flex justify-between">
-                        <span class="text-slate-400">Backspaces</span>
-                        <span id="res-backspace" class="font-bold text-orange-400">0</span>
                     </div>
                 </div>
 
                 <div class="flex gap-4">
-                    <button onclick="downloadCertificate()" class="flex-1 bg-green-600 hover:bg-green-500 text-white py-3 rounded-xl font-bold transition shadow-lg shadow-green-900/20">Download Cert</button>
+                    <button onclick="downloadCertificate()" class="flex-1 bg-green-600 hover:bg-green-500 text-white py-3 rounded-xl font-bold transition">Download Cert</button>
                     <button onclick="location.reload()" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white py-3 rounded-xl font-bold transition">Try Again</button>
                 </div>
             </div>
@@ -215,10 +195,8 @@
 
     <canvas id="certCanvas" width="800" height="600" class="hidden"></canvas>
 
-    <!-- LOGIC -->
+    <!-- LOGIC SCRIPT (AT THE END FOR SAFETY) -->
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        
         // --- DATA ---
         const textData = {
             english: [
@@ -238,7 +216,7 @@
             ]
         };
 
-        // --- STATE ---
+        // --- GLOBAL STATE ---
         let state = {
             active: false,
             timeLeft: 0,
@@ -250,89 +228,77 @@
             correctChars: 0,
             errors: 0,
             backspaces: 0,
-            history: [], // true/false for each word
+            history: [], 
             lang: 'english'
         };
 
-        // --- ELEMENTS ---
-        const els = {
-            config: document.getElementById('config-screen'),
-            typing: document.getElementById('typing-screen'),
-            modal: document.getElementById('result-modal'),
-            startBtn: document.getElementById('btn-start'),
-            input: document.getElementById('typing-input'),
-            textDisplay: document.getElementById('text-container'),
-            langSelect: document.getElementById('lang-select'),
-            timeBtns: document.querySelectorAll('.time-btn'),
-            timerDisplay: document.getElementById('timer-display'),
-            wpmDisplay: document.getElementById('wpm-display'),
-            accDisplay: document.getElementById('acc-display')
-        };
-
-        // --- TIME SELECTION LOGIC ---
-        els.timeBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Remove active class from all
-                els.timeBtns.forEach(b => {
-                    b.classList.remove('bg-blue-600', 'border-blue-500', 'font-bold', 'ring-2', 'ring-blue-400');
-                    b.classList.add('bg-slate-800', 'border-slate-600');
-                });
-                // Add active to clicked
-                btn.classList.remove('bg-slate-800', 'border-slate-600');
-                btn.classList.add('bg-blue-600', 'border-blue-500', 'font-bold', 'ring-2', 'ring-blue-400');
-                // Set hidden input
-                document.getElementById('time-select').value = btn.getAttribute('data-val');
+        // --- FUNCTIONS ---
+        
+        function setTime(val, btn) {
+            document.getElementById('time-select').value = val;
+            
+            // Visual feedback
+            document.querySelectorAll('.time-btn').forEach(b => {
+                b.classList.remove('bg-blue-600', 'border-blue-500', 'font-bold', 'ring-2', 'ring-blue-400', 'active-time');
+                b.classList.add('bg-slate-800', 'border-slate-600');
             });
-        });
-
-        // --- START TEST ---
-        els.startBtn.addEventListener('click', () => {
-            console.log("Starting test..."); // Debug log
             
-            // Get Config
-            state.lang = els.langSelect.value;
-            const mins = parseInt(document.getElementById('time-select').value);
-            state.totalTime = mins * 60;
+            btn.classList.remove('bg-slate-800', 'border-slate-600');
+            btn.classList.add('bg-blue-600', 'border-blue-500', 'font-bold', 'ring-2', 'ring-blue-400', 'active-time');
+        }
+
+        function startTest() {
+            // Force reset in case of weird state
+            if(state.active) return;
+            
+            const configScreen = document.getElementById('config-screen');
+            const typingScreen = document.getElementById('typing-screen');
+            const inputEl = document.getElementById('typing-input');
+            const langVal = document.getElementById('lang-select').value;
+            const timeVal = document.getElementById('time-select').value;
+
+            // Log for debugging
+            console.log("Starting test...", langVal, timeVal);
+
+            // Set Data
+            state.lang = langVal;
+            state.totalTime = parseInt(timeVal) * 60;
             state.timeLeft = state.totalTime;
-
-            // Reset
-            state.active = true;
-            state.idx = 0;
-            state.charsTyped = 0;
-            state.correctChars = 0;
-            state.errors = 0;
-            state.backspaces = 0;
-            state.history = [];
             
-            // Prepare Text
+            // Get Text
             const pool = textData[state.lang];
             const rawText = pool[Math.floor(Math.random() * pool.length)];
             state.words = rawText.split(' ');
 
+            // Setup UI
             renderText();
             applyFont();
             
-            // Switch UI
-            els.config.classList.add('hidden');
-            els.typing.classList.remove('hidden');
+            // Swap Screens
+            configScreen.classList.add('hidden');
+            typingScreen.classList.remove('hidden');
             
-            // Focus Input
-            els.input.value = '';
-            els.input.focus();
+            // Focus Input (Tiny timeout helps on mobile)
+            state.active = true;
+            inputEl.value = '';
+            setTimeout(() => inputEl.focus(), 100);
 
             // Start Timer
             updateStats();
+            clearInterval(state.timer);
             state.timer = setInterval(tick, 1000);
-        });
+        }
 
         function applyFont() {
-            els.textDisplay.className = "w-full h-[30vh] md:h-[40vh] bg-slate-900/90 rounded-xl border border-slate-600 overflow-y-auto p-6 md:p-8 text-xl md:text-3xl leading-[2.5] select-none shadow-inner scroll-smooth";
-            if(state.lang === 'hindi_mangal') els.textDisplay.classList.add('font-mangal');
-            if(state.lang === 'hindi_kruti') els.textDisplay.classList.add('font-kruti');
+            const display = document.getElementById('text-container');
+            display.className = "w-full h-[30vh] md:h-[40vh] bg-slate-900/90 rounded-xl border border-slate-600 overflow-y-auto p-6 md:p-8 text-xl md:text-3xl leading-[2.5] select-none shadow-inner scroll-smooth relative z-20";
+            if(state.lang === 'hindi_mangal') display.classList.add('font-mangal');
+            if(state.lang === 'hindi_kruti') display.classList.add('font-kruti');
         }
 
         function renderText() {
-            els.textDisplay.innerHTML = state.words.map((w, i) => 
+            const display = document.getElementById('text-container');
+            display.innerHTML = state.words.map((w, i) => 
                 `<span class="word ${i===0?'current':''}" id="w-${i}">${w}</span>`
             ).join('');
         }
@@ -347,44 +313,57 @@
         }
 
         function updateStats() {
-            // Timer
             const m = Math.floor(state.timeLeft / 60).toString().padStart(2,'0');
             const s = (state.timeLeft % 60).toString().padStart(2,'0');
-            els.timerDisplay.innerText = `${m}:${s}`;
+            document.getElementById('timer-display').innerText = `${m}:${s}`;
 
-            // Live WPM
             const timeElapsed = state.totalTime - state.timeLeft;
             if(timeElapsed > 0) {
                 const wpm = Math.round((state.charsTyped / 5) / (timeElapsed/60));
-                els.wpmDisplay.innerText = wpm;
+                document.getElementById('wpm-display').innerText = wpm;
             }
 
-            // Live Accuracy
             if(state.history.length > 0) {
                 const correct = state.history.filter(Boolean).length;
                 const acc = Math.round((correct / state.history.length) * 100);
-                els.accDisplay.innerText = acc + "%";
+                document.getElementById('acc-display').innerText = acc + "%";
             }
         }
 
-        // --- TYPING ENGINE ---
-        els.input.addEventListener('keydown', (e) => {
+        function finishTest() {
+            state.active = false;
+            clearInterval(state.timer);
+            document.getElementById('result-modal').classList.remove('hidden');
+
+            const timeMins = (state.totalTime - state.timeLeft) / 60 || 1;
+            const netWPM = Math.round((state.correctChars / 5) / timeMins);
+            const totalWords = state.history.length;
+            const correctWords = state.history.filter(Boolean).length;
+            const acc = totalWords ? Math.round((correctWords / totalWords) * 100) : 0;
+
+            document.getElementById('res-wpm').innerText = netWPM;
+            document.getElementById('res-acc').innerText = acc + '%';
+            document.getElementById('res-errors').innerText = state.errors;
+        }
+
+        // --- TYPING HANDLERS ---
+        const inputEl = document.getElementById('typing-input');
+        
+        inputEl.addEventListener('keydown', (e) => {
             if(!state.active) return;
             if(e.key === 'Backspace') state.backspaces++;
         });
 
-        els.input.addEventListener('input', (e) => {
+        inputEl.addEventListener('input', (e) => {
             if(!state.active) return;
-            
             const val = e.target.value;
             
             if(val.endsWith(' ')) {
-                // Word Submitted
                 const inputWord = val.trim();
-                if(inputWord) checkWord(inputWord);
-                e.target.value = '';
-            } else {
-                // (Optional) Real-time highlight logic could go here
+                if(inputWord) {
+                    checkWord(inputWord);
+                    e.target.value = '';
+                }
             }
         });
 
@@ -392,7 +371,7 @@
             const target = state.words[state.idx];
             const el = document.getElementById(`w-${state.idx}`);
             
-            state.charsTyped += typed.length + 1; // +1 space
+            state.charsTyped += typed.length + 1;
             
             if(typed === target) {
                 el.classList.add('correct');
@@ -406,7 +385,6 @@
                 state.history.push(false);
             }
 
-            // Move Next
             state.idx++;
             if(state.idx < state.words.length) {
                 const next = document.getElementById(`w-${state.idx}`);
@@ -418,79 +396,42 @@
         }
 
         function autoScroll(el) {
-            const container = els.textDisplay;
+            const container = document.getElementById('text-container');
             const elTop = el.offsetTop - container.offsetTop;
             if(elTop > container.clientHeight / 2) {
                 container.scrollTop = elTop - (container.clientHeight / 3);
             }
         }
 
-        function finishTest() {
-            state.active = false;
-            clearInterval(state.timer);
-            els.modal.classList.remove('hidden');
-
-            const timeMins = (state.totalTime - state.timeLeft) / 60 || 1;
-            
-            // Standard Calculation
-            const grossWPM = Math.round((state.charsTyped / 5) / timeMins);
-            const netWPM = Math.round((state.correctChars / 5) / timeMins);
-            const totalWords = state.history.length;
-            const correctWords = state.history.filter(Boolean).length;
-            const acc = totalWords ? Math.round((correctWords / totalWords) * 100) : 0;
-
-            document.getElementById('res-wpm').innerText = netWPM;
-            document.getElementById('res-gross').innerText = grossWPM;
-            document.getElementById('res-acc').innerText = acc + '%';
-            document.getElementById('res-errors').innerText = state.errors;
-            document.getElementById('res-backspace').innerText = state.backspaces;
-
-            // Trigger Confetti or sound could go here
-        }
-
-        // Global functions for buttons in modal
-        window.downloadCertificate = function() {
+        function downloadCertificate() {
             const canvas = document.getElementById('certCanvas');
             const ctx = canvas.getContext('2d');
             
             ctx.fillStyle = "#fff";
             ctx.fillRect(0,0,800,600);
-            
-            // Border
             ctx.lineWidth = 10;
             ctx.strokeStyle = "#3b82f6";
             ctx.strokeRect(10,10,780,580);
             
-            // Content
             ctx.fillStyle = "#1e293b";
-            ctx.font = "bold 40px Inter";
+            ctx.font = "bold 40px Inter, sans-serif";
             ctx.textAlign = "center";
             ctx.fillText("CERTIFICATE OF EXCELLENCE", 400, 100);
             
             ctx.fillStyle = "#64748b";
-            ctx.font = "20px Inter";
+            ctx.font = "20px Inter, sans-serif";
             ctx.fillText("Mourya Typing Pro Assessment", 400, 140);
             
             const net = document.getElementById('res-wpm').innerText;
-            const acc = document.getElementById('res-acc').innerText;
-            
             ctx.fillStyle = "#0f172a";
-            ctx.font = "bold 60px Inter";
+            ctx.font = "bold 60px Inter, sans-serif";
             ctx.fillText(net + " WPM", 400, 300);
-            
-            ctx.font = "30px Inter";
-            ctx.fillText("Accuracy: " + acc, 400, 360);
-            
-            ctx.font = "italic 16px Inter";
-            ctx.fillStyle = "#94a3b8";
-            ctx.fillText("Verified on " + new Date().toLocaleDateString(), 400, 500);
             
             const link = document.createElement('a');
             link.download = 'Mourya_Typing_Cert.png';
             link.href = canvas.toDataURL();
             link.click();
         }
-    });
     </script>
 </body>
 </html>
