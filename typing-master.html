@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sarkari Typing Master | SSC & Railway Special</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts for Mangal (Unicode) Simulation -->
+    <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Config for Custom Fonts and Colors -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            850: '#151f32', // Custom dark depth
+                            900: '#0f172a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['ui-sans-serif', 'system-ui'],
+                        mangal: ['"Tiro Devanagari Hindi"', 'sans-serif'], // Unicode Hindi
+                        kruti: ['"Kruti Dev 010"', '"Kruti Dev 011"', 'sans-serif'], // Legacy Hindi
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6; 
+            border-radius: 4px;
+        }
+
+        /* Text Highlighting Logic */
+        .word {
+            padding: 2px 4px;
+            border-radius: 4px;
+            margin-right: 4px;
+            display: inline-block;
+            line-height: 2.2; /* Better spacing for Hindi marks */
+        }
+        .word.current {
+            background-color: #3b82f6; /* Blue-500 */
+            color: white;
+            text-decoration: underline;
+        }
+        .word.correct {
+            color: #4ade80; /* Green-400 */
+        }
+        .word.wrong {
+            color: #f87171; /* Red-400 */
+            text-decoration: line-through;
+        }
+
+        /* Ad Space Styling */
+        .ad-space {
+            width: 100%;
+            height: 90px;
+            background-color: #1e293b;
+            border: 2px dashed #475569;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            margin: 10px 0;
+            font-size: 0.8rem;
+        }
+
+        /* Mobile Adjustments for Input Focus */
+        input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Kruti Dev Fallback Note: 
+           Since Kruti Dev is a system font, if the user doesn't have it, 
+           it will show as garbage English characters. This is expected behavior 
+           for Kruti Dev web tests. */
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200 min-h-screen flex flex-col font-sans selection:bg-blue-500 selection:text-white">
+
+    <!-- Navbar -->
+    <nav class="bg-slate-800 border-b border-slate-700 p-4 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-300">
+                Sarkari Typing Master
+            </h1>
+            <span class="text-xs text-slate-400 border border-slate-600 px-2 py-1 rounded">MouryaTools v1.0</span>
+        </div>
+    </nav>
+
+    <!-- Ad Space Top -->
+    <div class="container mx-auto px-4">
+        <div class="ad-space">Monetag Ad Space (970x90 or 320x50)</div>
+    </div>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="container mx-auto px-4 flex-grow flex flex-col items-center justify-center gap-6 relative">
+
+        <!-- CONFIGURATION SCREEN (Initial View) -->
+        <div id="config-screen" class="w-full max-w-md bg-slate-800 p-8 rounded-xl shadow-2xl border border-slate-700">
+            <h2 class="text-2xl font-semibold mb-6 text-center text-white">Test Configuration</h2>
+            
+            <div class="space-y-4">
+                <!-- Language Selection -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-400 mb-1">Language / Font</label>
+                    <select id="lang-select" class="w-full bg-slate-900 border border-slate-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none">
+                        <option value="english">English (QWERTY)</option>
+                        <option value="hindi_mangal">Hindi - Mangal (Inscript)</option>
+                        <option value="hindi_kruti">Hindi - Kruti Dev (Remington)</option>
+                    </select>
+                    <p class="text-xs text-slate-500 mt-1">*For Kruti Dev, ensure font is installed on PC.</p>
+                </div>
+
+                <!-- Duration Selection -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-400 mb-1">Duration</label>
+                    <select id="time-select" class="w-full bg-slate-900 border border-slate-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none">
+                        <option value="1">1 Minute (Quick Check)</option>
+                        <option value="2">2 Minutes</option>
+                        <option value="5">5 Minutes (SSC Standard)</option>
+                        <option value="10">10 Minutes (Full Test)</option>
+                    </select>
+                </div>
+
+                <button onclick="startTest()" class="w-full mt-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold py-3 rounded-lg shadow-lg transform transition active:scale-95">
+                    Start Test
+                </button>
+            </div>
+        </div>
+
+        <!-- TYPING INTERFACE (Hidden by default) -->
+        <div id="typing-screen" class="hidden w-full max-w-4xl flex flex-col gap-4">
+            
+            <!-- Live Stats Bar -->
+            <div class="grid grid-cols-3 gap-4 bg-slate-800 p-4 rounded-lg border border-slate-700 shadow-md">
+                <div class="text-center">
+                    <p class="text-xs text-slate-400 uppercase tracking-wider">Time Left</p>
+                    <p id="timer-display" class="text-2xl font-mono font-bold text-yellow-400">00:00</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-xs text-slate-400 uppercase tracking-wider">WPM (Live)</p>
+                    <p id="wpm-display" class="text-2xl font-mono font-bold text-blue-400">0</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-xs text-slate-400 uppercase tracking-wider">Accuracy</p>
+                    <p id="acc-display" class="text-2xl font-mono font-bold text-green-400">100%</p>
+                </div>
+            </div>
+
+            <!-- Text Display Area -->
+            <!-- Note: font-size adjusted dynamically via JS based on language -->
+            <div id="text-container" class="relative w-full h-48 md:h-64 bg-slate-850 rounded-lg border-2 border-slate-600 overflow-y-auto p-6 text-xl md:text-2xl leading-loose select-none shadow-inner">
+                <!-- Words will be injected here -->
+            </div>
+
+            <!-- Input Area -->
+            <div class="relative w-full">
+                <input 
+                    type="text" 
+                    id="typing-input" 
+                    class="w-full bg-slate-800 text-white text-xl p-4 rounded-lg border-2 border-slate-500 focus:border-blue-500 placeholder-slate-500"
+                    placeholder="Type here..."
+                    autocomplete="off" 
+                    autocorrect="off" 
+                    autocapitalize="off" 
+                    spellcheck="false"
+                    onpaste="return false"
+                >
+                <div class="absolute right-4 top-4 text-xs text-slate-500 hidden md:block">
+                    Press Space to Next
+                </div>
+            </div>
+
+            <div class="text-center text-xs text-slate-500">
+                OTG Keyboard Recommended for Mobile Users
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Ad Space Bottom -->
+    <div class="container mx-auto px-4">
+        <div class="ad-space">Monetag Ad Space (Responsive)</div>
+    </div>
+
+    <!-- RESULT MODAL -->
+    <div id="result-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-slate-800 w-full max-w-lg rounded-2xl border border-slate-600 shadow-2xl overflow-hidden transform transition-all scale-100">
+            
+            <div class="bg-gradient-to-r from-blue-900 to-slate-900 p-6 text-center border-b border-slate-700">
+                <h2 class="text-3xl font-bold text-white">Test Summary</h2>
+                <p class="text-blue-200 text-sm mt-1">MouryaTools Assessment</p>
+            </div>
+
+            <div class="p-6 grid grid-cols-2 gap-6">
+                <div class="bg-slate-900 p-4 rounded-lg text-center border border-slate-700">
+                    <p class="text-slate-400 text-xs uppercase">Net Speed</p>
+                    <p id="res-wpm" class="text-4xl font-bold text-blue-400">0</p>
+                    <p class="text-xs text-slate-500">WPM</p>
+                </div>
+                <div class="bg-slate-900 p-4 rounded-lg text-center border border-slate-700">
+                    <p class="text-slate-400 text-xs uppercase">Accuracy</p>
+                    <p id="res-acc" class="text-4xl font-bold text-green-400">0%</p>
+                </div>
+                
+                <div class="col-span-2 grid grid-cols-3 gap-2 text-center text-sm">
+                    <div class="p-2 bg-slate-850 rounded">
+                        <span class="block text-slate-400 text-xs">Gross WPM</span>
+                        <span id="res-gross" class="font-bold text-white">0</span>
+                    </div>
+                    <div class="p-2 bg-slate-850 rounded">
+                        <span class="block text-slate-400 text-xs">Backspaces</span>
+                        <span id="res-backspace" class="font-bold text-red-300">0</span>
+                    </div>
+                    <div class="p-2 bg-slate-850 rounded">
+                        <span class="block text-slate-400 text-xs">Errors</span>
+                        <span id="res-errors" class="font-bold text-red-400">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6 bg-slate-900 border-t border-slate-700 flex gap-4">
+                <button onclick="downloadCertificate()" class="flex-1 bg-green-600 hover:bg-green-500 text-white py-3 rounded-lg font-semibold transition">
+                    Download Certificate
+                </button>
+                <button onclick="location.reload()" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white py-3 rounded-lg font-semibold transition">
+                    Retake Test
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden Canvas for Certificate Generation -->
+    <canvas id="certCanvas" width="800" height="600" class="hidden"></canvas>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- DATA SOURCE ---
+        const dataSources = {
+            english: [
+                "The quick brown fox jumps over the lazy dog. Programming is the art of telling another human what one wants the computer to do. Education is the most powerful weapon which you can use to change the world. Success is not final, failure is not fatal: it is the courage to continue that counts.",
+                "In a world where technology evolves rapidly, staying updated is crucial. Government exams often test not just knowledge but also speed and accuracy. Typing is a fundamental skill for the digital age, required in almost every profession.",
+                "Democracy is a system of government by the whole population or all the eligible members of a state, typically through elected representatives. The Constitution of India is the supreme law of India. It lays down the framework defining fundamental political code.",
+                "Climate change is a long-term shift in global or regional climate patterns. Often climate change refers specifically to the rise in global temperatures from the mid-20th century to present. We must act now to save our planet for future generations.",
+                "Artificial Intelligence is intelligence demonstrated by machines, as opposed to the natural intelligence displayed by animals including humans. AI research has been defined as the field of study of intelligent agents, which refers to any system that perceives its environment."
+            ],
+            hindi_mangal: [
+                "भारत एक विशाल देश है और इसकी संस्कृति बहुत ही समृद्ध है। हमें अपने देश पर गर्व होना चाहिए। शिक्षा जीवन का आधार है। कठिन परिश्रम ही सफलता की कुंजी है।",
+                "लोकतंत्र में जनता का स्थान सर्वोपरि होता है। भारत का संविधान विश्व का सबसे बड़ा लिखित संविधान है। हमें संविधान का सम्मान करना चाहिए और नियमों का पालन करना चाहिए।",
+                "पर्यावरण की रक्षा करना हम सभी का कर्तव्य है। वृक्ष लगाओ, जीवन बचाओ। प्रदूषण को कम करने के लिए हमें प्लास्टिक का उपयोग कम करना होगा।",
+                "आज का युग विज्ञान और तकनीक का युग है। कंप्यूटर ने हमारे जीवन को बहुत आसान बना दिया है। इंटरनेट के माध्यम से हम दुनिया के किसी भी कोने से जुड़ सकते हैं।",
+                "सफलता पाने के लिए धैर्य और निरंतर प्रयास की आवश्यकता होती है। हार मत मानो, क्योंकि कोशिश करने वालों की कभी हार नहीं होती। आत्मविश्वास सफलता की पहली सीढ़ी है।"
+            ],
+            // Kruti Dev Data: These are specific ASCII characters that render as Hindi in Kruti Dev font.
+            // Example: "Hkkjr" -> "भारत" in Kruti Dev
+            hindi_kruti: [
+                "Hkkjr ,d fo'kky ns'k gS vkSj bldh laLd`fr cgqr gh le`) gSA gesa vius ns'k ij xoZ gksuk pkfg,A f'k{kk thou dk vk/kkj gSA dfBu ifjJe gh lQyrk dh dqath gSA",
+                "yksdra= esa turk dk LFkku loksZifj gksrk gSA Hkkjr dk lafo/kku fo'o dk lcls cM+k fyf[kr lafo/kku gSA gesa lafo/kku dk lEeku djuk pkfg, vkSj fu;eksa dk ikyu djuk pkfg,A",
+                "Ik;kZoj.k dh j{kk djuk ge lHkh dk drZO; gSA o`{k yxkvks] thou cpkvksA iznw"k.k dks de djus ds fy, gesa lykfLVd dk mi;ksx de djuk gksxkA",
+                "vkt dk ;qx foKku vkSj rduhd dk ;qx gSA daI;wVj us gekjs thou dks cgqr vklku cuk fn;k gSA baVjusV ds ek/;e ls ge nqfu;k ds fdlh Hkh dksus ls tqM+ ldrs gSaA",
+                "lQyrk ikus ds fy, /kS;Z vkSj fujarj iz;kl dh vko';drk gksrh gSA gkj er ekuks] D;ksafd dksf'k'k djus okyksa dh dHkh gkj ugha gksrhA vkRefo'okl lQyrk dh igyh lh<+h gSA"
+            ]
+        };
+
+        // --- STATE MANAGEMENT ---
+        let state = {
+            isRunning: false,
+            timeLeft: 0,
+            totalTime: 0,
+            timerInterval: null,
+            wordsArray: [],
+            currentWordIndex: 0,
+            correctKeystrokes: 0,
+            totalKeystrokes: 0,
+            errorCount: 0,
+            backspaceCount: 0,
+            selectedLang: 'english',
+            typedWordsHistory: [] // To track correctness of each word
+        };
+
+        // --- DOM ELEMENTS ---
+        const els = {
+            screens: {
+                config: document.getElementById('config-screen'),
+                typing: document.getElementById('typing-screen'),
+                modal: document.getElementById('result-modal')
+            },
+            inputs: {
+                lang: document.getElementById('lang-select'),
+                time: document.getElementById('time-select'),
+                typing: document.getElementById('typing-input')
+            },
+            display: {
+                text: document.getElementById('text-container'),
+                timer: document.getElementById('timer-display'),
+                wpm: document.getElementById('wpm-display'),
+                acc: document.getElementById('acc-display')
+            },
+            results: {
+                netWpm: document.getElementById('res-wpm'),
+                grossWpm: document.getElementById('res-gross'),
+                acc: document.getElementById('res-acc'),
+                back: document.getElementById('res-backspace'),
+                err: document.getElementById('res-errors')
+            }
+        };
+
+        // --- CORE FUNCTIONS ---
+
+        function init() {
+            // Nothing specific to run on load
+        }
+
+        function startTest() {
+            // Get Config
+            state.selectedLang = els.inputs.lang.value;
+            state.totalTime = parseInt(els.inputs.time.value) * 60;
+            state.timeLeft = state.totalTime;
+
+            // Reset State
+            state.currentWordIndex = 0;
+            state.correctKeystrokes = 0;
+            state.totalKeystrokes = 0;
+            state.errorCount = 0;
+            state.backspaceCount = 0;
+            state.typedWordsHistory = [];
+            state.isRunning = true;
+            
+            clearInterval(state.timerInterval);
+
+            // Select Paragraph
+            const samples = dataSources[state.selectedLang];
+            const randomText = samples[Math.floor(Math.random() * samples.length)];
+            state.wordsArray = randomText.split(' ');
+
+            // Setup UI
+            setupTextDisplay();
+            els.inputs.typing.value = '';
+            els.inputs.typing.focus();
+            
+            // Apply Fonts
+            els.display.text.className = "relative w-full h-48 md:h-64 bg-slate-850 rounded-lg border-2 border-slate-600 overflow-y-auto p-6 text-xl md:text-2xl leading-loose select-none shadow-inner";
+            if(state.selectedLang === 'hindi_mangal') els.display.text.classList.add('font-mangal');
+            if(state.selectedLang === 'hindi_kruti') els.display.text.classList.add('font-kruti');
+
+            // Switch Screen
+            els.screens.config.classList.add('hidden');
+            els.screens.typing.classList.remove('hidden');
+
+            // Start Timer
+            updateStatsUI();
+            state.timerInterval = setInterval(() => {
+                state.timeLeft--;
+                updateStatsUI();
+                if (state.timeLeft <= 0) endTest();
+            }, 1000);
+        }
+
+        function setupTextDisplay() {
+            els.display.text.innerHTML = '';
+            state.wordsArray.forEach((word, index) => {
+                const span = document.createElement('span');
+                span.innerText = word;
+                span.className = 'word';
+                span.id = `word-${index}`;
+                if (index === 0) span.classList.add('current');
+                els.display.text.appendChild(span);
+            });
+        }
+
+        // --- INPUT LOGIC ---
+
+        els.inputs.typing.addEventListener('keydown', (e) => {
+            if (!state.isRunning) return;
+
+            // Count Backspaces
+            if (e.key === 'Backspace') {
+                state.backspaceCount++;
+            }
+        });
+
+        els.inputs.typing.addEventListener('input', (e) => {
+            if (!state.isRunning) return;
+
+            const val = e.target.value;
+            
+            // Check for Spacebar (Word Submission)
+            if (val.endsWith(' ')) {
+                const typedWord = val.trim();
+                if (typedWord.length > 0) {
+                    processWord(typedWord);
+                    els.inputs.typing.value = ''; // Clear input
+                } else {
+                    els.inputs.typing.value = ''; // Prevent just spaces
+                }
+            } else {
+                // Real-time current word highlighting (Optional Logic: Check prefix)
+                // For simplicity in this robust version, we just let them type.
+            }
+        });
+
+        function processWord(typedWord) {
+            const targetWord = state.wordsArray[state.currentWordIndex];
+            const wordSpan = document.getElementById(`word-${state.currentWordIndex}`);
+            
+            // Logic for Checking
+            let isCorrect = (typedWord === targetWord);
+
+            // Update State
+            state.totalKeystrokes += typedWord.length + 1; // +1 for space
+            
+            if (isCorrect) {
+                state.correctKeystrokes += typedWord.length + 1;
+                wordSpan.classList.add('correct');
+                state.typedWordsHistory.push(true);
+            } else {
+                state.errorCount++; // Count word error
+                wordSpan.classList.add('wrong');
+                state.typedWordsHistory.push(false);
+            }
+
+            wordSpan.classList.remove('current');
+
+            // Move to next
+            state.currentWordIndex++;
+            if (state.currentWordIndex < state.wordsArray.length) {
+                const nextSpan = document.getElementById(`word-${state.currentWordIndex}`);
+                nextSpan.classList.add('current');
+                
+                // Auto Scroll Logic
+                autoScroll(nextSpan);
+            } else {
+                // End test if text finished
+                endTest();
+            }
+        }
+
+        function autoScroll(activeElement) {
+            const container = els.display.text;
+            const offsetTop = activeElement.offsetTop;
+            const containerHeight = container.clientHeight;
+            const scrollTop = container.scrollTop;
+
+            // If word is in bottom 1/3rd of view, scroll down
+            if (offsetTop > scrollTop + (containerHeight / 1.5)) {
+                container.scrollTo({
+                    top: offsetTop - (containerHeight / 3),
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function updateStatsUI() {
+            // Timer Format
+            const m = Math.floor(state.timeLeft / 60).toString().padStart(2, '0');
+            const s = (state.timeLeft % 60).toString().padStart(2, '0');
+            els.display.timer.innerText = `${m}:${s}`;
+
+            // Calculate Live WPM
+            const timeElapsed = state.totalTime - state.timeLeft;
+            if (timeElapsed > 0) {
+                const mins = timeElapsed / 60;
+                // Standard Govt Formula: Gross WPM = (Total Typed Characters / 5) / Mins
+                const grossWPM = Math.round((state.totalKeystrokes / 5) / mins);
+                els.display.wpm.innerText = grossWPM;
+                
+                // Accuracy
+                const totalWords = state.currentWordIndex;
+                if(totalWords > 0) {
+                   const correctWords = state.typedWordsHistory.filter(Boolean).length;
+                   const acc = Math.round((correctWords / totalWords) * 100);
+                   els.display.acc.innerText = `${acc}%`;
+                }
+            }
+        }
+
+        function endTest() {
+            state.isRunning = false;
+            clearInterval(state.timerInterval);
+            els.screens.modal.classList.remove('hidden');
+
+            // Final Calculations
+            const timeElapsedMins = (state.totalTime - state.timeLeft) / 60 || 1; // avoid divide by zero
+            
+            // SSC/Railway Formula Logic
+            // Gross WPM = (Total Chars / 5) / Time
+            // Net WPM = ((Total Chars - ErrorChars) / 5) / Time OR (GrossWPM - (Errors/Time))
+            // Here we use a standard Net Speed calculation:
+            
+            const grossWPM = Math.round((state.totalKeystrokes / 5) / timeElapsedMins);
+            const netWPM = Math.round(((state.correctKeystrokes) / 5) / timeElapsedMins); 
+            
+            const totalWords = state.typedWordsHistory.length;
+            const correctWords = state.typedWordsHistory.filter(Boolean).length;
+            const accuracy = totalWords === 0 ? 0 : Math.round((correctWords / totalWords) * 100);
+
+            // Populate Modal
+            els.results.netWpm.innerText = netWPM;
+            els.results.grossWpm.innerText = grossWPM;
+            els.results.acc.innerText = accuracy + '%';
+            els.results.back.innerText = state.backspaceCount;
+            els.results.err.innerText = state.errorCount;
+        }
+
+        // --- CERTIFICATE GENERATION ---
+        function downloadCertificate() {
+            const canvas = document.getElementById('certCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Background
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0, 0, 800, 600);
+
+            // Border
+            ctx.strokeStyle = "#1e293b";
+            ctx.lineWidth = 20;
+            ctx.strokeRect(0, 0, 800, 600);
+
+            // Header
+            ctx.fillStyle = "#0f172a";
+            ctx.font = "bold 40px Arial";
+            ctx.textAlign = "center";
+            ctx.fillText("CERTIFICATE OF ACHIEVEMENT", 400, 100);
+
+            ctx.font = "20px Arial";
+            ctx.fillStyle = "#64748b";
+            ctx.fillText("Sarkari Typing Master | MouryaTools", 400, 140);
+
+            // Score Data
+            ctx.textAlign = "left";
+            ctx.fillStyle = "#0f172a";
+            ctx.font = "bold 30px Arial";
+            
+            const startX = 250;
+            const startY = 250;
+            const gap = 50;
+
+            ctx.fillText(`Net Speed: ${els.results.netWpm.innerText} WPM`, startX, startY);
+            ctx.fillText(`Accuracy: ${els.results.acc.innerText}`, startX, startY + gap);
+            ctx.fillText(`Language: ${state.selectedLang === 'hindi_mangal' ? 'Hindi (Mangal)' : state.selectedLang === 'hindi_kruti' ? 'Hindi (Kruti Dev)' : 'English'}`, startX, startY + gap * 2);
+
+            // Date
+            ctx.font = "italic 16px Arial";
+            ctx.fillText(`Date: ${new Date().toLocaleDateString()}`, startX, startY + gap * 3.5);
+
+            // Watermark/Footer
+            ctx.textAlign = "center";
+            ctx.font = "14px Arial";
+            ctx.fillStyle = "#cbd5e1";
+            ctx.fillText("Generated by MouryaTools Typing System", 400, 550);
+
+            // Download
+            const link = document.createElement('a');
+            link.download = `Typing_Certificate_${Date.now()}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+    </script>
+</body>
+</html>
