@@ -2,36 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <!-- Home Page -->
    <url>
-      <loc>https://sarkaritool.netlify.app//</loc>
+      <loc>https://mourya-tool.netlify.app/</loc>
       <lastmod>2026-01-02</lastmod>
       <priority>1.00</priority>
    </url>
    
    <!-- SSC Page -->
    <url>
-      <loc>https://sarkaritool.netlify.app//ssc-resizer.html</loc>
+      <loc>https://mourya-tool.netlify.app/ssc-resizer.html</loc>
       <lastmod>2026-01-02</lastmod>
       <priority>0.80</priority>
    </url>
 
    <!-- UPSC Page -->
    <url>
-      <loc>https://sarkaritool.netlify.app//upsc-resizer.html</loc>
+      <loc>https://mourya-tool.netlify.app/upsc-resizer.html</loc>
       <lastmod>2026-01-02</lastmod>
       <priority>0.80</priority>
    </url>
 
    <!-- Railway Page -->
    <url>
-      <loc>https://sarkaritool.netlify.app//railway-resizer.html</loc>
+      <loc>https://mourya-tool.netlify.app/railway-resizer.html</loc>
       <lastmod>2026-01-02</lastmod>
       <priority>0.80</priority>
    </url>
 
    <!-- Passport Page -->
    <url>
-      <loc>https://sarkaritool.netlify.app//passport-photo.html</loc>
+      <loc>https://mourya-tool.netlify.app/passport-photo.html</loc>
       <lastmod>2026-01-02</lastmod>
       <priority>0.80</priority>
    </url>
 </urlset>
+<!-- Hindi Typing Tool (New Addition) -->
+   <url>
+      <loc>https://mouryatools.netlify.app/hindi-typing.html</loc>
+      <lastmod>2026-01-05</lastmod> <!-- Aaj ki date -->
+      <priority>0.80</priority>
+   </url>
