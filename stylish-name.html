@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylish Name Generator - Free Fire, BGMI & Instagram</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .name-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .name-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(147, 51, 234, 0.3);
+        }
+        
+        .copy-feedback {
+            animation: fadeInOut 2s ease-in-out;
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            20%, 80% { opacity: 1; }
+        }
+        
+        .style-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .style-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .style-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .sparkle {
+            animation: sparkle 2s linear infinite;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        
+        .loading-spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid white;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .category-tab {
+            transition: all 0.3s ease;
+        }
+        
+        .category-tab.active {
+            background: rgba(147, 51, 234, 0.3);
+            border-bottom: 2px solid #9333ea;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900">
+    <!-- Header -->
+    <header class="glass-effect sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center floating">
+                        <i class="fas fa-magic text-purple-400 text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-white">Stylish Name Generator</h1>
+                        <p class="text-purple-200 text-sm">Create unique names for Free Fire, BGMI & Instagram</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="toggleTheme()" class="text-white hover:text-purple-300 transition">
+                        <i class="fas fa-moon text-xl"></i>
+                    </button>
+                    <button onclick="shareTool()" class="text-white hover:text-purple-300 transition">
+                        <i class="fas fa-share-alt text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Input Section -->
+        <section class="max-w-4xl mx-auto mb-8">
+            <div class="glass-effect rounded-2xl p-8 shadow-2xl">
+                <div class="mb-6">
+                    <label class="block text-purple-200 text-sm font-medium mb-2">
+                        <i class="fas fa-keyboard mr-2"></i>Enter Your Name
+                    </label>
+                    <div class="relative">
+                        <input 
+                            type="text" 
+                            id="nameInput" 
+                            placeholder="Type your name here..."
+                            class="w-full px-4 py-3 bg-white/10 border border-purple-400/30 rounded-lg text-white placeholder-purple-300 focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-400/50 transition"
+                            oninput="resetAndGenerate()"
+                        >
+                        <button 
+                            onclick="clearInput()"
+                            class="absolute right-3 top-1/2 transform -translate-y-1/2 text-purple-300 hover:text-white transition"
+                        >
+                            <i class="fas fa-times-circle"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Category Tabs -->
+                <div class="mb-6">
+                    <label class="block text-purple-200 text-sm font-medium mb-3">
+                        <i class="fas fa-th-large mr-2"></i>Choose Category
+                    </label>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="setCategory('all')" class="category-tab active px-4 py-2 bg-white/10 border border-purple-400/30 rounded-lg text-purple-200 hover:bg-white/20 transition">
+                            All Styles
+                        </button>
+                        <button onclick="setCategory('freefire')" class="category-tab px-4 py-2 bg-white/10 border border-purple-400/30 rounded-lg text-purple-200 hover:bg-white/20 transition">
+                            <i class="fas fa-fire mr-1"></i> Free Fire
+                        </button>
+                        <button onclick="setCategory('bgmi')" class="category-tab px-4 py-2 bg-white/10 border border-purple-400/30 rounded-lg text-purple-200 hover:bg-white/20 transition">
+                            <i class="fas fa-crosshairs mr-1"></i> BGMI
+                        </button>
+                        <button onclick="setCategory('instagram')" class="category-tab px-4 py-2 bg-white/10 border border-purple-400/30 rounded-lg text-purple-200 hover:bg-white/20 transition">
+                            <i class="fas fa-camera mr-1"></i> Instagram
+                        </button>
+                        <button onclick="setCategory('gaming')" class="category-tab px-4 py-2 bg-white/10 border border-purple-400/30 rounded-lg text-purple-200 hover:bg-white/20 transition">
+                            <i class="fas fa-gamepad mr-1"></i> Gaming
+                        </button>
+                        <button onclick="setCategory('professional')" class="category-tab px-4 py-2 bg-white/10 border border-purple-400/30 rounded-lg text-purple-200 hover:bg-white/20 transition">
+                            <i class="fas fa-briefcase mr-1"></i> Professional
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Platform Tags -->
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-purple-500/20 rounded-full text-purple-200 text-sm">
+                        <i class="fas fa-fire mr-1"></i> Free Fire
+                    </span>
+                    <span class="px-3 py-1 bg-purple-500/20 rounded-full text-purple-200 text-sm">
+                        <i class="fas fa-crosshairs mr-1"></i> BGMI
+                    </span>
+                    <span class="px-3 py-1 bg-purple-500/20 rounded-full text-purple-200 text-sm">
+                        <i class="fas fa-camera mr-1"></i> Instagram
+                    </span>
+                    <span class="px-3 py-1 bg-purple-500/20 rounded-full text-purple-200 text-sm">
+                        <i class="fas fa-gamepad mr-1"></i> Gaming
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Generated Names Section -->
+        <section class="max-w-6xl mx-auto">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-white">
+                    <i class="fas fa-sparkles text-yellow-400 mr-2 sparkle"></i>
+                    Generated Names
+                    <span id="resultCount" class="text-sm font-normal text-purple-300 ml-2"></span>
+                </h2>
+                <div class="flex space-x-2">
+                    <button 
+                        onclick="copyAllNames()"
+                        class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition flex items-center space-x-2"
+                    >
+                        <i class="fas fa-copy"></i>
+                        <span>Copy All</span>
+                    </button>
+                    <button 
+                        onclick="downloadNames()"
+                        class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition flex items-center space-x-2"
+                    >
+                        <i class="fas fa-download"></i>
+                        <span>Download</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="namesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Names will be generated here -->
+                <div class="glass-effect rounded-lg p-6 text-center col-span-full">
+                    <i class="fas fa-magic text-purple-400 text-3xl mb-3"></i>
+                    <p class="text-purple-200">Start typing to generate stylish names!</p>
+                </div>
+            </div>
+
+            <!-- Load More Button -->
+            <div id="loadMoreContainer" class="text-center mt-8 hidden">
+                <button 
+                    onclick="loadMoreNames()"
+                    class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition flex items-center space-x-2 mx-auto"
+                >
+                    <span id="loadMoreText">Load More</span>
+                    <div id="loadingSpinner" class="loading-spinner ml-2 hidden"></div>
+                </button>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="max-w-6xl mx-auto mt-12">
+            <h3 class="text-xl font-bold text-white mb-6 text-center">
+                <i class="fas fa-star text-yellow-400 mr-2"></i>
+                Why Choose Our Generator?
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-effect rounded-lg p-6 text-center">
+                    <div class="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-bolt text-purple-400 text-2xl"></i>
+                    </div>
+                    <h4 class="text-white font-semibold mb-2">100+ Unique Styles</h4>
+                    <p class="text-purple-200 text-sm">Huge variety of fonts and decorations</p>
+                </div>
+                <div class="glass-effect rounded-lg p-6 text-center">
+                    <div class="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-mobile-alt text-purple-400 text-2xl"></i>
+                    </div>
+                    <h4 class="text-white font-semibold mb-2">Mobile Friendly</h4>
+                    <p class="text-purple-200 text-sm">Works perfectly on all devices</p>
+                </div>
+                <div class="glass-effect rounded-lg p-6 text-center">
+                    <div class="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-copy text-purple-400 text-2xl"></i>
+                    </div>
+                    <h4 class="text-white font-semibold mb-2">Easy Copy</h4>
+                    <p class="text-purple-200 text-sm">One-click copy to clipboard</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-effect mt-16">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <p class="text-purple-200 text-sm mb-4 md:mb-0">
+                    © 2024 Stylish Name Generator. Made with <i class="fas fa-heart text-red-400"></i> for gamers
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-purple-300 hover:text-white transition">
+                        <i class="fab fa-discord text-xl"></i>
+                    </a>
+                    <a href="#" class="text-purple-300 hover:text-white transition">
+                        <i class="fab fa-youtube text-xl"></i>
+                    </a>
+                    <a href="#" class="text-purple-300 hover:text-white transition">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-4 right-4 glass-effect px-6 py-3 rounded-lg text-white hidden copy-feedback">
+        <i class="fas fa-check-circle text-green-400 mr-2"></i>
+        <span id="toastMessage">Copied to clipboard!</span>
+    </div>
+
+    <script>
+        // Massive Decoration Library
+        const decorations = {
+            gaming: [
+                '꧁', '꧂', '☬', '☠︎', '卍', '⚡', '𝕯', '♔', '♕', '♖', '♗', '♘', '♙', '♚', '♛', '♜', '♝', '♞', '♟',
+                '彡', '★', '☆', 'ツ', 'ン', 'シ', 'ゞ', 'ノ', '〆', '卍', 'Ø', 'ᴳᵒᵈ', 'ᴮᴼˢˢ', 'ʟᴇɢᴇɴᴅ',
+                'ᴋɪɴɢ', 'Qᴜᴇᴇɴ', 'ᴾʳᵒ', '々', '〰', '『', '』', '「', '」', '【', '】', '〖', '〗'
+            ],
+            emojis: [
+                '❤️', '🔥', '✨', '🦋', '💀', '👑', '💎', '🍎', '🦄', '🌟', '💫', '⭐', '🌙', '☀️', '🌈', 
+                '🎮', '🎯', '🏆', '🥇', '🎖️', '⚔️', '🛡️', '🔱', '⚜️', '🎭', '🎪', '🎨', '🎬', '🎤'
+            ],
+            abstract: [
+                'ミ', '★', '۞', '⚓', '✈', '✉', '✿', '☛', '⚚', '◈', '◉', '◎', '○', '●', '◐', '◑',
+                '░', '▒', '▓', '║', '╝', '╚', '╗', '╔', '═', '╬', '╦', '╩', '╠', '╣', '╬',
+                '✮', '✯', '⚜', '✵', '✶', '✷', '✸', '✹', '✺', '✻', '✼', '❋', '✿', '❀', '❁'
+            ],
+            brackets: [
+                '(', ')', '[', ']', '{', '}', '<', '>', '|', '/', '\\', '「', '」', '『', '』', '【', '】',
+                '〖', '〗', '〘', '〙', '〚', '〛', '（', '）', '［', '］', '｛', '｝', '〈', '〉'
+            ],
+            lines: [
+                '─', '━', '│', '┃', '┄', '┅', '┆', '┇', '┈', '┉', '┊', '┋', '┌', '┍', '┎', '┏',
+                '┐', '┑', '┒', '┓', '└', '┕', '┖', '┗', '┘', '┙', '┚', '┛', '├', '┝', '┞', '┟'
+            ],
+            math: [
+                '∑', '∏', '∆', '∇', '∂', '∫', '∬', '∭', '∮', '∯', '∰', '∱', '∲', '∳', '∴', '∵',
+                '∶', '∷', '∸', '∹', '∺', '∻', '∼', '∽', '∾', '∿', '≀', '≁', '≂', '≃', '≄', '≅'
+            ],
+            arrows: [
+                '←', '→', '↑', '↓', '↔', '↕', '↖', '↗', '↘', '↙', '↚', '↛', '↜', '↝', '↞', '↟',
+                '↠', '↡', '↢', '↣', '↤', '↥', '↦', '↧', '↨', '↩', '↪', '↫', '↬', '↭', '↮', '↯'
+            ],
+            stars: [
+                '✦', '✧', '✩', '✪', '✫', '✬', '✭', '✮', '✯', '✰', '✱', '✲', '✳', '✴', '✵', '✶',
+                '✷', '✸', '✹', '✺', '✻', '✼', '❋', '❋', '❋', '❋', '❋', '❋', '❋', '❋', '❋'
+            ]
+        };
+
+        // Expanded Font Mappings
+        const fontMappings = {
+            // Original fonts
+            bold: {
+                'a': '𝗮', 'b': '𝗯', 'c': '𝗰', 'd': '𝗱', 'e': '𝗲', 'f': '𝗳', 'g': '𝗴',
+                'h': '𝗵', 'i': '𝗶', 'j': '𝗷', 'k': '𝗸', 'l': '𝗹', 'm': '𝗺', 'n': '𝗻',
+                'o': '𝗼', 'p': '𝗽', 'q': '𝗾', 'r': '𝗿', 's': '𝘀', 't': '𝘁', 'u': '𝘂',
+                'v': '𝘃', 'w': '𝘄', 'x': '𝘅', 'y': '𝘆', 'z': '𝘇',
+                'A': '𝗔', 'B': '𝗕', 'C': '𝗖', 'D': '𝗗', 'E': '𝗘', 'F': '𝗙', 'G': '𝗚',
+                'H': '𝗛', 'I': '𝗜', 'J': '𝗝', 'K': '𝗞', 'L': '𝗟', 'M': '𝗠', 'N': '𝗡',
+                'O': '𝗢', 'P': '𝗣', 'Q': '𝗤', 'R': '𝗥', 'S': '𝗦', 'T': '𝗧', 'U': '𝗨',
+                'V': '𝗩', 'W': '𝗪', 'X': '𝗫', 'Y': '𝗬', 'Z': '𝗭',
+                '0': '𝟬', '1': '𝟭', '2': '𝟮', '3': '𝟯', '4': '𝟰', '5': '𝟱', '6': '𝟲', '7': '𝟳', '8': '𝟴', '9': '𝟵'
+            },
+            italic: {
+                'a': '𝘢', 'b': '𝘣', 'c': '𝘤', 'd': '𝘥', 'e': '𝘦', 'f': '𝘧', 'g': '𝘨',
+                'h': '𝘩', 'i': '𝘪', 'j': '𝘫', 'k': '𝘬', 'l': '𝘭', 'm': '𝘮', 'n': '𝘯',
+                'o': '𝘰', 'p': '𝘱', 'q': '𝘲', 'r': '𝘳', 's': '𝘴', 't': '𝘵', 'u': '𝘶',
+                'v': '𝘷', 'w': '𝘸', 'x': '𝘹', 'y': '𝘺', 'z': '𝘻',
+                'A': '𝘈', 'B': '𝘉', 'C': '𝘊', 'D': '𝘋', 'E': '𝘌', 'F': '𝘍', 'G': '𝘎',
+                'H': '𝘏', 'I': '𝘐', 'J': '𝘑', 'K': '𝘒', 'L': '𝘓', 'M': '𝘔', 'N': '𝘕',
+                'O': '𝘖', 'P': '𝘗', 'Q': '𝘘', 'R': '𝘙', 'S': '𝘚', 'T': '𝘛', 'U': '𝘜',
+                'V': '𝘝', 'W': '𝘞', 'X': '𝘟', 'Y': '𝘠', 'Z': '𝘡'
+            },
+            script: {
+                'a': '𝒶', 'b': '𝒷', 'c': '𝒸', 'd': '𝒹', 'e': '𝑒', 'f': '𝒻', 'g': '𝑔',
+                'h': '𝒽', 'i': '𝒾', 'j': '𝒿', 'k': '𝓀', 'l': '𝓁', 'm': '𝓂', 'n': '𝓃',
+                'o': '𝑜', 'p': '𝓅', 'q': '𝓆', 'r': '𝓇', 's': '𝓈', 't': '𝓉', 'u': '𝓊',
+                'v': '𝓋', 'w': '𝓌', 'x': '𝓍', 'y': '𝓎', 'z': '𝓏',
+                'A': '𝒜', 'B': '𝐵', 'C': '𝒞', 'D': '𝒟', 'E': '𝐸', 'F': '𝐹', 'G': '𝒢',
+                'H': '𝐻', 'I': '𝐼', 'J': '𝐽', 'K': '𝐾', 'L': '𝐿', 'M': '𝑀', 'N': '𝑁',
+                'O': '𝒪', 'P': '𝒫', 'Q': '𝒬', 'R': '𝑅', 'S': '𝒮', 'T': '𝑇', 'U': '𝒰',
+                'V': '𝒱', 'W': '𝒲', 'X': '𝒳', 'Y': '𝒴', 'Z': '𝒵'
+            },
+            mono: {
+                'a': '𝚊', 'b': '𝚋', 'c': '𝚌', 'd': '𝚍', 'e': '𝚎', 'f': '𝚏', 'g': '𝚐',
+                'h': '𝚑', 'i': '𝚒', 'j': '𝚓', 'k': '𝚔', 'l': '𝚕', 'm': '𝚖', 'n': '𝚗',
+                'o': '𝚘', 'p': '𝚙', 'q': '𝚚', 'r': '𝚛', 's': '𝚜', 't': '𝚝', 'u': '𝚞',
+                'v': '𝚟', 'w': '𝚠', 'x': '𝚡', 'y': '𝚢', 'z': '𝚣',
+                'A': '𝙰', 'B': '𝙱', 'C': '𝙲', 'D': '𝙳', 'E': '𝙴', 'F': '𝙵', 'G': '𝙶',
+                'H': '𝙷', 'I': '𝙸', 'J': '𝙹', 'K': '𝙺', 'L': '𝙻', 'M': '𝙼', 'N': '𝙽',
+                'O': '𝙾', 'P': '𝙿', 'Q': '𝚀', 'R': '𝚁', 'S': '𝚂', 'T': '𝚃', 'U': '𝚄',
+                'V': '𝚅', 'W': '𝚆', 'X': '𝚇', 'Y': '𝚈', 'Z': '𝚉',
+                '0': '𝟶', '1': '𝟷', '2': '𝟸', '3': '𝟹', '4': '𝟺', '5': '𝟻', '6': '𝟼', '7': '𝟽', '8': '𝟾', '9': '𝟿'
+            },
+            
+            // New fonts
+            doubleStruck: {
+                'a': '𝕒', 'b': '𝕓', 'c': '𝕔', 'd': '𝕕', 'e': '𝕖', 'f': '𝕗', 'g': '𝕘',
+                'h': '𝕙', 'i': '𝕚', 'j': '𝕛', 'k': '𝕜', 'l': '𝕝', 'm': '𝕞', 'n': '𝕟',
+                'o': '𝕠', 'p': '𝕡', 'q': '𝕢', 'r': '𝕣', 's': '𝕤', 't': '𝕥', 'u': '𝕦',
+                'v': '𝕧', 'w': '𝕨', 'x': '𝕩', 'y': '𝕪', 'z': '𝕫',
+                'A': '𝔸', 'B': '𝔹', 'C': 'ℂ', 'D': '𝔻', 'E': '𝔼', 'F': '𝔽', 'G': '𝔾',
+                'H': 'ℍ', 'I': '𝕀', 'J': '𝕁', 'K': '𝕂', 'L': '𝕃', 'M': '𝕄', 'N': 'ℕ',
+                'O': '𝕆', 'P': 'ℙ', 'Q': 'ℚ', 'R': 'ℝ', 'S': '𝕊', 'T': '𝕋', 'U': '𝕌',
+                'V': '𝕍', 'W': '𝕎', 'X': '𝕏', 'Y': '𝕐', 'Z': 'ℤ',
+                '0': '𝟘', '1': '𝟙', '2': '𝟚', '3': '𝟛', '4': '𝟜', '5': '𝟝', '6': '𝟞', '7': '𝟟', '8': '𝟠', '9': '𝟡'
+            },
+            fraktur: {
+                'a': '𝔞', 'b': '𝔟', 'c': '𝔠', 'd': '𝔡', 'e': '𝔢', 'f': '𝔣', 'g': '𝔤',
+                'h': '𝔥', 'i': '𝔦', 'j': '𝔧', 'k': '𝔨', 'l': '𝔩', 'm': '𝔪', 'n': '𝔫',
+                'o': '𝔬', 'p': '𝔭', 'q': '𝔮', 'r': '𝔯', 's': '𝔰', 't': '𝔱', 'u': '𝔲',
+                'v': '𝔳', 'w': '𝔴', 'x': '𝔵', 'y': '𝔶', 'z': '𝔷',
+                'A': '𝔄', 'B': '𝔅', 'C': 'ℭ', 'D': '𝔇', 'E': '𝔈', 'F': '𝔉', 'G': '𝔊',
+                'H': 'ℌ', 'I': 'ℑ', 'J': '𝔍', 'K': '𝔎', 'L': '𝔏', 'M': '𝔐', 'N': '𝔑',
+                'O': '𝔒', 'P': '𝔓', 'Q': '𝔔', 'R': 'ℜ', 'S': '𝔖', 'T': '𝔗', 'U': '𝔘',
+                'V': '𝔙', 'W': '𝔚', 'X': '𝔛', 'Y': '𝔜', 'Z': 'ℨ'
+            },
+            boldFraktur: {
+                'a': '𝖆', 'b': '𝖇', 'c': '𝖈', 'd': '𝖉', 'e': '𝖊', 'f': '𝖋', 'g': '𝖌',
+                'h': '𝖍', 'i': '𝖎', 'j': '𝖏', 'k': '𝖐', 'l': '𝖑', 'm': '𝖒', 'n': '𝖓',
+                'o': '𝖔', 'p': '𝖕', 'q': '𝖖', 'r': '𝖗', 's': '𝖘', 't': '𝖙', 'u': '𝖚',
+                'v': '𝖛', 'w': '𝖜', 'x': '𝖝', 'y': '𝖞', 'z': '𝖟',
+                'A': '𝕬', 'B': '𝕭', 'C': '𝕮', 'D': '𝕯', 'E': '𝕰', 'F': '𝕱', 'G': '𝕲',
+                'H': '𝕳', 'I': '𝕴', 'J': '𝕵', 'K': '𝕶', 'L': '𝕷', 'M': '𝕸', 'N': '𝕹',
+                'O': '𝕺', 'P': '𝕻', 'Q': '𝕼', 'R': '𝕽', 'S': '𝕾', 'T': '𝕿', 'U': '𝖀',
+                'V': '𝖁', 'W': '𝖂', 'X': '𝖃', 'Y': '𝖄', 'Z': '𝖅'
+            },
+            circles: {
+                'a': 'ⓐ', 'b': 'ⓑ', 'c': 'ⓒ', 'd': 'ⓓ', 'e': 'ⓔ', 'f': 'ⓕ', 'g': 'ⓖ',
+                'h': 'ⓗ', 'i': 'ⓘ', 'j': 'ⓙ', 'k': 'ⓚ', 'l': 'ⓛ', 'm': 'ⓜ', 'n': 'ⓝ',
+                'o': 'ⓞ', 'p': 'ⓟ', 'q': 'ⓠ', 'r': 'ⓡ', 's': 'ⓢ', 't': 'ⓣ', 'u': 'ⓤ',
+                'v': 'ⓥ', 'w': 'ⓦ', 'x': 'ⓧ', 'y': 'ⓨ', 'z': 'ⓩ',
+                'A': 'Ⓐ', 'B': 'Ⓑ', 'C': 'Ⓒ', 'D': 'Ⓓ', 'E': 'Ⓔ', 'F': 'Ⓕ', 'G': 'Ⓖ',
+                'H': 'Ⓗ', 'I': 'Ⓘ', 'J': 'Ⓙ', 'K': 'Ⓚ', 'L': 'Ⓛ', 'M': 'Ⓜ', 'N': 'Ⓝ',
+                'O': 'Ⓞ', 'P': 'Ⓟ', 'Q': 'Ⓠ', 'R': 'Ⓡ', 'S': 'Ⓢ', 'T': 'Ⓣ', 'U': 'Ⓤ',
+                'V': 'Ⓥ', 'W': 'Ⓦ', 'X': 'Ⓧ', 'Y': 'Ⓨ', 'Z': 'Ⓩ',
+                '0': '⓪', '1': '①', '2': '②', '3': '③', '4': '④', '5': '⑤', '6': '⑥', '7': '⑦', '8': '⑧', '9': '⑨'
+            },
+            squares: {
+                'a': '🄰', 'b': '🄱', 'c': '🄲', 'd': '🄳', 'e': '🄴', 'f': '🄵', 'g': '🄶',
+                'h': '🄷', 'i': '🄸', 'j': '🄹', 'k': '🄺', 'l': '🄻', 'm': '🄼', 'n': '🄽',
+                'o': '🄾', 'p': '🄿', 'q': '🅀', 'r': '🅁', 's': '🅂', 't': '🅃', 'u': '🅄',
+                'v': '🅅', 'w': '🅆', 'x': '🅇', 'y': '🅈', 'z': '🅉',
+                'A': '🅐', 'B': '🅑', 'C': '🅒', 'D': '🅓', 'E': '🅔', 'F': '🅕', 'G': '🅖',
+                'H': '🅗', 'I': '🅘', 'J': '🅙', 'K': '🅚', 'L': '🅛', 'M': '🅜', 'N': '🅝',
+                'O': '🅞', 'P': '🅟', 'Q': '🅠', 'R': '🅡', 'S': '🅢', 'T': '🅣', 'U': '🅤',
+                'V': '🅥', 'W': '🅦', 'X': '🅧', 'Y': '🅨', 'Z': '🅩',
+                '0': '🄋', '1': '🄁', '2': '🄂', '3': '🄃', '4': '🄄', '5': '🄅', '6': '🄆', '7': '🄇', '8': '🄈', '9': '🄉'
+            },
+            parenthesis: {
+                'a': '⒜', 'b': '⒝', 'c': '⒞', 'd': '⒟', 'e': '⒠', 'f': '⒡', 'g': '⒢',
+                'h': '⒣', 'i': '⒤', 'j': '⒥', 'k': '⒦', 'l': '⒧', 'm': '⒨', 'n': '⒩',
+                'o': '⒪', 'p': '⒫', 'q': '⒬', 'r': '⒭', 's': '⒮', 't': '⒯', 'u': '⒰',
+                'v': '⒱', 'w': '⒲', 'x': '⒳', 'y': '⒴', 'z': '⒵',
+                'A': 'Ⓐ', 'B': 'Ⓑ', 'C': 'Ⓒ', 'D': 'Ⓓ', 'E': 'Ⓔ', 'F': 'Ⓕ', 'G': 'Ⓖ',
+                'H': 'Ⓗ', 'I': 'Ⓘ', 'J': 'Ⓙ', 'K': 'Ⓚ', 'L': 'Ⓛ', 'M': 'Ⓜ', 'N': 'Ⓝ',
+                'O': 'Ⓞ', 'P': 'Ⓟ', 'Q': 'Ⓠ', 'R': 'Ⓡ', 'S': 'Ⓢ', 'T': 'Ⓣ', 'U': 'Ⓤ',
+                'V': 'Ⓥ', 'W': 'Ⓦ', 'X': 'Ⓧ', 'Y': 'Ⓨ', 'Z': 'Ⓩ',
+                '0': '⓪', '1': '①', '2': '②', '3': '③', '4': '④', '5': '⑤', '6': '⑥', '7': '⑦', '8': '⑧', '9': '⑨'
+            },
+            smallCaps: {
+                'a': 'ᴀ', 'b': 'ʙ', 'c': 'ᴄ', 'd': 'ᴅ', 'e': 'ᴇ', 'f': 'ꜰ', 'g': 'ɢ',
+                'h': 'ʜ', 'i': 'ɪ', 'j': 'ᴊ', 'k': 'ᴋ', 'l': 'ʟ', 'm': 'ᴍ', 'n': 'ɴ',
+                'o': 'ᴏ', 'p': 'ᴘ', 'q': 'ǫ', 'r': 'ʀ', 's': 'ꜱ', 't': 'ᴛ', 'u': 'ᴜ',
+                'v': 'ᴠ', 'w': 'ᴡ', 'x': 'x', 'y': 'ʏ', 'z': 'ᴢ',
+                'A': 'A', 'B': 'B', 'C': 'C', 'D': 'D', 'E': 'E', 'F': 'F', 'G': 'G',
+                'H': 'H', 'I': 'I', 'J': 'J', 'K': 'K', 'L': 'L', 'M': 'M', 'N': 'N',
+                'O': 'O', 'P': 'P', 'Q': 'Q', 'R': 'R', 'S': 'S', 'T': 'T', 'U': 'U',
+                'V': 'V', 'W': 'W', 'X': 'X', 'Y': 'Y', 'Z': 'Z',
+                '0': '0', '1': '1', '2': '2', '3': '3', '4': '4', '5': '5', '6': '6', '7': '7', '8': '8', '9': '9'
+            },
+            wideText: {
+                'a': 'ａ', 'b': 'ｂ', 'c': 'ｃ', 'd': 'ｄ', 'e': 'ｅ', 'f': 'ｆ', 'g': 'ｇ',
+                'h': 'ｈ', 'i': 'ｉ', 'j': 'ｊ', 'k': 'ｋ', 'l': 'ｌ', 'm': 'ｍ', 'n': 'ｎ',
+                'o': 'ｏ', 'p': 'ｐ', 'q': 'ｑ', 'r': 'ｒ', 's': 'ｓ', 't': 'ｔ', 'u': 'ｕ',
+                'v': 'ｖ', 'w': 'ｗ', 'x': 'ｘ', 'y': 'ｙ', 'z': 'ｚ',
+                'A': 'Ａ', 'B': 'Ｂ', 'C': 'Ｃ', 'D': 'Ｄ', 'E': 'Ｅ', 'F': 'Ｆ', 'G': 'Ｇ',
+                'H': 'Ｈ', 'I': 'Ｉ', 'J': 'Ｊ', 'K': 'Ｋ', 'L': 'Ｌ', 'M': 'Ｍ', 'N': 'Ｎ',
+                'O': 'Ｏ', 'P': 'Ｐ', 'Q': 'Ｑ', 'R': 'Ｒ', 'S': 'Ｓ', 'T': 'Ｔ', 'U': 'Ｕ',
+                'V': 'Ｖ', 'W': 'Ｗ', 'X': 'Ｘ', 'Y': 'Ｙ', 'Z': 'Ｚ',
+                '0': '０', '1': '１', '2': '２', '3': '３', '4': '４', '5': '５', '6': '６', '7': '７', '8': '８', '9': '９'
+            },
+            slashThrough: {
+                'a': 'ꜹ', 'b': 'ꜻ', 'c': 'ꜿ', 'd': 'ꝁ', 'e': 'ꝃ', 'f': 'ꝅ', 'g': 'ꝇ',
+                'h': 'ꝉ', 'i': 'ꝋ', 'j': 'ꝍ', 'k': 'ꝏ', 'l': 'ꝑ', 'm': 'ꝓ', 'n': 'ꝕ',
+                'o': 'ꝗ', 'p': 'ꝙ', 'q': 'ꝛ', 'r': 'ꝝ', 's': 'ꝟ', 't': 'ꝡ', 'u': 'ꝣ',
+                'v': 'ꝥ', 'w': 'ꝧ', 'x': 'ꝩ', 'y': 'ꝫ', 'z': 'ꝭ',
+                'A': 'Ꜹ', 'B': 'Ꜻ', 'C': 'Ꜿ', 'D': 'Ꝁ', 'E': 'Ꝃ', 'F': 'Ꝅ', 'G': 'Ꝇ',
+                'H': 'Ꝉ', 'I': 'Ꝋ', 'J': 'Ꝍ', 'K': 'Ꝏ', 'L': 'Ꝑ', 'M': 'Ꝓ', 'N': 'Ꝕ',
+                'O': 'Ꝗ', 'P': 'Ꝙ', 'Q': 'Ꝛ', 'R': 'Ꝝ', 'S': 'Ꝟ', 'T': 'Ꝡ', 'U': 'Ꝣ',
+                'V': 'Ꝥ', 'W': 'Ꝧ', 'X': 'Ꝩ', 'Y': 'Ꝫ', 'Z': 'Ꝭ'
+            },
+            upsideDown: {
+                'a': 'ɐ', 'b': 'q', 'c': 'ɔ', 'd': 'p', 'e': 'ǝ', 'f': 'ɟ', 'g': 'ɓ',
+                'h': 'ɥ', 'i': 'ᴉ', 'j': 'ɾ', 'k': 'ʞ', 'l': 'l', 'm': 'ɯ', 'n': 'u',
+                'o': 'o', 'p': 'd', 'q': 'b', 'r': 'ɹ', 's': 's', 't': 'ʇ', 'u': 'n',
+                'v': 'ʌ', 'w': 'ʍ', 'x': 'x', 'y': 'ʎ', 'z': 'z',
+                'A': '∀', 'B': 'q', 'C': 'Ɔ', 'D': 'p', 'E': 'Ǝ', 'F': 'Ⅎ', 'G': 'פ',
+                'H': 'H', 'I': 'I', 'J': 'ſ', 'K': 'ʞ', 'L': '˥', 'M': 'W', 'N': 'N',
+                'O': 'O', 'P': 'd', 'Q': 'b', 'R': 'ɹ', 'S': 'S', 'T': '┴', 'U': '∩',
+                'V': 'Λ', 'W': 'M', 'X': 'X', 'Y': '⅄', 'Z': 'Z',
+                '0': '0', '1': 'Ɩ', '2': 'ᔭ', '3': 'Ɛ', '4': 'ㄣ', '5': 'ϛ', '6': '9', '7': 'ㄥ', '8': '8', '9': '6'
+            },
+            bubble: {
+                'a': 'Ⓐ', 'b': 'Ⓑ', 'c': 'Ⓒ', 'd': 'Ⓓ', 'e': 'Ⓔ', 'f': 'Ⓕ', 'g': 'Ⓖ',
+                'h': 'Ⓗ', 'i': 'Ⓘ', 'j': 'Ⓙ', 'k': 'Ⓚ', 'l': 'Ⓛ', 'm': 'Ⓜ', 'n': 'Ⓝ',
+                'o': 'Ⓞ', 'p': 'Ⓟ', 'q': 'Ⓠ', 'r': 'Ⓡ', 's': 'Ⓢ', 't': 'Ⓣ', 'u': 'Ⓤ',
+                'v': 'Ⓥ', 'w': 'Ⓦ', 'x': 'Ⓧ', 'y': 'Ⓨ', 'z': 'Ⓩ',
+                'A': '🅰', 'B': '🅱', 'C': '🅲', 'D': '🅳', 'E': '🅴', 'F': '🅵', 'G': '🅶',
+                'H': '🅷', 'I': '🅸', 'J': '🅹', 'K': '🅺', 'L': '🅻', 'M': '🅼', 'N': '🅽',
+                'O': '🅾', 'P': '🅿', 'Q': '🆀', 'R': '🆁', 'S': '🆂', 'T': '🆃', 'U': '🆄',
+                'V': '🆅', 'W': '🆆', 'X': '🆇', 'Y': '🆈', 'Z': '🆉',
+                '0': '0⃣', '1': '1⃣', '2': '2⃣', '3': '3⃣', '4': '4⃣', '5': '5⃣', '6': '6⃣', '7': '7⃣', '8': '8⃣', '9': '9⃣'
+            },
+            zalgo: {
+                'a': 'a̴', 'b': 'b̴', 'c': 'c̴', 'd': 'd̴', 'e': 'e̴', 'f': 'f̴', 'g': 'g̴',
+                'h': 'h̴', 'i': 'i̴', 'j': 'j̴', 'k': 'k̴', 'l': 'l̴', 'm': 'm̴', 'n': 'n̴',
+                'o': 'o̴', 'p': 'p̴', 'q': 'q̴', 'r': 'r̴', 's': 's̴', 't': 't̴', 'u': 'u̴',
+                'v': 'v̴', 'w': 'w̴', 'x': 'x̴', 'y': 'y̴', 'z': 'z̴',
+                'A': 'A̴', 'B': 'B̴', 'C': 'C̴', 'D': 'D̴', 'E': 'E̴', 'F': 'F̴', 'G': 'G̴',
+                'H': 'H̴', 'I': 'I̴', 'J': 'J̴', 'K': 'K̴', 'L': 'L̴', 'M': 'M̴', 'N': 'N̴',
+                'O': 'O̴', 'P': 'P̴', 'Q': 'Q̴', 'R': 'R̴', 'S': 'S̴', 'T': 'T̴', 'U': 'U̴',
+                'V': 'V̴', 'W': 'W̴', 'X': 'X̴', 'Y': 'Y̴', 'Z': 'Z̴',
+                '0': '0̴', '1': '1̴', '2': '2̴', '3': '3̴', '4': '4̴', '5': '5̴', '6': '6̴', '7': '7̴', '8': '8̴', '9': '9̴'
+            }
+        };
+
+        // Templates for combining fonts and decorations
+        const templates = {
+            gaming: [
+                { prefix: '꧁', suffix: '꧂', name: 'Gaming Wings' },
+                { prefix: '♔', suffix: '♔', name: 'Double Crown' },
+                { prefix: '☬', suffix: '☬', name: 'Swastika Style' },
+                { prefix: '『', suffix: '』', name: 'Japanese Brackets' },
+                { prefix: '【', suffix: '】', name: 'Square Brackets' },
+                { prefix: '⚡', suffix: '⚡', name: 'Lightning' },
+                { prefix: '𝕯', suffix: '𝕯', name: 'Dark Symbol' },
+                { prefix: '♛', suffix: '♛', name: 'Queen Crown' },
+                { prefix: '彡', suffix: '彡', name: 'Japanese Marks' },
+                { prefix: '卍', suffix: '卍', name: 'Swastika' }
+            ],
+            instagram: [
+                { prefix: '•', suffix: '•', name: 'Simple Dots' },
+                { prefix: '·', suffix: '·', name: 'Middle Dots' },
+                { prefix: '✨', suffix: '✨', name: 'Sparkles' },
+                { prefix: '🦋', suffix: '🦋', name: 'Butterflies' },
+                { prefix: '💫', suffix: '💫', name: 'Dizzy' },
+                { prefix: '⭐', suffix: '⭐', name: 'Stars' },
+                { prefix: '❤️', suffix: '❤️', name: 'Hearts' },
+                { prefix: '🌟', suffix: '🌟', name: 'Glowing Star' },
+                { prefix: '💎', suffix: '💎', name: 'Diamonds' },
+                { prefix: '🔥', suffix: '🔥', name: 'Fire' }
+            ],
+            professional: [
+                { prefix: '[', suffix: ']', name: 'Square Brackets' },
+                { prefix: '(', suffix: ')', name: 'Parentheses' },
+                { prefix: '{', suffix: '}', name: 'Curly Braces' },
+                { prefix: '<', suffix: '>', name: 'Angle Brackets' },
+                { prefix: '|', suffix: '|', name: 'Vertical Bars' },
+                { prefix: '〖', suffix: '〗', name: 'Double Square' },
+                { prefix: '「', suffix: '」', name: 'Japanese Quotes' },
+                { prefix: '『', suffix: '』', name: 'Japanese Brackets' },
+                { prefix: '【', suffix: '】', name: 'Thick Brackets' },
+                { prefix: '〚', suffix: '〛', name: 'Special Brackets' }
+            ],
+            emoji: [
+                { prefix: '🎮', suffix: '🎮', name: 'Gaming' },
+                { prefix: '🏆', suffix: '🏆', name: 'Trophy' },
+                { prefix: '👑', suffix: '👑', name: 'Crown' },
+                { prefix: '💀', suffix: '💀', name: 'Skull' },
+                { prefix: '🔱', suffix: '🔱', name: 'Trident' },
+                { prefix: '⚔️', suffix: '⚔️', name: 'Swords' },
+                { prefix: '🛡️', suffix: '🛡️', name: 'Shield' },
+                { prefix: '🎯', suffix: '🎯', name: 'Target' },
+                { prefix: '🎭', suffix: '🎭', name: 'Mask' },
+                { prefix: '🎪', suffix: '🎪', name: 'Circus' }
+            ],
+            abstract: [
+                { prefix: '◈', suffix: '◈', name: 'Diamond' },
+                { prefix: '◉', suffix: '◉', name: 'Circle Dot' },
+                { prefix: '◎', suffix: '◎', name: 'Circle with Dot' },
+                { prefix: '○', suffix: '○', name: 'Circle' },
+                { prefix: '●', suffix: '●', name: 'Filled Circle' },
+                { prefix: '◐', suffix: '◐', name: 'Half Circle' },
+                { prefix: '◑', suffix: '◑', name: 'Half Circle 2' },
+                { prefix: '✦', suffix: '✦', name: 'Four Star' },
+                { prefix: '✧', suffix: '✧', name: 'Four Star 2' },
+                { prefix: '✩', suffix: '✩', name: 'Star with Dot' }
+            ]
+        };
+
+        // Global variables
+        let currentCategory = 'all';
+        let generatedNamesList = [];
+        let displayedNames = 0;
+        const batchSize = 18; // Number of names to display at once
+        let isLoading = false;
+
+        // Function to apply font style to text
+        function applyFont(text, fontName) {
+            if (!fontMappings[fontName]) return text;
+            return text.split('').map(char => fontMappings[fontName][char] || char).join('');
+        }
+
+        // Function to generate names based on templates and fonts
+        function generateNamesList(input) {
+            if (!input) return [];
+            
+            let names = [];
+            const fontNames = Object.keys(fontMappings);
+            
+            // Get appropriate templates based on category
+            let templateList = [];
+            if (currentCategory === 'all') {
+                templateList = [...templates.gaming, ...templates.instagram, ...templates.professional, ...templates.emoji, ...templates.abstract];
+            } else if (currentCategory === 'freefire' || currentCategory === 'bgmi' || currentCategory === 'gaming') {
+                templateList = [...templates.gaming, ...templates.emoji];
+            } else if (currentCategory === 'instagram') {
+                templateList = [...templates.instagram, ...templates.professional];
+            } else if (currentCategory === 'professional') {
+                templateList = [...templates.professional, ...templates.abstract];
+            }
+            
+            // Generate combinations of fonts and templates
+            for (let i = 0; i < fontNames.length; i++) {
+                const fontName = fontNames[i];
+                const styledText = applyFont(input, fontName);
+                
+                // Add plain styled text
+                names.push({
+                    style: fontName.charAt(0).toUpperCase() + fontName.slice(1),
+                    text: styledText,
+                    icon: 'fa-font'
+                });
+                
+                // Add combinations with templates
+                for (let j = 0; j < Math.min(3, templateList.length); j++) {
+                    const template = templateList[(i + j) % templateList.length];
+                    names.push({
+                        style: `${fontName.charAt(0).toUpperCase() + fontName.slice(1)} ${template.name}`,
+                        text: template.prefix + styledText + template.suffix,
+                        icon: 'fa-magic'
+                    });
+                }
+            }
+            
+            // Add some special combinations
+            names.push({
+                style: 'Spaced',
+                text: input.split('').join(' '),
+                icon: 'fa-text-width'
+            });
+            
+            names.push({
+                style: 'Upper Bold',
+                text: applyFont(input.toUpperCase(), 'bold'),
+                icon: 'fa-arrow-up'
+            });
+            
+            names.push({
+                style: 'Lower Bold',
+                text: applyFont(input.toLowerCase(), 'bold'),
+                icon: 'fa-arrow-down'
+            });
+            
+            // Add some special decorations
+            for (let i = 0; i < 5; i++) {
+                const randomDecoration1 = decorations.gaming[Math.floor(Math.random() * decorations.gaming.length)];
+                const randomDecoration2 = decorations.gaming[Math.floor(Math.random() * decorations.gaming.length)];
+                const randomFont = fontNames[Math.floor(Math.random() * fontNames.length)];
+                
+                names.push({
+                    style: 'Special Mix',
+                    text: randomDecoration1 + applyFont(input, randomFont) + randomDecoration2,
+                    icon: 'fa-star'
+                });
+            }
+            
+            // Add emoji combinations
+            for (let i = 0; i < 5; i++) {
+                const randomEmoji1 = decorations.emojis[Math.floor(Math.random() * decorations.emojis.length)];
+                const randomEmoji2 = decorations.emojis[Math.floor(Math.random() * decorations.emojis.length)];
+                const randomFont = fontNames[Math.floor(Math.random() * fontNames.length)];
+                
+                names.push({
+                    style: 'Emoji Mix',
+                    text: randomEmoji1 + applyFont(input, randomFont) + randomEmoji2,
+                    icon: 'fa-smile'
+                });
+            }
+            
+            // Add abstract combinations
+            for (let i = 0; i < 5; i++) {
+                const randomAbstract1 = decorations.abstract[Math.floor(Math.random() * decorations.abstract.length)];
+                const randomAbstract2 = decorations.abstract[Math.floor(Math.random() * decorations.abstract.length)];
+                const randomFont = fontNames[Math.floor(Math.random() * fontNames.length)];
+                
+                names.push({
+                    style: 'Abstract Mix',
+                    text: randomAbstract1 + applyFont(input, randomFont) + randomAbstract2,
+                    icon: 'fa-shapes'
+                });
+            }
+            
+            // Shuffle the array to randomize the order
+            names = shuffleArray(names);
+            
+            return names;
+        }
+
+        // Function to shuffle array
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        // Function to display names
+        function displayNames(names, append = false) {
+            const container = document.getElementById('namesContainer');
+            const resultCount = document.getElementById('resultCount');
+            
+            if (!append) {
+                container.innerHTML = '';
+                displayedNames = 0;
+            }
+            
+            const endIndex = Math.min(displayedNames + batchSize, names.length);
+            
+            for (let i = displayedNames; i < endIndex; i++) {
+                const name = names[i];
+                const nameCard = document.createElement('div');
+                nameCard.className = 'name-card glass-effect rounded-lg p-4 cursor-pointer';
+                nameCard.onclick = () => copyName(name.text, i);
+                
+                nameCard.innerHTML = `
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs text-purple-300 font-medium">
+                            <i class="fas ${name.icon} mr-1"></i> ${name.style}
+                        </span>
+                        <i class="fas fa-copy text-purple-400 hover:text-white transition"></i>
+                    </div>
+                    <p class="text-white text-lg font-medium break-all">${name.text}</p>
+                `;
+                
+                container.appendChild(nameCard);
+            }
+            
+            displayedNames = endIndex;
+            resultCount.textContent = `Showing ${displayedNames} of ${names.length} results`;
+            
+            // Show or hide load more button
+            const loadMoreContainer = document.getElementById('loadMoreContainer');
+            if (displayedNames < names.length) {
+                loadMoreContainer.classList.remove('hidden');
+            } else {
+                loadMoreContainer.classList.add('hidden');
+            }
+        }
+
+        // Function to load more names
+        function loadMoreNames() {
+            if (isLoading || displayedNames >= generatedNamesList.length) return;
+            
+            isLoading = true;
+            document.getElementById('loadingSpinner').classList.remove('hidden');
+            document.getElementById('loadMoreText').textContent = 'Loading...';
+            
+            // Simulate loading delay for better UX
+            setTimeout(() => {
+                displayNames(generatedNamesList, true);
+                isLoading = false;
+                document.getElementById('loadingSpinner').classList.add('hidden');
+                document.getElementById('loadMoreText').textContent = 'Load More';
+            }, 500);
+        }
+
+        // Function to generate names and display first batch
+        function generateNames() {
+            const input = document.getElementById('nameInput').value.trim();
+            
+            if (!input) {
+                document.getElementById('namesContainer').innerHTML = `
+                    <div class="glass-effect rounded-lg p-6 text-center col-span-full">
+                        <i class="fas fa-magic text-purple-400 text-3xl mb-3"></i>
+                        <p class="text-purple-200">Start typing to generate stylish names!</p>
+                    </div>
+                `;
+                document.getElementById('resultCount').textContent = '';
+                document.getElementById('loadMoreContainer').classList.add('hidden');
+                return;
+            }
+            
+            generatedNamesList = generateNamesList(input);
+            displayNames(generatedNamesList);
+        }
+
+        // Function to reset and regenerate
+        function resetAndGenerate() {
+            displayedNames = 0;
+            generateNames();
+        }
+
+        // Function to set category
+        function setCategory(category) {
+            currentCategory = category;
+            
+            // Update button states
+            document.querySelectorAll('.category-tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            resetAndGenerate();
+        }
+
+        // Function to copy name
+        function copyName(text, index) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(`Copied: ${text}`);
+                
+                // Add visual feedback
+                const cards = document.querySelectorAll('.name-card');
+                if (cards[index]) {
+                    cards[index].style.background = 'rgba(147, 51, 234, 0.3)';
+                    setTimeout(() => {
+                        cards[index].style.background = '';
+                    }, 300);
+                }
+            });
+        }
+
+        // Function to copy all names
+        function copyAllNames() {
+            if (generatedNamesList.length === 0) {
+                showToast('No names to copy!');
+                return;
+            }
+            
+            const allNames = generatedNamesList.map(n => n.text).join('\n');
+            navigator.clipboard.writeText(allNames).then(() => {
+                showToast('All names copied to clipboard!');
+            });
+        }
+
+        // Function to download names as text file
+        function downloadNames() {
+            if (generatedNamesList.length === 0) {
+                showToast('No names to download!');
+                return;
+            }
+            
+            const allNames = generatedNamesList.map(n => `${n.style}: ${n.text}`).join('\n');
+            const blob = new Blob([allNames], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'stylish-names.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showToast('Names downloaded successfully!');
+        }
+
+        // Function to clear input
+        function clearInput() {
+            document.getElementById('nameInput').value = '';
+            resetAndGenerate();
+        }
+
+        // Function to show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = message;
+            toast.classList.remove('hidden');
+            
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 2000);
+        }
+
+        // Function to toggle theme (placeholder)
+        function toggleTheme() {
+            showToast('Theme toggle coming soon!');
+        }
+
+        // Function to share tool
+        function shareTool() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Stylish Name Generator',
+                    text: 'Create cool names for Free Fire, BGMI and Instagram!',
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    showToast('Link copied to clipboard!');
+                });
+            }
+        }
+
+        // Initialize with example
+        window.addEventListener('load', () => {
+            document.getElementById('nameInput').value = 'Player';
+            generateNames();
+        });
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'c') {
+                const input = document.getElementById('nameInput');
+                if (input === document.activeElement) return;
+                e.preventDefault();
+                copyAllNames();
+            }
+        });
+    </script>
+</body>
+</html>
