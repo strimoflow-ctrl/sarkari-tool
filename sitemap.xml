@@ -2,55 +2,61 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <!-- Home Page -->
    <url>
-      <loc>https://mourya-tool.netlify.app/</loc>
+      <loc>https://sarkaritool.netlify.app/ /</loc>
       <lastmod>2026-01-05</lastmod>
       <priority>1.00</priority>
    </url>
    
    <!-- Sarkari Tool Page -->
    <url>
-      <loc>https://mourya-tool.netlify.app/sarkari-tool.html</loc>
+      <loc>https://sarkaritool.netlify.app//sarkari-tool.html</loc>
       <lastmod>2026-01-05</lastmod>
       <priority>0.80</priority>
    </url>
 
    <!-- SSC Page -->
    <url>
-      <loc>https://mourya-tool.netlify.app/ssc-resizer.html</loc>
+      <loc>https://sarkaritool.netlify.app//ssc-resizer.html</loc>
       <lastmod>2026-01-05</lastmod>
       <priority>0.80</priority>
    </url>
 
    <!-- UPSC Page -->
    <url>
-      <loc>https://mourya-tool.netlify.app/upsc-resizer.html</loc>
+      <loc>https://sarkaritool.netlify.app//upsc-resizer.html</loc>
       <lastmod>2026-01-05</lastmod>
       <priority>0.80</priority>
    </url>
 
    <!-- Railway Page -->
    <url>
-      <loc>https://mourya-tool.netlify.app/railway-resizer.html</loc>
+      <loc>https://sarkaritool.netlify.app//railway-resizer.html</loc>
       <lastmod>2026-01-05</lastmod>
       <priority>0.80</priority>
    </url>
 
    <!-- Passport Page -->
    <url>
-      <loc>https://mourya-tool.netlify.app/passport-photo.html</loc>
+      <loc>https://sarkaritool.netlify.app//passport-photo.html</loc>
       <lastmod>2026-01-05</lastmod>
       <priority>0.80</priority>
    </url>
 
    <!-- Marriage Biodata Tool -->
    <url>
-      <loc>https://mourya-tool.netlify.app/marriage-biodata.html</loc>
+      <loc>https://sarkaritool.netlify.app//marriage-biodata.html</loc>
       <lastmod>2026-01-05</lastmod>
       <priority>0.80</priority>
    </url>
       <!-- stylish name-->
    <url>
-      <loc>https://mourya-tool.netlify.app/stylish-name.html</loc>
+      <loc>https://sarkaritool.netlify.app//stylish-name.html</loc>
+      <lastmod>2026-01-05</lastmod>
+      <priority>0.80</priority>
+   </url>
+   <!-- neet tool-->
+   <url>
+      <loc>https://sarkaritool.netlify.app//neet-tool.html</loc>
       <lastmod>2026-01-05</lastmod>
       <priority>0.80</priority>
    </url>
