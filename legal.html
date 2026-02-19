@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Information | Sarkari Tool</title>
+    <meta name="description" content="Privacy Policy, Terms of Service, and Disclaimer for Sarkari Tool.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sarkari: {
+                            blue: '#1d4ed8',
+                            dark: '#1e293b',
+                            light: '#f8fafc',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Tab Transition */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Print Styles */
+        @media print {
+            .no-print { display: none; }
+            .tab-content { display: block !important; }
+            body { background: white; color: black; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <div class="w-8 h-8 bg-sarkari-blue rounded-lg flex items-center justify-center text-white shadow-md">
+                        <i class="fa-solid fa-landmark text-sm"></i>
+                    </div>
+                    <span class="text-xl font-bold text-slate-900 tracking-tight">Sarkari<span class="text-sarkari-blue">Tool</span></span>
+                </a>
+
+                <!-- Back to Home Link -->
+                <a href="index.html" class="text-sm font-medium text-slate-600 hover:text-sarkari-blue transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span class="hidden sm:inline">Back to Home</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow py-8 sm:py-12">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Page Title -->
+            <div class="text-center mb-10">
+                <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-3">Legal Information</h1>
+                <p class="text-slate-500">Last Updated: February 19, 2026</p>
+            </div>
+
+            <!-- TABS NAVIGATION -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-1 mb-8 sticky top-20 z-40 no-print">
+                <div class="grid grid-cols-3 gap-1">
+                    <button onclick="switchTab('privacy')" id="tab-privacy" class="tab-btn py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-200 text-center bg-sarkari-blue text-white shadow-md">
+                        <i class="fa-solid fa-shield-halved mr-2"></i>Privacy Policy
+                    </button>
+                    <button onclick="switchTab('terms')" id="tab-terms" class="tab-btn py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-200 text-center text-slate-600 hover:bg-slate-100">
+                        <i class="fa-solid fa-file-contract mr-2"></i>Terms of Service
+                    </button>
+                    <button onclick="switchTab('disclaimer')" id="tab-disclaimer" class="tab-btn py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-200 text-center text-slate-600 hover:bg-slate-100">
+                        <i class="fa-solid fa-triangle-exclamation mr-2"></i>Disclaimer
+                    </button>
+                </div>
+            </div>
+
+            <!-- CONTENT CONTAINER -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-10">
+                
+                <!-- PRIVACY POLICY SECTION -->
+                <div id="content-privacy" class="tab-content active">
+                    <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                        <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-sarkari-blue text-xl">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-slate-900">Privacy Policy</h2>
+                            <p class="text-sm text-slate-500">How we handle your data</p>
+                        </div>
+                    </div>
+
+                    <div class="prose prose-slate max-w-none">
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                            At Sarkari Tool, we prioritize your privacy and data security. This Privacy Policy outlines how we collect, use, and protect your information when you use our services.
+                        </p>
+
+                        <h3 class="text-lg font-bold text-slate-900 mt-8 mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-laptop-code text-sarkari-blue text-sm"></i>
+                            1. Client-Side Processing
+                        </h3>
+                        <div class="bg-blue-50 border-l-4 border-sarkari-blue p-4 rounded-r-lg mb-6">
+                            <p class="text-slate-700 text-sm leading-relaxed">
+                                <strong>Important:</strong> All image processing on Sarkari Tool occurs entirely within your web browser using client-side JavaScript. 
+                                <span class="font-semibold text-sarkari-blue">Your photos and documents are NEVER uploaded to our servers.</span> 
+                                Once you close the browser tab, all processed data is automatically cleared from your device memory.
+                            </p>
+                        </div>
+
+                        <h3 class="text-lg font-bold text-slate-900 mt-8 mb-3">2. Information We Collect</h3>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-600 mb-6">
+                            <li><strong>Usage Data:</strong> We use Google Analytics to collect anonymous traffic data (pages visited, time spent, device type) to improve our services.</li>
+                            <li><strong>Cookies:</strong> We use essential cookies to remember your preferences and session data. Third-party advertisers may also place cookies.</li>
+                            <li><strong>Account Information:</strong> If you choose to create an account, we collect your email address and basic profile information via Firebase Authentication.</li>
+                        </ul>
+
+                        <h3 class="text-lg font-bold text-slate-900 mt-8 mb-3">3. Third-Party Services</h3>
+                        <p class="text-slate-600 leading-relaxed mb-4">
+                            We utilize third-party advertising networks (including Monetag) to support our free services. These partners may use cookies and similar technologies to serve personalized advertisements.
+                        </p>
+
+                        <h3 class="text-lg font-bold text-slate-900 mt-8 mb-3">4. Data Security</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            While we implement industry-standard security measures, please note that no method of transmission over the Internet is 100% secure. We strive to use commercially acceptable means to protect your personal information.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- TERMS OF SERVICE SECTION -->
+                <div id="content-terms" class="tab-content">
+                    <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                        <div class="w-12 h-12 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600 text-xl">
+                            <i class="fa-solid fa-file-contract"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-slate-900">Terms of Service</h2>
+                            <p class="text-sm text-slate-500">Rules and regulations for using our platform</p>
+                        </div>
+                    </div>
+
+                    <div class="prose prose-slate max-w-none">
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                            By accessing and using Sarkari Tool, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
+                        </p>
+
+                        <h3 class="text-lg font-bold text-slate-900 mt-6 mb-3">1. Use License</h3>
+                        <p class="text-slate-600 leading-relaxed mb-4">
+                            Permission is granted to temporarily use Sarkari Tool for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title.
+                        </p>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-600 mb-6">
+                            <li>The tool is strictly for <strong>personal and educational use</strong>.</li>
+                            <li>You may not modify or copy the materials for commercial purposes.</li>
+                            <li>Automated scraping, bots, or systematic data collection is strictly prohibited.</li>
+                        </ul>
+
+                        <h3 class="text-lg font-bold text-slate-900 mt-6 mb-3">2. Accuracy of Tools</h3>
+                        <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg mb-6">
+                            <p class="text-slate-700 text-sm leading-relaxed">
+                                <strong>Disclaimer of Accuracy:</strong> While we strive to maintain accurate image dimension specifications based on official notifications, 
+                                <span class="font-semibold">we do not guarantee 100% accuracy</span>. Government specifications may change without notice. 
+                                Users are strongly advised to verify final image dimensions with the official notification of the respective examination authority before submission.
+                            </p>
+                        </div>
+
+                        <h3 class="text-lg font-bold text-slate-900 mt-6 mb-3">3. Prohibited Activities</h3>
+                        <p class="text-slate-600 leading-relaxed mb-4">Users are prohibited from:</p>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-600 mb-6">
+                            <li>Using the service for any illegal or unauthorized purpose.</li>
+                            <li>Attempting to interfere with the proper working of the website.</li>
+                            <li>Circumventing any security measures or access controls.</li>
+                            <li>Uploading malicious code, viruses, or harmful files.</li>
+                        </ul>
+
+                        <h3 class="text-lg font-bold text-slate-900 mt-6 mb-3">4. Modifications</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Sarkari Tool reserves the right to revise these terms of service at any time without notice. By using this website you are agreeing to be bound by the then current version of these Terms of Service.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- DISCLAIMER SECTION -->
+                <div id="content-disclaimer" class="tab-content">
+                    <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                        <div class="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center text-red-600 text-xl">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-slate-900">Disclaimer</h2>
+                            <p class="text-sm text-slate-500">Important legal notices</p>
+                        </div>
+                    </div>
+
+                    <div class="prose prose-slate max-w-none">
+                        
+                        <div class="bg-red-50 border border-red-200 rounded-xl p-6 mb-8">
+                            <h3 class="text-lg font-bold text-red-800 mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-building-columns"></i>
+                                Independent Status
+                            </h3>
+                            <p class="text-red-700 leading-relaxed text-sm">
+                                <strong>Sarkari Tool is a private utility platform and is NOT affiliated with, endorsed by, or associated with any Government Organization, 
+                                including but not limited to:</strong> Staff Selection Commission (SSC), Union Public Service Commission (UPSC), 
+                                Railway Recruitment Board (RRB), National Testing Agency (NTA), or any State Public Service Commissions.
+                            </p>
+                        </div>
+
+                        <h3 class="text-lg font-bold text-slate-900 mt-6 mb-3">1. Nature of Service</h3>
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                            This website is an <strong>independent tool provider</strong> designed to assist students and job aspirants in preparing their application documents. 
+                            We are a third-party service provider offering technical assistance only. We do not represent any government body.
+                        </p>
+
+                        <h3 class="text-lg font-bold text-slate-900 mt-6 mb-3">2. No Liability for Form Rejection</h3>
+                        <p class="text-slate-600 leading-relaxed mb-4">
+                            While we endeavor to keep the information up to date and correct, we make no representations or warranties of any kind, 
+                            express or implied, about the completeness, accuracy, reliability, suitability or availability with respect to the website or the information, 
+                            products, services, or related graphics contained on the website for any purpose.
+                        </p>
+                        <div class="bg-slate-100 p-4 rounded-lg border border-slate-200 mb-6">
+                            <p class="text-slate-700 text-sm italic">
+                                "Sarkari Tool shall not be held liable for any form rejection, application cancellation, or disqualification resulting from the use of our tools. 
+                                Users must verify all specifications with official notifications before final submission."
+                            </p>
+                        </div>
+
+                        <h3 class="text-lg font-bold text-slate-900 mt-6 mb-3">3. External Links</h3>
+                        <p class="text-slate-600 leading-relaxed mb-6">
+                            Our website may contain links to external sites (such as official government portals). We have no control over the nature, content, and availability of those sites. 
+                            The inclusion of any links does not necessarily imply a recommendation or endorse the views expressed within them.
+                        </p>
+
+                        <h3 class="text-lg font-bold text-slate-900 mt-6 mb-3">4. Contact for Official Matters</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            For any discrepancies in your application or official queries, please contact the respective examination authority directly through their official channels. 
+                            We cannot intervene in or influence government recruitment processes.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Print Button -->
+            <div class="mt-8 text-center no-print">
+                <button onclick="window.print()" class="inline-flex items-center gap-2 px-6 py-3 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors text-sm font-medium shadow-md">
+                    <i class="fa-solid fa-print"></i>
+                    Print / Save as PDF
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-200 py-8 mt-auto">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div class="text-center sm:text-left">
+                    <p class="text-sm text-slate-500">
+                        &copy; 2026 Sarkari Tool. All rights reserved.
+                    </p>
+                </div>
+                <div class="flex gap-6 text-sm">
+                    <a href="index.html" class="text-sarkari-blue hover:underline font-medium">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        function switchTab(tabName) {
+            // Hide all content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Show selected content
+            document.getElementById('content-' + tabName).classList.add('active');
+            
+            // Reset all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-sarkari-blue', 'text-white', 'shadow-md');
+                btn.classList.add('text-slate-600', 'hover:bg-slate-100');
+            });
+            
+            // Highlight active button
+            const activeBtn = document.getElementById('tab-' + tabName);
+            activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-100');
+            activeBtn.classList.add('bg-sarkari-blue', 'text-white', 'shadow-md');
+            
+            // Scroll to top of content on mobile
+            if (window.innerWidth < 640) {
+                document.querySelector('main').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Check URL hash for direct linking
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash && ['privacy', 'terms', 'disclaimer'].includes(hash)) {
+                switchTab(hash);
+            }
+        });
+    </script>
+</body>
+</html>
