@@ -1,299 +1,598 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="scroll-smooth">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q9QLK6NVCW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-Q9QLK6NVCW');
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MouryaTools - Premium Online Tools Hub</title>
-    <meta name="description" content="MouryaTools: Free suite of online tools for students. Image Resizer, Biodata Maker, Passport Photo Generator. Fast, Secure, and Dark Mode.">
+    <title>Sarkari Tool - Official Photo Resizer, Postcard Maker & Exam Utilities</title>
     
-    <!-- Tailwind CSS (Dark Mode Ready) -->
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Sarkari Tool is the official hub for government exam utilities. Resize photos for SSC, UPSC, Railway exams. Create Postcard size photos, Marriage Biodata, and Passport photos instantly.">
+    <meta name="keywords" content="ssc photo resizer, upsc signature compress, neet postcard size maker, passport photo online, railway photo resizer, sarkari exam tools, government form photo size, resize image to 20kb, online photo resizer for ssc">
+    <meta name="author" content="Sarkari Tool">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Sarkari Tool - Official Exam Utilities Hub">
+    <meta property="og:description" content="Free online tools for Sarkari Exams. Resize photos, make biodata, and generate passport photos.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sarkaritool.in">
+    <meta property="og:image" content="https://sarkaritool.in/assets/og-image.jpg">
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            500: '#3b82f6', // Blue
-                            600: '#2563eb',
-                            900: '#0f172a', // Dark BG
-                            800: '#1e293b', // Card BG
+                        sarkari: {
+                            blue: '#1d4ed8',      // Deep Navy
+                            dark: '#0f172a',      // Slate 900
+                            light: '#f8fafc',     // Slate 50
+                            saffron: '#ea580c',   // Orange 600
+                            green: '#15803d'      // Green 700
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
                         }
                     }
                 }
             }
         }
     </script>
-    <!-- Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        body { font-family: 'Outfit', sans-serif; background-color: #0f172a; color: #e2e8f0; }
-        .glass-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #1d4ed8; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #1e40af; }
+
+        /* Card Hover Effects */
+        .tool-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .tool-card:hover {
             transform: translateY(-5px);
-            border-color: #3b82f6;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        /* Modal Animation */
-        .modal { transition: opacity 0.3s ease; }
-        .hidden { display: none; }
+        
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(to right, #1d4ed8, #ea580c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Staggered Animation Delays */
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        
+        /* Glassmorphism for sticky nav */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        }
     </style>
 </head>
-<body class="flex flex-col min-h-screen">
+<body class="bg-slate-50 text-slate-800 antialiased">
 
-    <!-- NAVBAR -->
-    <nav class="border-b border-gray-800 bg-brand-900 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-            <!-- Logo -->
-            <a href="#" class="flex items-center gap-2 group">
-                <div class="w-9 h-9 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg">M</div>
-                <span class="font-bold text-2xl tracking-tight text-white group-hover:text-blue-400 transition-colors">Mourya<span class="text-blue-500">Tools</span></span>
-            </a>
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-10 h-10 bg-sarkari-blue rounded-lg flex items-center justify-center text-white shadow-lg">
+                        <i class="fa-solid fa-landmark text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Sarkari<span class="text-sarkari-blue">Tool</span></h1>
+                        <p class="text-[10px] text-slate-500 font-semibold tracking-widest uppercase">Official Utilities Hub</p>
+                    </div>
+                </div>
 
-            <!-- Auth Buttons -->
-            <div>
-                <button id="loginBtn" onclick="openAuthModal()" class="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2 rounded-full font-semibold text-sm transition-all shadow-lg shadow-blue-500/30">
-                    Login / Join
-                </button>
+                <!-- Search Bar (Desktop) -->
+                <div class="hidden md:flex flex-1 max-w-lg mx-8 relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fa-solid fa-search text-slate-400"></i>
+                    </div>
+                    <input type="text" id="searchInput" placeholder="Search tools (e.g., SSC, UPSC, NEET)..." 
+                        class="block w-full pl-10 pr-3 py-2.5 border border-slate-200 rounded-full leading-5 bg-slate-100 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-sarkari-blue focus:border-sarkari-blue sm:text-sm transition-all shadow-inner">
+                </div>
 
-                <!-- Logged In User View -->
-                <div id="userProfile" class="hidden flex items-center gap-3 bg-gray-800 px-3 py-1.5 rounded-full border border-gray-700">
-                    <img id="userAvatar" src="https://ui-avatars.com/api/?name=User&background=random" class="w-7 h-7 rounded-full">
-                    <span id="userName" class="text-sm font-medium text-gray-200 hidden sm:block">User</span>
-                    <button onclick="handleLogout()" class="text-xs text-red-400 hover:text-red-300 ml-2"><i class="fas fa-sign-out-alt"></i></button>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobileMenuBtn" class="text-slate-600 hover:text-sarkari-blue focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
                 </div>
             </div>
+        </div>
+        
+        <!-- Mobile Search (Visible only on mobile) -->
+        <div class="md:hidden px-4 pb-4 bg-white border-b border-slate-200 hidden" id="mobileMenu">
+            <input type="text" id="mobileSearchInput" placeholder="Search tools..." 
+                class="block w-full pl-4 pr-3 py-2 border border-slate-200 rounded-lg bg-slate-50 focus:outline-none focus:ring-2 focus:ring-sarkari-blue">
         </div>
     </nav>
 
     <!-- HERO SECTION -->
-    <header class="py-20 text-center px-4 relative overflow-hidden">
-        <!-- Background Glow -->
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[100px] -z-10"></div>
-        
-        <h1 class="text-4xl sm:text-6xl font-bold mb-6 text-white">
-            Smart Tools for <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Smart Indians.</span>
-        </h1>
-        <p class="text-gray-400 text-lg max-w-2xl mx-auto mb-8">
-            Free, Secure, and Fast online utilities. Resize photos for Sarkari Exams, create Marriage Biodata, and more. No login required for basic tools.
-        </p>
+    <header class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%231d4ed8\' fill-opacity=\'0.03\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-50"></div>
+            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-sarkari-blue/10 blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-sarkari-saffron/10 blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 text-sarkari-blue text-sm font-semibold mb-6 animate-fade-in-up">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sarkari-blue opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-sarkari-blue"></span>
+                </span>
+                Trusted by 50,000+ Aspirants
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-6 animate-fade-in-up delay-100">
+                Your <span class="text-gradient">Official</span> Hub for <br class="hidden md:block" />
+                Sarkari Exam Preparation
+            </h1>
+            
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-600 animate-fade-in-up delay-200">
+                Resize photos, compress signatures, and create biodata for SSC, UPSC, Railway, and Banking exams. Fast, Free, and Accurate.
+            </p>
+            
+            <div class="mt-10 flex justify-center gap-4 animate-fade-in-up delay-300">
+                <a href="#tools" class="px-8 py-4 bg-sarkari-blue text-white font-bold rounded-xl shadow-lg hover:bg-blue-700 hover:shadow-blue-500/30 transition-all transform hover:-translate-y-1 flex items-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Explore Tools
+                </a>
+                <a href="#faq" class="px-8 py-4 bg-white text-slate-700 border border-slate-200 font-bold rounded-xl hover:bg-slate-50 hover:border-slate-300 transition-all flex items-center gap-2">
+                    <i class="fa-regular fa-circle-question"></i> How to Use
+                </a>
+            </div>
+        </div>
     </header>
 
-    <!-- TOOLS GRID (AUTOMATICALLY GENERATED) -->
-    <main class="flex-grow px-4 pb-20">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex items-center gap-2 mb-8">
-                <i class="fas fa-th-large text-blue-500 text-xl"></i>
-                <h2 class="text-2xl font-bold text-white">Our Tools</h2>
+    <!-- TOOLS GRID SECTION -->
+    <main id="tools" class="py-16 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900">Essential Exam Utilities</h2>
+                <p class="mt-2 text-slate-500">Select a tool below to get started instantly</p>
+                <div class="w-20 h-1 bg-sarkari-blue mx-auto mt-4 rounded-full"></div>
             </div>
 
-            <!-- ID Jahan Tools Inject Honge -->
-            <div id="toolsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Javascript will load tools here -->
+            <!-- Grid Container -->
+            <div id="toolsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Tools will be injected here by JavaScript -->
+            </div>
+
+            <!-- No Results State -->
+            <div id="noResults" class="hidden text-center py-12">
+                <div class="inline-block p-4 rounded-full bg-slate-100 mb-4">
+                    <i class="fa-solid fa-magnifying-glass text-slate-400 text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-medium text-slate-900">No tools found</h3>
+                <p class="text-slate-500">Try adjusting your search terms</p>
             </div>
         </div>
     </main>
 
-    <!-- LOGIN MODAL -->
-    <div id="authModal" class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-gray-800 w-full max-w-md rounded-2xl border border-gray-700 shadow-2xl overflow-hidden relative">
-            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fas fa-times text-xl"></i></button>
+    <!-- SEO CONTENT SECTION -->
+    <section class="py-16 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-lg prose-slate">
+            <h2 class="text-3xl font-bold text-slate-900 text-center mb-8">Why Use Sarkari Tool?</h2>
             
-            <div class="p-8">
-                <h2 class="text-2xl font-bold text-white mb-1 text-center">Welcome Back</h2>
-                <p class="text-gray-400 text-center text-sm mb-6">Login to save your preferences</p>
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <div class="w-12 h-12 bg-green-100 text-sarkari-green rounded-lg flex items-center justify-center mb-4 text-xl">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Lightning Fast Processing</h3>
+                    <p class="text-slate-600 text-sm">Our client-side processing ensures your photos are resized in milliseconds without uploading to a server, ensuring maximum privacy.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <div class="w-12 h-12 bg-blue-100 text-sarkari-blue rounded-lg flex items-center justify-center mb-4 text-xl">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">100% Accurate Dimensions</h3>
+                    <p class="text-slate-600 text-sm">We strictly follow the official notification guidelines for SSC CGL, UPSC Civil Services, Railway NTPC, and Banking exams.</p>
+                </div>
+            </div>
 
-                <!-- Google Button -->
-                <button onclick="handleGoogleLogin()" class="w-full bg-white text-gray-900 font-bold py-3 rounded-xl flex items-center justify-center gap-3 hover:bg-gray-100 transition-colors mb-4">
-                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5">
-                    Continue with Google
-                </button>
+            <h3 class="text-2xl font-bold text-slate-900 mt-12 mb-4">How to Resize Photo for SSC Online Application?</h3>
+            <p class="text-slate-600 mb-4">
+                Uploading the correct photo size is crucial for SSC applications. A common mistake is uploading a high-resolution image directly from a phone. 
+                Use our <strong>SSC Photo Resizer</strong> tool to automatically adjust your image to the required dimensions (typically 20 KB to 50 KB) and resolution (100x120 pixels).
+            </p>
+            <ol class="list-decimal pl-5 space-y-2 text-slate-600 mb-8">
+                <li>Click on the "SSC Resizer" tool above.</li>
+                <li>Upload your recent passport size photograph.</li>
+                <li>Adjust the crop area to fit your face correctly.</li>
+                <li>Download the compressed JPG file ready for upload.</li>
+            </ol>
 
-                <div class="flex items-center gap-2 my-4 text-gray-500 text-xs uppercase">
-                    <span class="h-px bg-gray-700 flex-grow"></span> OR <span class="h-px bg-gray-700 flex-grow"></span>
+            <h3 class="text-2xl font-bold text-slate-900 mt-12 mb-4">UPSC Signature Resize Guidelines</h3>
+            <p class="text-slate-600">
+                For UPSC exams like IAS, IPS, and IFS, the signature file must be between 20 KB and 300 KB. The dimensions should be approximately 140 x 60 pixels. 
+                Our tool ensures the aspect ratio is maintained while compressing the file size to meet these strict requirements.
+            </p>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="py-16 bg-white">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-slate-900 text-center mb-10">Frequently Asked Questions</h2>
+            
+            <div class="space-y-4" id="faqContainer">
+                <!-- FAQ Item 1 -->
+                <div class="border border-slate-200 rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left bg-slate-50 hover:bg-slate-100 flex justify-between items-center focus:outline-none transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-800">Is Sarkari Tool free to use?</span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-6 py-4 bg-white text-slate-600 text-sm border-t border-slate-100">
+                        Yes, all tools on Sarkari Tool are 100% free to use. We believe in helping every student access government job opportunities without financial barriers.
+                    </div>
                 </div>
 
-                <!-- Email Form -->
-                <form id="emailForm" onsubmit="handleEmailAuth(event)" class="space-y-4">
-                    <input type="email" id="email" placeholder="Email Address" class="w-full bg-gray-900 border border-gray-700 text-white px-4 py-3 rounded-xl focus:border-blue-500 focus:outline-none" required>
-                    <input type="password" id="password" placeholder="Password" class="w-full bg-gray-900 border border-gray-700 text-white px-4 py-3 rounded-xl focus:border-blue-500 focus:outline-none" required>
-                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-colors">
-                        Sign In / Sign Up
+                <!-- FAQ Item 2 -->
+                <div class="border border-slate-200 rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left bg-slate-50 hover:bg-slate-100 flex justify-between items-center focus:outline-none transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-800">What is the photo size for Railway (RRB) exams?</span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300"></i>
                     </button>
-                    <p class="text-xs text-gray-500 text-center">We will create an account if one doesn't exist.</p>
-                </form>
-                <p id="authError" class="text-red-400 text-xs text-center mt-3 hidden"></p>
+                    <div class="hidden px-6 py-4 bg-white text-slate-600 text-sm border-t border-slate-100">
+                        For RRB NTPC and Group D exams, the photograph should be between 20 KB to 50 KB with dimensions of 200 x 230 pixels (preferred). The signature should be between 10 KB to 40 KB.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="border border-slate-200 rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left bg-slate-50 hover:bg-slate-100 flex justify-between items-center focus:outline-none transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-800">Is my data safe? Do you store my photos?</span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-6 py-4 bg-white text-slate-600 text-sm border-t border-slate-100">
+                        Absolutely. We use client-side processing technology. This means your photos are processed directly in your browser and are never uploaded to our servers. Your privacy is our top priority.
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- FOOTER -->
-    <footer class="bg-gray-900 border-t border-gray-800 text-gray-500 py-8 text-center text-sm">
-        <p>&copy; 2026 MouryaTools. Made with ❤️ in India.</p>
+    <footer class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 bg-sarkari-blue rounded flex items-center justify-center text-white">
+                            <i class="fa-solid fa-landmark text-sm"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">SarkariTool</span>
+                    </div>
+                    <p class="text-sm text-slate-400">
+                        India's most trusted platform for government exam utilities. Helping aspirants prepare better.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#tools" class="hover:text-white transition-colors">All Tools</a></li>
+                        <li><a href="#faq" class="hover:text-white transition-colors">Help Center</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Popular Tools</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="ssc-resizer.html" class="hover:text-white transition-colors">SSC Resizer</a></li>
+                        <li><a href="upsc-resizer.html" class="hover:text-white transition-colors">UPSC Resizer</a></li>
+                        <li><a href="passport-photo.html" class="hover:text-white transition-colors">Passport Photo</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-slate-500">&copy; 2026 Sarkari Tool. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-sarkari-blue hover:text-white transition-all"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-sarkari-blue hover:text-white transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-sarkari-blue hover:text-white transition-all"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
     </footer>
 
-<script type="module">
-        // --- 1. FIREBASE SETUP ---
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-        import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+    <!-- JSON-LD SCHEMA MARKUP FOR SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Sarkari Tool",
+      "url": "https://sarkaritool.in",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://sarkaritool.in/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Sarkari Tool",
+      "url": "https://sarkaritool.in",
+      "logo": "https://sarkaritool.in/logo.png",
+      "sameAs": [
+        "https://twitter.com/sarkaritool",
+        "https://facebook.com/sarkaritool"
+      ]
+    }
+    </script>
 
-        // TUMHARA CONFIG
-        const firebaseConfig = {
-            apiKey: "AIzaSyAFshh-gdh7G2K9wp3TuAwkprmfNb_nAhE",
-            authDomain: "mourya-tool.firebaseapp.com",
-            projectId: "mourya-tool",
-            storageBucket: "mourya-tool.firebasestorage.app",
-            messagingSenderId: "392072052666",
-            appId: "1:392072052666:web:d8cc30cc644dd50e11e783"
-        };
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is Sarkari Tool free to use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, all tools on Sarkari Tool are 100% free to use. We believe in helping every student access government job opportunities without financial barriers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the photo size for Railway (RRB) exams?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For RRB NTPC and Group D exams, the photograph should be between 20 KB to 50 KB with dimensions of 200 x 230 pixels (preferred). The signature should be between 10 KB to 40 KB."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my data safe? Do you store my photos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. We use client-side processing technology. This means your photos are processed directly in your browser and are never uploaded to our servers. Your privacy is our top priority."
+          }
+        }
+      ]
+    }
+    </script>
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const provider = new GoogleAuthProvider();
-
-        // --- 2. TOOLS DATA ---
+    <!-- MAIN JAVASCRIPT LOGIC -->
+    <script>
+        // --- 1. DATA SOURCE (SCALABLE) ---
+        // Add new tools here to automatically render them
         const toolsData = [
             {
-                name: "Sarkari Photo Resizer",
-                desc: "Resize photo/sign for SSC, UPSC, Railway (20kb-50kb).",
-                link: "sarkari-tool.html",
+                id: 1,
+                name: "SSC Photo Resizer",
+                shortDesc: "Resize photo/sign for SSC CGL/CHSL (20-50kb).",
+                fullDesc: "Official dimensions for Staff Selection Commission exams.",
+                link: "ssc-resizer.html",
                 icon: "fa-id-card",
-                color: "text-blue-400",
-                bg: "bg-blue-500/10"
+                color: "blue",
+                tags: ["ssc", "cgl", "chsl", "exam"],
+                trending: true
             },
             {
-                name: "Marriage Biodata Maker",
-                desc: "Create beautiful wedding biodata PDF with premium templates.",
-                link: "marriage-biodata.html",
-                icon: "fa-heart",
-                color: "text-pink-400",
-                bg: "bg-pink-500/10"
+                id: 2,
+                name: "UPSC Photo Resizer",
+                shortDesc: "Compress images for Civil Services (IAS/IPS).",
+                fullDesc: "Meets strict UPSC guidelines for Prelims and Mains.",
+                link: "upsc-resizer.html",
+                icon: "fa-scale-balanced",
+                color: "indigo",
+                tags: ["upsc", "ias", "ips", "civil services"],
+                trending: true
             },
             {
+                id: 3,
+                name: "Railway Photo Resizer",
+                shortDesc: "RRB NTPC & Group D compliant sizes.",
+                fullDesc: "Optimized for Railway Recruitment Board applications.",
+                link: "railway-resizer.html",
+                icon: "fa-train",
+                color: "red",
+                tags: ["rrb", "railway", "ntpc", "group d"],
+                trending: false
+            },
+            {
+                id: 4,
                 name: "Passport Photo Maker",
-                desc: "Convert selfie to Passport Size (2x2 inch) for Visa/PAN.",
+                shortDesc: "2x2 inch standard for Visa/PAN/Aadhaar.",
+                fullDesc: "Generate standard passport size photos with white background.",
                 link: "passport-photo.html",
                 icon: "fa-camera",
-                color: "text-green-400",
-                bg: "bg-green-500/10"
+                color: "green",
+                tags: ["passport", "visa", "pan", "aadhaar", "id"],
+                trending: true
+            },
+            {
+                id: 5,
+                name: "Marriage Biodata Maker",
+                shortDesc: "Create beautiful wedding biodata PDFs.",
+                fullDesc: "Professional templates for matrimonial profiles.",
+                link: "marriage-biodata.html",
+                icon: "fa-heart",
+                color: "pink",
+                tags: ["biodata", "marriage", "wedding", "matrimony"],
+                trending: false
+            },
+            {
+                id: 6,
+                name: "NEET Postcard Maker",
+                shortDesc: "Postcard size photo for NEET application.",
+                fullDesc: "Specific size requirements for NTA Medical entrance.",
+                link: "#", // Placeholder for future
+                icon: "fa-user-doctor",
+                color: "teal",
+                tags: ["neet", "medical", "nta", "postcard"],
+                trending: true,
+                disabled: true
             }
         ];
 
-        function renderTools() {
-            const container = document.getElementById('toolsContainer');
-            container.innerHTML = toolsData.map(tool => `
-                <a href="${tool.link}" class="tool-card glass-card p-6 rounded-2xl transition-all group border border-gray-700 hover:border-${tool.color.split('-')[1]}">
-                    <div class="w-12 h-12 ${tool.bg} ${tool.color} rounded-xl flex items-center justify-center mb-4 text-xl">
-                        <i class="fas ${tool.icon}"></i>
-                    </div>
-                    <h3 class="font-bold text-lg text-white mb-2 group-hover:${tool.color} transition-colors">${tool.name}</h3>
-                    <p class="text-sm text-gray-400">${tool.desc}</p>
-                </a>
-            `).join('');
+        // --- 2. RENDER LOGIC ---
+        const toolsGrid = document.getElementById('toolsGrid');
+        const noResults = document.getElementById('noResults');
 
-            container.innerHTML += `
-                <div class="border border-dashed border-gray-700 p-6 rounded-2xl flex flex-col items-center justify-center text-center opacity-50">
-                    <span class="text-xs font-bold text-gray-500 uppercase mb-2">Development</span>
-                    <h3 class="font-bold text-gray-400">Hindi Typing Tool</h3>
-                    <p class="text-xs text-gray-600 mt-1">Coming Soon...</p>
-                </div>
-            `;
+        function renderTools(filterText = '') {
+            toolsGrid.innerHTML = '';
+            let hasResults = false;
+
+            const filteredTools = toolsData.filter(tool => {
+                const searchContent = `${tool.name} ${tool.shortDesc} ${tool.tags.join(' ')}`.toLowerCase();
+                return searchContent.includes(filterText.toLowerCase());
+            });
+
+            if (filteredTools.length === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+                
+                filteredTools.forEach((tool, index) => {
+                    hasResults = true;
+                    
+                    // Color mapping
+                    const colorClasses = {
+                        blue: 'bg-blue-50 text-blue-600 border-blue-100 hover:border-blue-300',
+                        indigo: 'bg-indigo-50 text-indigo-600 border-indigo-100 hover:border-indigo-300',
+                        red: 'bg-red-50 text-red-600 border-red-100 hover:border-red-300',
+                        green: 'bg-green-50 text-green-600 border-green-100 hover:border-green-300',
+                        pink: 'bg-pink-50 text-pink-600 border-pink-100 hover:border-pink-300',
+                        teal: 'bg-teal-50 text-teal-600 border-teal-100 hover:border-teal-300',
+                    };
+                    
+                    const theme = colorClasses[tool.color] || colorClasses.blue;
+                    const disabledClass = tool.disabled ? 'opacity-60 pointer-events-none grayscale' : '';
+                    const trendingBadge = tool.trending ? 
+                        `<div class="absolute -top-3 -right-3 bg-sarkari-saffron text-white text-xs font-bold px-3 py-1 rounded-full shadow-md z-10 animate-pulse-slow">TRENDING</div>` : '';
+
+                    const cardHTML = `
+                        <a href="${tool.link}" class="tool-card relative group block bg-white rounded-2xl border border-slate-200 p-6 ${theme} ${disabledClass} animate-fade-in-up" style="animation-delay: ${index * 100}ms">
+                            ${trendingBadge}
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="w-14 h-14 rounded-xl bg-white shadow-sm flex items-center justify-center text-2xl border border-slate-100">
+                                    <i class="fa-solid ${tool.icon}"></i>
+                                </div>
+                                ${tool.disabled ? '<span class="text-xs font-bold bg-slate-200 text-slate-600 px-2 py-1 rounded">SOON</span>' : '<i class="fa-solid fa-arrow-right text-slate-300 group-hover:text-sarkari-blue transition-colors transform group-hover:translate-x-1"></i>'}
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-2 group-hover:text-sarkari-blue transition-colors">${tool.name}</h3>
+                            <p class="text-sm text-slate-600 mb-3">${tool.shortDesc}</p>
+                            <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">${tool.fullDesc}</p>
+                        </a>
+                    `;
+                    toolsGrid.innerHTML += cardHTML;
+                });
+            }
         }
+
+        // Initial Render
         renderTools();
 
-        // --- 3. NEW & FIXED AUTH LOGIC ---
-        
-        // Google Login
-        window.handleGoogleLogin = () => {
-            signInWithPopup(auth, provider)
-                .then(() => closeAuthModal())
-                .catch((error) => showError(error.message));
-        };
+        // --- 3. SEARCH FUNCTIONALITY ---
+        const searchInput = document.getElementById('searchInput');
+        const mobileSearchInput = document.getElementById('mobileSearchInput');
 
-        // FIXED EMAIL LOGIC (Reverse Strategy)
-        window.handleEmailAuth = (e) => {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const errorText = document.getElementById('authError');
+        function handleSearch(e) {
+            const term = e.target.value;
+            renderTools(term);
+        }
 
-            // Strategy: Pehle Naya Account banane ki koshish karo
-            createUserWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    // Success: Account ban gaya aur login bhi ho gaya
-                    closeAuthModal();
-                })
-                .catch((error) => {
-                    // Agar error aaya ki "Account pehle se hai" (email-already-in-use)
-                    if (error.code === 'auth/email-already-in-use') {
-                        // Toh ab Login karne ki koshish karo
-                        signInWithEmailAndPassword(auth, email, password)
-                            .then(() => {
-                                closeAuthModal();
-                            })
-                            .catch((loginError) => {
-                                // Agar ab bhi error aaya, matlab Password Galat hai
-                                showError("Incorrect Password or Account issue.");
-                            });
-                    } else {
-                        // Koi aur error (jaise password too short)
-                        showError(error.message);
-                    }
-                });
-        };
+        searchInput.addEventListener('input', handleSearch);
+        mobileSearchInput.addEventListener('input', handleSearch);
 
-        window.handleLogout = () => signOut(auth);
+        // --- 4. MOBILE MENU TOGGLE ---
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
 
-        // UI Updates
-        onAuthStateChanged(auth, (user) => {
-            const loginBtn = document.getElementById('loginBtn');
-            const userProfile = document.getElementById('userProfile');
-            const userName = document.getElementById('userName');
-            const userAvatar = document.getElementById('userAvatar');
-
-            if (user) {
-                loginBtn.classList.add('hidden');
-                userProfile.classList.remove('hidden');
-                userName.innerText = user.displayName ? user.displayName.split(' ')[0] : user.email.split('@')[0];
-                if(user.photoURL) userAvatar.src = user.photoURL;
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
             } else {
-                loginBtn.classList.remove('hidden');
-                userProfile.classList.add('hidden');
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
             }
         });
 
-        function showError(msg) {
-            const el = document.getElementById('authError');
-            // Clean up error message for user
-            let cleanMsg = msg.replace('Firebase:', '').replace('auth/', '').replace(/-/g, ' ');
-            el.innerText = cleanMsg;
-            el.classList.remove('hidden');
-        }
+        // --- 5. FAQ ACCORDION LOGIC ---
+        window.toggleFaq = function(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            // Close others (optional, keeping it open allows comparison)
+            // document.querySelectorAll('#faqContainer > div > div').forEach(div => {
+            //     if (div !== content) div.classList.add('hidden');
+            // });
 
-        window.openAuthModal = () => {
-            document.getElementById('authModal').classList.remove('hidden');
-            document.getElementById('authError').classList.add('hidden');
-        }
-        window.closeAuthModal = () => document.getElementById('authModal').classList.add('hidden');
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+                button.classList.add('bg-slate-100');
+            } else {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+                button.classList.remove('bg-slate-100');
+            }
+        };
 
-        document.getElementById('authModal').addEventListener('click', (e) => {
-            if (e.target.id === 'authModal') closeAuthModal();
+        // --- 6. NAVBAR SCROLL EFFECT ---
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 10) {
+                nav.classList.add('shadow-md');
+            } else {
+                nav.classList.remove('shadow-md');
+            }
         });
     </script>
 </body>
