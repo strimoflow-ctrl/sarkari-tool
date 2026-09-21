@@ -2,373 +2,164 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <link rel="icon" type="image/png" sizes="96x96"  href="https://cdn.jsdelivr.net/gh/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design@802ac47228f3a7b06fc4ede8c8816bd5f920f1c7/uploads/2026-02-23T06-25-14-412Z-ro29w3ayq.ico">
+    <!-- Enhanced Mobile Viewport for Ultra-Crisp Rendering on all Phones -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    
+    <link rel="icon" type="image/png" sizes="96x96" href="https://cdn.jsdelivr.net/gh/free-whiteboard-online/Free-Erasorio-Alternative-for-Collaborative-Design@802ac47228f3a7b06fc4ede8c8816bd5f920f1c7/uploads/2026-02-23T06-25-14-412Z-ro29w3ayq.ico">
+    <link rel="canonical" href="https://sarkaritool.netlify.app/">
     <title>Sarkari Tool - Official Photo Resizer, Postcard Maker & Exam Utilities</title>
     
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Sarkari Tool is the official hub for government exam utilities. Resize photos for SSC, UPSC, Railway exams. Create Postcard size photos, Marriage Biodata, and Passport photos instantly.">
-    <meta name="keywords" content="ssc photo resizer, upsc signature compress, neet postcard size maker, passport photo online, railway photo resizer, sarkari exam tools, government form photo size, resize image to 20kb, online photo resizer for ssc">
+    <!-- 1. SEO Meta Tags (Preserved & Enhanced with High-Volume Search Keywords) -->
+    <meta name="description" content="Sarkari Tool is the official hub for government exam utilities. Resize photos for SSC, UPSC, Railway exams. Create Postcard size photos, Marriage Biodata, and Passport photos instantly with 100% free client-side privacy.">
+    <meta name="keywords" content="ssc photo resizer, upsc signature compress, neet postcard size maker, passport photo online, railway photo resizer, sarkari exam tools, government form photo size, resize image to 20kb, online photo resizer for ssc, sarkari result photo resize online, ssc cgl photo sign size 2026, upsc prelims photo size 350x350, rrb ntpc photo size, neet postcard size photo maker 4x6, shadi biodata maker pdf, passport size photo background white online, सरकारी फोटो रिसाइजर, सरकारी रिजल्ट फोटो रिसाइज, फोटो का साइज कैसे कम करें">
     <meta name="author" content="Sarkari Tool">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="geo.region" content="IN">
+    <meta name="language" content="English, Hindi">
+    <meta name="theme-color" content="#1d4ed8">
     
-    <!-- Open Graph / Social Media -->
+    <!-- 2. Open Graph / Social Media Meta Tags -->
     <meta property="og:title" content="Sarkari Tool - Official Exam Utilities Hub">
-    <meta property="og:description" content="Free online tools for Sarkari Exams. Resize photos, make biodata, and generate passport photos.">
+    <meta property="og:description" content="Free online tools for Sarkari Exams. Resize photos, make biodata, and generate passport photos instantly.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://sarkaritool.in">
-    <meta property="og:image" content="https://sarkaritool.in/assets/og-image.jpg">
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta property="og:url" content="https://sarkaritool.netlify.app/">
+    <meta property="og:image" content="https://sarkaritool.netlify.app/assets/og-image.jpg">
+    <meta property="og:site_name" content="Sarkari Tool">
+    <meta property="og:locale" content="en_IN">
     
-    <!-- Tailwind Configuration -->
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sarkari Tool - Official Exam Utilities Hub">
+    <meta name="twitter:description" content="Resize photos for SSC, UPSC, Railway, NEET, and create Marriage Biodata in 1 click.">
+    <meta name="twitter:image" content="https://sarkaritool.netlify.app/assets/og-image.jpg">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         sarkari: {
-                            blue: '#1d4ed8',      // Deep Navy
-                            dark: '#0f172a',      // Slate 900
-                            light: '#f8fafc',     // Slate 50
-                            saffron: '#ea580c',   // Orange 600
-                            green: '#15803d'      // Green 700
+                            blue: '#1d4ed8',
+                            dark: '#0f172a',
+                            light: '#f8fafc',
+                            saffron: '#ea580c',
+                            green: '#15803d'
                         }
                     },
                     fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                    },
-                    animation: {
-                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        }
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Reusable Common Styles -->
+    <link rel="stylesheet" href="assets/css/common.css">
 
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        /* Mobile-friendly horizontal pill scrolling without ugly scrollbar */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #1d4ed8; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #1e40af; }
-
-        /* Card Hover Effects */
-        .tool-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .tool-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        
-        /* Gradient Text */
-        .text-gradient {
-            background: linear-gradient(to right, #1d4ed8, #ea580c);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Staggered Animation Delays */
-        .delay-100 { animation-delay: 100ms; }
-        .delay-200 { animation-delay: 200ms; }
-        .delay-300 { animation-delay: 300ms; }
-        
-        /* Glassmorphism for sticky nav */
-        .glass-nav {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        /* Category filter chip active state */
+        .filter-chip.active {
+            background: #1d4ed8;
+            color: #ffffff;
+            border-color: #1d4ed8;
+            box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3);
         }
     </style>
-</head>
-<body class="bg-slate-50 text-slate-800 antialiased">
 
-    <!-- NAVIGATION -->
-    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <div class="w-10 h-10 bg-sarkari-blue rounded-lg flex items-center justify-center text-white shadow-lg">
-                        <i class="fa-solid fa-landmark text-xl"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Sarkari<span class="text-sarkari-blue">Tool</span></h1>
-                        <p class="text-[10px] text-slate-500 font-semibold tracking-widest uppercase">Official Utilities Hub</p>
-                    </div>
-                </div>
-
-                <!-- Search Bar (Desktop) -->
-                <div class="hidden md:flex flex-1 max-w-lg mx-8 relative">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <i class="fa-solid fa-search text-slate-400"></i>
-                    </div>
-                    <input type="text" id="searchInput" placeholder="Search tools (e.g., SSC, UPSC, NEET)..." 
-                        class="block w-full pl-10 pr-3 py-2.5 border border-slate-200 rounded-full leading-5 bg-slate-100 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-sarkari-blue focus:border-sarkari-blue sm:text-sm transition-all shadow-inner">
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobileMenuBtn" class="text-slate-600 hover:text-sarkari-blue focus:outline-none p-2">
-                        <i class="fa-solid fa-bars text-2xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Mobile Search (Visible only on mobile) -->
-        <div class="md:hidden px-4 pb-4 bg-white border-b border-slate-200 hidden" id="mobileMenu">
-            <input type="text" id="mobileSearchInput" placeholder="Search tools..." 
-                class="block w-full pl-4 pr-3 py-2 border border-slate-200 rounded-lg bg-slate-50 focus:outline-none focus:ring-2 focus:ring-sarkari-blue">
-        </div>
-    </nav>
-
-    <!-- HERO SECTION -->
-    <header class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
-        <!-- Background Pattern -->
-        <div class="absolute inset-0 -z-10">
-            <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%231d4ed8\' fill-opacity=\'0.03\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-50"></div>
-            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-sarkari-blue/10 blur-3xl"></div>
-            <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-sarkari-saffron/10 blur-3xl"></div>
-        </div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 text-sarkari-blue text-sm font-semibold mb-6 animate-fade-in-up">
-                <span class="relative flex h-2 w-2">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sarkari-blue opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2 w-2 bg-sarkari-blue"></span>
-                </span>
-                Trusted by 50,000+ Aspirants
-            </div>
-            
-            <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-6 animate-fade-in-up delay-100">
-                Your <span class="text-gradient">Official</span> Hub for <br class="hidden md:block" />
-                Sarkari Exam Preparation
-            </h1>
-            
-            <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-600 animate-fade-in-up delay-200">
-                Resize photos, compress signatures, and create biodata for SSC, UPSC, Railway, and Banking exams. Fast, Free, and Accurate.
-            </p>
-            
-            <div class="mt-10 flex justify-center gap-4 animate-fade-in-up delay-300">
-                <a href="#tools" class="px-8 py-4 bg-sarkari-blue text-white font-bold rounded-xl shadow-lg hover:bg-blue-700 hover:shadow-blue-500/30 transition-all transform hover:-translate-y-1 flex items-center gap-2">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i> Explore Tools
-                </a>
-                <a href="#faq" class="px-8 py-4 bg-white text-slate-700 border border-slate-200 font-bold rounded-xl hover:bg-slate-50 hover:border-slate-300 transition-all flex items-center gap-2">
-                    <i class="fa-regular fa-circle-question"></i> How to Use
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <!-- TOOLS GRID SECTION -->
-    <main id="tools" class="py-16 bg-white relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <!-- Section Header -->
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-slate-900">Essential Exam Utilities</h2>
-                <p class="mt-2 text-slate-500">Select a tool below to get started instantly</p>
-                <div class="w-20 h-1 bg-sarkari-blue mx-auto mt-4 rounded-full"></div>
-            </div>
-
-            <!-- Grid Container -->
-            <div id="toolsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Tools will be injected here by JavaScript -->
-            </div>
-
-            <!-- No Results State -->
-            <div id="noResults" class="hidden text-center py-12">
-                <div class="inline-block p-4 rounded-full bg-slate-100 mb-4">
-                    <i class="fa-solid fa-magnifying-glass text-slate-400 text-2xl"></i>
-                </div>
-                <h3 class="text-lg font-medium text-slate-900">No tools found</h3>
-                <p class="text-slate-500">Try adjusting your search terms</p>
-            </div>
-        </div>
-    </main>
-
-    <!-- SEO CONTENT SECTION -->
-    <section class="py-16 bg-slate-50 border-t border-slate-200">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-lg prose-slate">
-            <h2 class="text-3xl font-bold text-slate-900 text-center mb-8">Why Use Sarkari Tool?</h2>
-            
-            <div class="grid md:grid-cols-2 gap-8 mb-12">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                    <div class="w-12 h-12 bg-green-100 text-sarkari-green rounded-lg flex items-center justify-center mb-4 text-xl">
-                        <i class="fa-solid fa-bolt"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-2">Lightning Fast Processing</h3>
-                    <p class="text-slate-600 text-sm">Our client-side processing ensures your photos are resized in milliseconds without uploading to a server, ensuring maximum privacy.</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                    <div class="w-12 h-12 bg-blue-100 text-sarkari-blue rounded-lg flex items-center justify-center mb-4 text-xl">
-                        <i class="fa-solid fa-shield-halved"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-2">100% Accurate Dimensions</h3>
-                    <p class="text-slate-600 text-sm">We strictly follow the official notification guidelines for SSC CGL, UPSC Civil Services, Railway NTPC, and Banking exams.</p>
-                </div>
-            </div>
-
-            <h3 class="text-2xl font-bold text-slate-900 mt-12 mb-4">How to Resize Photo for SSC Online Application?</h3>
-            <p class="text-slate-600 mb-4">
-                Uploading the correct photo size is crucial for SSC applications. A common mistake is uploading a high-resolution image directly from a phone. 
-                Use our <strong>SSC Photo Resizer</strong> tool to automatically adjust your image to the required dimensions (typically 20 KB to 50 KB) and resolution (100x120 pixels).
-            </p>
-            <ol class="list-decimal pl-5 space-y-2 text-slate-600 mb-8">
-                <li>Click on the "SSC Resizer" tool above.</li>
-                <li>Upload your recent passport size photograph.</li>
-                <li>Adjust the crop area to fit your face correctly.</li>
-                <li>Download the compressed JPG file ready for upload.</li>
-            </ol>
-
-            <h3 class="text-2xl font-bold text-slate-900 mt-12 mb-4">UPSC Signature Resize Guidelines</h3>
-            <p class="text-slate-600">
-                For UPSC exams like IAS, IPS, and IFS, the signature file must be between 20 KB and 300 KB. The dimensions should be approximately 140 x 60 pixels. 
-                Our tool ensures the aspect ratio is maintained while compressing the file size to meet these strict requirements.
-            </p>
-        </div>
-    </section>
-
-    <!-- FAQ SECTION -->
-    <section id="faq" class="py-16 bg-white">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-slate-900 text-center mb-10">Frequently Asked Questions</h2>
-            
-            <div class="space-y-4" id="faqContainer">
-                <!-- FAQ Item 1 -->
-                <div class="border border-slate-200 rounded-lg overflow-hidden">
-                    <button class="w-full px-6 py-4 text-left bg-slate-50 hover:bg-slate-100 flex justify-between items-center focus:outline-none transition-colors" onclick="toggleFaq(this)">
-                        <span class="font-semibold text-slate-800">Is Sarkari Tool free to use?</span>
-                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300"></i>
-                    </button>
-                    <div class="hidden px-6 py-4 bg-white text-slate-600 text-sm border-t border-slate-100">
-                        Yes, all tools on Sarkari Tool are 100% free to use. We believe in helping every student access government job opportunities without financial barriers.
-                    </div>
-                </div>
-
-                <!-- FAQ Item 2 -->
-                <div class="border border-slate-200 rounded-lg overflow-hidden">
-                    <button class="w-full px-6 py-4 text-left bg-slate-50 hover:bg-slate-100 flex justify-between items-center focus:outline-none transition-colors" onclick="toggleFaq(this)">
-                        <span class="font-semibold text-slate-800">What is the photo size for Railway (RRB) exams?</span>
-                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300"></i>
-                    </button>
-                    <div class="hidden px-6 py-4 bg-white text-slate-600 text-sm border-t border-slate-100">
-                        For RRB NTPC and Group D exams, the photograph should be between 20 KB to 50 KB with dimensions of 200 x 230 pixels (preferred). The signature should be between 10 KB to 40 KB.
-                    </div>
-                </div>
-
-                <!-- FAQ Item 3 -->
-                <div class="border border-slate-200 rounded-lg overflow-hidden">
-                    <button class="w-full px-6 py-4 text-left bg-slate-50 hover:bg-slate-100 flex justify-between items-center focus:outline-none transition-colors" onclick="toggleFaq(this)">
-                        <span class="font-semibold text-slate-800">Is my data safe? Do you store my photos?</span>
-                        <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300"></i>
-                    </button>
-                    <div class="hidden px-6 py-4 bg-white text-slate-600 text-sm border-t border-slate-100">
-                        Absolutely. We use client-side processing technology. This means your photos are processed directly in your browser and are never uploaded to our servers. Your privacy is our top priority.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-                <div class="col-span-1 md:col-span-1">
-                    <div class="flex items-center gap-2 mb-4">
-                        <div class="w-8 h-8 bg-sarkari-blue rounded flex items-center justify-center text-white">
-                            <i class="fa-solid fa-landmark text-sm"></i>
-                        </div>
-                        <span class="text-xl font-bold text-white">SarkariTool</span>
-                    </div>
-                    <p class="text-sm text-slate-400">
-                        India's most trusted platform for government exam utilities. Helping aspirants prepare better.
-                    </p>
-                </div>
-                
-                <div>
-                    <h4 class="text-white font-semibold mb-4">Quick Links</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="hover:text-white transition-colors">Home</a></li>
-                        <li><a href="#tools" class="hover:text-white transition-colors">All Tools</a></li>
-                        <li><a href="#faq" class="hover:text-white transition-colors">Help Center</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-white font-semibold mb-4">Popular Tools</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="ssc-resizer.html" class="hover:text-white transition-colors">SSC Resizer</a></li>
-                        <li><a href="upsc-resizer.html" class="hover:text-white transition-colors">UPSC Resizer</a></li>
-                        <li><a href="passport-photo.html" class="hover:text-white transition-colors">Passport Photo</a></li>
-                        <li><a href="neet-tool.html" class="hover:text-white transition-colors">Neet 2026 Tool</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-white font-semibold mb-4">Legal</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="legal.html" class="hover:text-white transition-colors">Privacy Policy</a></li>
-                        <li><a href="legal.html" class="hover:text-white transition-colors">Terms of Service</a></li>
-                        <li><a href="legal.html" class="hover:text-white transition-colors">Disclaimer</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-sm text-slate-500">&copy; 2026 Sarkari Tool. All rights reserved.</p>
-                <div class="flex gap-4">
-                    <a href="#" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-sarkari-blue hover:text-white transition-all"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="#" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-sarkari-blue hover:text-white transition-all"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-sarkari-blue hover:text-white transition-all"><i class="fa-brands fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- JSON-LD SCHEMA MARKUP FOR SEO -->
+    <!-- 3. Google JSON-LD Structured Data (Organization + WebSite + SearchAction + ItemList + FAQ) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "Sarkari Tool",
-      "url": "https://sarkaritool.in",
+      "url": "https://sarkaritool.netlify.app/",
+      "description": "Official online utilities hub for SSC, UPSC, Railway, NEET exams photo resizing and document tools.",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://sarkaritool.in/search?q={search_term_string}",
+        "target": "https://sarkaritool.netlify.app/?q={search_term_string}#tools",
         "query-input": "required name=search_term_string"
       }
     }
     </script>
-    
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "Sarkari Tool",
-      "url": "https://sarkaritool.in",
-      "logo": "https://sarkaritool.in/logo.png",
-      "sameAs": [
-        "https://twitter.com/sarkaritool",
-        "https://facebook.com/sarkaritool"
+      "url": "https://sarkaritool.netlify.app/",
+      "logo": "https://sarkaritool.netlify.app/logo.png"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Sarkari Online Utilities & Photo Resizers",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "SSC Photo Resizer",
+          "url": "https://sarkaritool.netlify.app/tools/ssc-resizer.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "UPSC Photo & Signature Resizer",
+          "url": "https://sarkaritool.netlify.app/tools/upsc-resizer.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Railway Photo Resizer",
+          "url": "https://sarkaritool.netlify.app/tools/railway-resizer.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Passport Photo Maker",
+          "url": "https://sarkaritool.netlify.app/tools/passport-photo.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "NEET Postcard Photo Maker",
+          "url": "https://sarkaritool.netlify.app/tools/neet-tool.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "Sarkari Photo Date Maker",
+          "url": "https://sarkaritool.netlify.app/tools/sarkari-tool.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "name": "Marriage Biodata Maker",
+          "url": "https://sarkaritool.netlify.app/tools/marriage-biodata.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "name": "Stylish Font & Name Maker",
+          "url": "https://sarkaritool.netlify.app/tools/stylish-name.html"
+        }
       ]
     }
     </script>
@@ -383,7 +174,15 @@
           "name": "Is Sarkari Tool free to use?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, all tools on Sarkari Tool are 100% free to use. We believe in helping every student access government job opportunities without financial barriers."
+            "text": "Yes, all tools on Sarkari Tool are 100% free with no login or hidden charges. Students can resize photos and generate documents unlimited times."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How to resize photo to 20kb - 50kb for SSC CGL & CHSL?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Open the SSC Photo Resizer tool on Sarkari Tool, upload your image, adjust the crop box to 3.5cm x 4.5cm, and download the compressed image. It automatically maintains the required 20KB to 50KB size limit."
           }
         },
         {
@@ -391,192 +190,813 @@
           "name": "What is the photo size for Railway (RRB) exams?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "For RRB NTPC and Group D exams, the photograph should be between 20 KB to 50 KB with dimensions of 200 x 230 pixels (preferred). The signature should be between 10 KB to 40 KB."
+            "text": "For RRB NTPC, Group D, and ALP exams, photographs should be between 20 KB to 50 KB with 200 x 230 pixel dimensions. Signatures must be between 10 KB to 40 KB."
           }
         },
         {
           "@type": "Question",
-          "name": "Is my data safe? Do you store my photos?",
+          "name": "What is the Postcard size photo requirement for NEET 2026?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Absolutely. We use client-side processing technology. This means your photos are processed directly in your browser and are never uploaded to our servers. Your privacy is our top priority."
+            "text": "NTA requires a 4x6 inch Postcard size photograph for NEET UG with Candidate Name and Date of taking photo printed at the bottom with white background."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my data safe? Do you store photos on a server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, 100% safe. All image resizing, compression, and PDF generation happen entirely inside your device browser using HTML5 Canvas. No image or personal detail is ever uploaded to our servers."
           }
         }
       ]
     }
     </script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased pb-20 md:pb-0">
 
-    <!-- MAIN JAVASCRIPT LOGIC -->
-    <script>
-        // --- 1. DATA SOURCE (SCALABLE) ---
-        // Add new tools here to automatically render them
-        const toolsData = [
-            {
-                id: 1,
-                name: "SSC Photo Resizer",
-                shortDesc: "Resize photo/sign for SSC CGL/CHSL (20-50kb).",
-                fullDesc: "Official dimensions for Staff Selection Commission exams.",
-                link: "ssc-resizer.html",
-                icon: "fa-id-card",
-                color: "blue",
-                tags: ["ssc", "cgl", "chsl", "exam"],
-                trending: true
-            },
-            {
-                id: 2,
-                name: "UPSC Photo Resizer",
-                shortDesc: "Compress images for Civil Services (IAS/IPS).",
-                fullDesc: "Meets strict UPSC guidelines for Prelims and Mains.",
-                link: "upsc-resizer.html",
-                icon: "fa-scale-balanced",
-                color: "indigo",
-                tags: ["upsc", "ias", "ips", "civil services"],
-                trending: true
-            },
-            {
-                id: 3,
-                name: "Railway Photo Resizer",
-                shortDesc: "RRB NTPC & Group D compliant sizes.",
-                fullDesc: "Optimized for Railway Recruitment Board applications.",
-                link: "railway-resizer.html",
-                icon: "fa-train",
-                color: "red",
-                tags: ["rrb", "railway", "ntpc", "group d"],
-                trending: false
-            },
-            {
-                id: 4,
-                name: "Passport Photo Maker",
-                shortDesc: "2x2 inch standard for Visa/PAN/Aadhaar.",
-                fullDesc: "Generate standard passport size photos with white background.",
-                link: "passport-photo.html",
-                icon: "fa-camera",
-                color: "green",
-                tags: ["passport", "visa", "pan", "aadhaar", "id"],
-                trending: true
-            },
-            {
-                id: 5,
-                name: "Marriage Biodata Maker",
-                shortDesc: "Create beautiful wedding biodata PDFs.",
-                fullDesc: "Professional templates for matrimonial profiles.",
-                link: "marriage-biodata.html",
-                icon: "fa-heart",
-                color: "pink",
-                tags: ["biodata", "marriage", "wedding", "matrimony"],
-                trending: false
-            },
-            {
-                id: 6,
-                name: "NEET Postcard Maker",
-                shortDesc: "Postcard size photo for NEET application.",
-                fullDesc: "Specific size requirements for NTA Medical entrance.",
-                link: "neet-tool.html", // Placeholder for future
-                icon: "fa-user-doctor",
-                color: "teal",
-                tags: ["neet", "medical", "nta", "postcard"],
-                trending: true,
-                disabled: false
-            }
-    
-        ];
+    <!-- TOP NAVIGATION -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-nav shadow-sm" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 sm:h-20">
+                <!-- Brand Logo -->
+                <a href="/" class="flex items-center gap-2.5 sm:gap-3 group">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-landmark text-lg sm:text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Sarkari<span class="text-sarkari-blue">Tool</span></span>
+                        <span class="hidden sm:block text-[10px] text-slate-500 font-semibold tracking-widest uppercase">Official Exam Utilities</span>
+                    </div>
+                </a>
 
-        // --- 2. RENDER LOGIC ---
-        const toolsGrid = document.getElementById('toolsGrid');
-        const noResults = document.getElementById('noResults');
+                <!-- Desktop Search -->
+                <div class="hidden md:flex flex-1 max-w-md mx-8 relative">
+                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                        <i class="fa-solid fa-search"></i>
+                    </div>
+                    <input type="text" id="desktopSearchInput" placeholder="Search tool (SSC, UPSC, NEET, Passport)..." 
+                        class="w-full pl-10 pr-4 py-2 text-sm rounded-full border border-slate-200 bg-slate-100/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sarkari-blue transition-all">
+                </div>
 
-        function renderTools(filterText = '') {
-            toolsGrid.innerHTML = '';
-            let hasResults = false;
+                <!-- Right Quick Links -->
+                <div class="flex items-center gap-3">
+                    <a href="#tools" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-sarkari-blue bg-white border border-slate-200 px-3.5 py-2 rounded-lg hover:border-blue-300 transition-all">
+                        <i class="fa-solid fa-grid-2"></i> All Tools
+                    </a>
+                    <a href="#faq" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-sarkari-blue bg-white border border-slate-200 px-3.5 py-2 rounded-lg hover:border-blue-300 transition-all">
+                        <i class="fa-regular fa-circle-question"></i> Help
+                    </a>
+                    <a href="#tools" class="sm:hidden text-sarkari-blue bg-blue-50 w-9 h-9 rounded-lg flex items-center justify-center font-bold" title="Browse Tools">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-            const filteredTools = toolsData.filter(tool => {
-                const searchContent = `${tool.name} ${tool.shortDesc} ${tool.tags.join(' ')}`.toLowerCase();
-                return searchContent.includes(filterText.toLowerCase());
-            });
+    <!-- HERO SECTION (Touch-Optimized for Mobile) -->
+    <header class="relative pt-24 pb-12 sm:pt-32 sm:pb-20 overflow-hidden">
+        <!-- Ambient Backdrops -->
+        <div class="absolute inset-0 -z-10 pointer-events-none">
+            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-blue-500/10 blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-orange-500/10 blur-3xl"></div>
+        </div>
 
-            if (filteredTools.length === 0) {
-                noResults.classList.remove('hidden');
-            } else {
-                noResults.classList.add('hidden');
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <!-- Trust Badge -->
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-sarkari-blue text-xs sm:text-sm font-bold mb-4 animate-fade-in-up">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
+                </span>
+                100% Free • 50,000+ Indian Aspirants
+            </div>
+            
+            <!-- Headline -->
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight sm:leading-tight mb-3 sm:mb-5 animate-fade-in-up delay-100">
+                Official Utilities for <br class="hidden sm:block">
+                <span class="text-gradient">Sarkari Exams & Government Forms</span>
+            </h1>
+            
+            <!-- Subtitle -->
+            <p class="max-w-2xl mx-auto text-sm sm:text-lg text-slate-600 mb-6 sm:mb-8 leading-relaxed animate-fade-in-up delay-200">
+                Instantly resize photos and signatures for SSC, UPSC, Railway, and NEET exams. Generate marriage biodatas and standard passport photos with client-side privacy.
+            </p>
+            
+            <!-- Mobile-First Instant Search Bar -->
+            <div class="max-w-xl mx-auto mb-6 sm:mb-8 animate-fade-in-up delay-300">
+                <div class="relative flex items-center shadow-lg rounded-2xl bg-white border border-slate-200 focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-100 transition-all">
+                    <div class="pl-4 pr-2 text-slate-400 text-lg">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <input type="text" id="heroSearchInput" placeholder="Type exam name (e.g. SSC, UPSC, NEET)..." 
+                           class="w-full py-3.5 sm:py-4 text-sm sm:text-base text-slate-800 placeholder-slate-400 bg-transparent focus:outline-none">
+                    <button id="clearSearchBtn" class="hidden pr-4 text-slate-400 hover:text-slate-600" title="Clear Search">
+                        <i class="fa-solid fa-circle-xmark text-lg"></i>
+                    </button>
+                </div>
+                <div class="flex items-center justify-center gap-2 mt-2 text-[11px] sm:text-xs text-slate-500 font-medium">
+                    <span>Popular:</span>
+                    <button onclick="applyQuickSearch('ssc')" class="text-blue-600 hover:underline">SSC CGL</button> •
+                    <button onclick="applyQuickSearch('upsc')" class="text-blue-600 hover:underline">UPSC Sign</button> •
+                    <button onclick="applyQuickSearch('neet')" class="text-blue-600 hover:underline">NEET Postcard</button> •
+                    <button onclick="applyQuickSearch('passport')" class="text-blue-600 hover:underline">Passport</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- TOOLS GRID SECTION -->
+    <main id="tools" class="py-8 sm:py-16 bg-white border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Title -->
+            <div class="text-center mb-6 sm:mb-8">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Essential Online Tools</h2>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1">Choose a tool below to process your documents instantly in your browser</p>
+            </div>
+
+            <!-- Mobile-Friendly Category Filter Pills (Horizontal Touch Slider) -->
+            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-3 mb-6 sm:mb-10 sm:justify-center">
+                <button class="filter-chip active flex-shrink-0 px-3.5 py-2 text-xs sm:text-sm font-bold rounded-full border border-slate-200 transition-all" data-category="all">
+                    ✨ All Tools (8)
+                </button>
+                <button class="filter-chip flex-shrink-0 px-3.5 py-2 text-xs sm:text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-full border border-slate-200 transition-all" data-category="govt">
+                    🏛️ Govt Exams (SSC/UPSC/RRB)
+                </button>
+                <button class="filter-chip flex-shrink-0 px-3.5 py-2 text-xs sm:text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-full border border-slate-200 transition-all" data-category="photo">
+                    📸 Passport & ID Photo
+                </button>
+                <button class="filter-chip flex-shrink-0 px-3.5 py-2 text-xs sm:text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-full border border-slate-200 transition-all" data-category="neet">
+                    🩺 NEET Postcard
+                </button>
+                <button class="filter-chip flex-shrink-0 px-3.5 py-2 text-xs sm:text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-full border border-slate-200 transition-all" data-category="biodata">
+                    💍 Marriage Biodata
+                </button>
+                <button class="filter-chip flex-shrink-0 px-3.5 py-2 text-xs sm:text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-full border border-slate-200 transition-all" data-category="fun">
+                    🔤 Fancy Fonts
+                </button>
+            </div>
+
+            <!-- Static Crawlable Tools Grid (Mobile 1 Col, Tablet 2 Col, Desktop 3 Col) -->
+            <div id="toolsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+
+            <!-- Tool Card: SSC Photo Resizer 2026 -->
+            <div class="tool-card group relative bg-white rounded-2xl border border-slate-200 hover:border-blue-400 p-4 sm:p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                 data-tool-id="ssc"
+                 data-tool-category="govt"
+                 data-tool-name="SSC Photo Resizer 2026"
+                 data-tool-tags="ssc cgl chsl mts gd photo signature 20kb 50kb resizer govt exam">
                 
-                filteredTools.forEach((tool, index) => {
-                    hasResults = true;
-                    
-                    // Color mapping
-                    const colorClasses = {
-                        blue: 'bg-blue-50 text-blue-600 border-blue-100 hover:border-blue-300',
-                        indigo: 'bg-indigo-50 text-indigo-600 border-indigo-100 hover:border-indigo-300',
-                        red: 'bg-red-50 text-red-600 border-red-100 hover:border-red-300',
-                        green: 'bg-green-50 text-green-600 border-green-100 hover:border-green-300',
-                        pink: 'bg-pink-50 text-pink-600 border-pink-100 hover:border-pink-300',
-                        teal: 'bg-teal-50 text-teal-600 border-teal-100 hover:border-teal-300',
-                    };
-                    
-                    const theme = colorClasses[tool.color] || colorClasses.blue;
-                    const disabledClass = tool.disabled ? 'opacity-60 pointer-events-none grayscale' : '';
-                    const trendingBadge = tool.trending ? 
-                        `<div class="absolute -top-3 -right-3 bg-sarkari-saffron text-white text-xs font-bold px-3 py-1 rounded-full shadow-md z-10 animate-pulse-slow">TRENDING</div>` : '';
+                <div>
+                    <!-- Card Top Header -->
+                    <div class="flex items-start justify-between gap-3 mb-3">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center text-xl sm:text-2xl border text-blue-600 bg-blue-50 border-blue-200 shadow-sm group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-id-card"></i>
+                        </div>
+                        <div class="flex flex-col items-end gap-1">
+                            <span class="inline-flex items-center gap-1 bg-gradient-to-r from-orange-500 to-amber-500 text-white text-[10px] sm:text-xs font-bold px-2.5 py-0.5 rounded-full shadow-sm">
+            <i class="fa-solid fa-fire text-[9px]"></i> TRENDING
+         </span>
+                            <span class="text-[11px] font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">SSC CGL / CHSL / MTS / GD</span>
+                        </div>
+                    </div>
 
-                    const cardHTML = `
-                        <a href="${tool.link}" class="tool-card relative group block bg-white rounded-2xl border border-slate-200 p-6 ${theme} ${disabledClass} animate-fade-in-up" style="animation-delay: ${index * 100}ms">
-                            ${trendingBadge}
-                            <div class="flex items-start justify-between mb-4">
-                                <div class="w-14 h-14 rounded-xl bg-white shadow-sm flex items-center justify-center text-2xl border border-slate-100">
-                                    <i class="fa-solid ${tool.icon}"></i>
-                                </div>
-                                ${tool.disabled ? '<span class="text-xs font-bold bg-slate-200 text-slate-600 px-2 py-1 rounded">SOON</span>' : '<i class="fa-solid fa-arrow-right text-slate-300 group-hover:text-sarkari-blue transition-colors transform group-hover:translate-x-1"></i>'}
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-800 mb-2 group-hover:text-sarkari-blue transition-colors">${tool.name}</h3>
-                            <p class="text-sm text-slate-600 mb-3">${tool.shortDesc}</p>
-                            <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">${tool.fullDesc}</p>
-                        </a>
-                    `;
-                    toolsGrid.innerHTML += cardHTML;
+                    <!-- Title & Spec -->
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-sarkari-blue transition-colors leading-tight mb-1">
+                        <a href="tools/ssc-resizer.html" class="hover:underline focus:outline-none">SSC Photo Resizer 2026</a>
+                    </h3>
+                    
+                    <div class="inline-flex items-center gap-1 text-[11px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded mb-2.5">
+                        <i class="fa-solid fa-circle-check text-[10px]"></i> 20 KB - 50 KB • 3.5 × 4.5 cm
+                    </div>
+
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                        Official photo and signature compressor for Staff Selection Commission exams.
+                    </p>
+                </div>
+
+                <!-- Action Button (Touch-Friendly 44px+ min height) -->
+                <a href="tools/ssc-resizer.html" 
+                   class="w-full min-h-[44px] py-2.5 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-bold shadow-md hover:shadow-lg hover:opacity-95 transition-all flex items-center justify-center gap-2 group/btn">
+                    <span>Use Tool</span>
+                    <i class="fa-solid fa-arrow-right text-xs group-hover/btn:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <!-- Tool Card: UPSC Photo & Sign Resizer -->
+            <div class="tool-card group relative bg-white rounded-2xl border border-slate-200 hover:border-blue-400 p-4 sm:p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                 data-tool-id="upsc"
+                 data-tool-category="govt"
+                 data-tool-name="UPSC Photo & Sign Resizer"
+                 data-tool-tags="upsc civil services ias ips nda cds signature photo resizer">
+                
+                <div>
+                    <!-- Card Top Header -->
+                    <div class="flex items-start justify-between gap-3 mb-3">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center text-xl sm:text-2xl border text-indigo-600 bg-indigo-50 border-indigo-200 shadow-sm group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-scale-balanced"></i>
+                        </div>
+                        <div class="flex flex-col items-end gap-1">
+                            <span class="inline-flex items-center gap-1 bg-gradient-to-r from-orange-500 to-amber-500 text-white text-[10px] sm:text-xs font-bold px-2.5 py-0.5 rounded-full shadow-sm">
+            <i class="fa-solid fa-fire text-[9px]"></i> TRENDING
+         </span>
+                            <span class="text-[11px] font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">IAS / IPS / IFS / NDA / CDS</span>
+                        </div>
+                    </div>
+
+                    <!-- Title & Spec -->
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-sarkari-blue transition-colors leading-tight mb-1">
+                        <a href="tools/upsc-resizer.html" class="hover:underline focus:outline-none">UPSC Photo & Sign Resizer</a>
+                    </h3>
+                    
+                    <div class="inline-flex items-center gap-1 text-[11px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded mb-2.5">
+                        <i class="fa-solid fa-circle-check text-[10px]"></i> 20 KB - 300 KB • 350 × 350 px
+                    </div>
+
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                        Precise pixel dimension and aspect ratio resizer strictly compliant with UPSC guidelines.
+                    </p>
+                </div>
+
+                <!-- Action Button (Touch-Friendly 44px+ min height) -->
+                <a href="tools/upsc-resizer.html" 
+                   class="w-full min-h-[44px] py-2.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-bold shadow-md hover:shadow-lg hover:opacity-95 transition-all flex items-center justify-center gap-2 group/btn">
+                    <span>Use Tool</span>
+                    <i class="fa-solid fa-arrow-right text-xs group-hover/btn:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <!-- Tool Card: Railway Photo Resizer -->
+            <div class="tool-card group relative bg-white rounded-2xl border border-slate-200 hover:border-blue-400 p-4 sm:p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                 data-tool-id="railway"
+                 data-tool-category="govt"
+                 data-tool-name="Railway Photo Resizer"
+                 data-tool-tags="rrb railway ntpc group d alp technician photo date maker">
+                
+                <div>
+                    <!-- Card Top Header -->
+                    <div class="flex items-start justify-between gap-3 mb-3">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center text-xl sm:text-2xl border text-rose-600 bg-rose-50 border-rose-200 shadow-sm group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-train"></i>
+                        </div>
+                        <div class="flex flex-col items-end gap-1">
+                            
+                            <span class="text-[11px] font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">RRB NTPC / Group D / ALP</span>
+                        </div>
+                    </div>
+
+                    <!-- Title & Spec -->
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-sarkari-blue transition-colors leading-tight mb-1">
+                        <a href="tools/railway-resizer.html" class="hover:underline focus:outline-none">Railway Photo Resizer</a>
+                    </h3>
+                    
+                    <div class="inline-flex items-center gap-1 text-[11px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded mb-2.5">
+                        <i class="fa-solid fa-circle-check text-[10px]"></i> 20 KB - 50 KB • White / Light BG
+                    </div>
+
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                        Railway Recruitment Board photo size adjuster with date and name alignment.
+                    </p>
+                </div>
+
+                <!-- Action Button (Touch-Friendly 44px+ min height) -->
+                <a href="tools/railway-resizer.html" 
+                   class="w-full min-h-[44px] py-2.5 px-4 rounded-xl bg-gradient-to-r from-rose-600 to-red-600 text-white text-sm font-bold shadow-md hover:shadow-lg hover:opacity-95 transition-all flex items-center justify-center gap-2 group/btn">
+                    <span>Use Tool</span>
+                    <i class="fa-solid fa-arrow-right text-xs group-hover/btn:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <!-- Tool Card: Passport Photo Maker -->
+            <div class="tool-card group relative bg-white rounded-2xl border border-slate-200 hover:border-blue-400 p-4 sm:p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                 data-tool-id="passport"
+                 data-tool-category="photo"
+                 data-tool-name="Passport Photo Maker"
+                 data-tool-tags="passport size photo maker online visa pan card aadhaar id card">
+                
+                <div>
+                    <!-- Card Top Header -->
+                    <div class="flex items-start justify-between gap-3 mb-3">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center text-xl sm:text-2xl border text-emerald-600 bg-emerald-50 border-emerald-200 shadow-sm group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-camera"></i>
+                        </div>
+                        <div class="flex flex-col items-end gap-1">
+                            <span class="inline-flex items-center gap-1 bg-gradient-to-r from-orange-500 to-amber-500 text-white text-[10px] sm:text-xs font-bold px-2.5 py-0.5 rounded-full shadow-sm">
+            <i class="fa-solid fa-fire text-[9px]"></i> TRENDING
+         </span>
+                            <span class="text-[11px] font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">Visa / PAN / Aadhaar / Driving</span>
+                        </div>
+                    </div>
+
+                    <!-- Title & Spec -->
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-sarkari-blue transition-colors leading-tight mb-1">
+                        <a href="tools/passport-photo.html" class="hover:underline focus:outline-none">Passport Photo Maker</a>
+                    </h3>
+                    
+                    <div class="inline-flex items-center gap-1 text-[11px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded mb-2.5">
+                        <i class="fa-solid fa-circle-check text-[10px]"></i> 2 × 2 Inch • Standard Sheet Print
+                    </div>
+
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                        Make printable 4x6 / A4 sheets of 8, 16, or 32 passport photos with white background.
+                    </p>
+                </div>
+
+                <!-- Action Button (Touch-Friendly 44px+ min height) -->
+                <a href="tools/passport-photo.html" 
+                   class="w-full min-h-[44px] py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-sm font-bold shadow-md hover:shadow-lg hover:opacity-95 transition-all flex items-center justify-center gap-2 group/btn">
+                    <span>Use Tool</span>
+                    <i class="fa-solid fa-arrow-right text-xs group-hover/btn:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <!-- Tool Card: NEET Postcard Photo Maker -->
+            <div class="tool-card group relative bg-white rounded-2xl border border-slate-200 hover:border-blue-400 p-4 sm:p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                 data-tool-id="neet"
+                 data-tool-category="neet"
+                 data-tool-name="NEET Postcard Photo Maker"
+                 data-tool-tags="neet postcard size photo maker 4x6 nta medical exam date name dop">
+                
+                <div>
+                    <!-- Card Top Header -->
+                    <div class="flex items-start justify-between gap-3 mb-3">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center text-xl sm:text-2xl border text-teal-600 bg-teal-50 border-teal-200 shadow-sm group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-user-doctor"></i>
+                        </div>
+                        <div class="flex flex-col items-end gap-1">
+                            <span class="inline-flex items-center gap-1 bg-gradient-to-r from-orange-500 to-amber-500 text-white text-[10px] sm:text-xs font-bold px-2.5 py-0.5 rounded-full shadow-sm">
+            <i class="fa-solid fa-fire text-[9px]"></i> TRENDING
+         </span>
+                            <span class="text-[11px] font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">NTA NEET UG / PG 2026</span>
+                        </div>
+                    </div>
+
+                    <!-- Title & Spec -->
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-sarkari-blue transition-colors leading-tight mb-1">
+                        <a href="tools/neet-tool.html" class="hover:underline focus:outline-none">NEET Postcard Photo Maker</a>
+                    </h3>
+                    
+                    <div class="inline-flex items-center gap-1 text-[11px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded mb-2.5">
+                        <i class="fa-solid fa-circle-check text-[10px]"></i> 4 × 6 Inch • 10 KB - 200 KB
+                    </div>
+
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                        Generate official Postcard size photo with Candidate Name & Date of Photo (DOP) for NTA NEET.
+                    </p>
+                </div>
+
+                <!-- Action Button (Touch-Friendly 44px+ min height) -->
+                <a href="tools/neet-tool.html" 
+                   class="w-full min-h-[44px] py-2.5 px-4 rounded-xl bg-gradient-to-r from-teal-600 to-cyan-600 text-white text-sm font-bold shadow-md hover:shadow-lg hover:opacity-95 transition-all flex items-center justify-center gap-2 group/btn">
+                    <span>Use Tool</span>
+                    <i class="fa-solid fa-arrow-right text-xs group-hover/btn:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <!-- Tool Card: Sarkari Photo Date Maker -->
+            <div class="tool-card group relative bg-white rounded-2xl border border-slate-200 hover:border-blue-400 p-4 sm:p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                 data-tool-id="sarkari"
+                 data-tool-category="govt"
+                 data-tool-name="Sarkari Photo Date Maker"
+                 data-tool-tags="photo date maker candidate name dop on photo sarkari result exam">
+                
+                <div>
+                    <!-- Card Top Header -->
+                    <div class="flex items-start justify-between gap-3 mb-3">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center text-xl sm:text-2xl border text-amber-600 bg-amber-50 border-amber-200 shadow-sm group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-calendar-check"></i>
+                        </div>
+                        <div class="flex flex-col items-end gap-1">
+                            <span class="inline-flex items-center gap-1 bg-gradient-to-r from-orange-500 to-amber-500 text-white text-[10px] sm:text-xs font-bold px-2.5 py-0.5 rounded-full shadow-sm">
+            <i class="fa-solid fa-fire text-[9px]"></i> TRENDING
+         </span>
+                            <span class="text-[11px] font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">Name & Date on Photo (DOP)</span>
+                        </div>
+                    </div>
+
+                    <!-- Title & Spec -->
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-sarkari-blue transition-colors leading-tight mb-1">
+                        <a href="tools/sarkari-tool.html" class="hover:underline focus:outline-none">Sarkari Photo Date Maker</a>
+                    </h3>
+                    
+                    <div class="inline-flex items-center gap-1 text-[11px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded mb-2.5">
+                        <i class="fa-solid fa-circle-check text-[10px]"></i> Custom Text & Date • 1-Click
+                    </div>
+
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                        Add Candidate Name and Date of Taking Photo on your picture for state PSC, Police, and Teacher exams.
+                    </p>
+                </div>
+
+                <!-- Action Button (Touch-Friendly 44px+ min height) -->
+                <a href="tools/sarkari-tool.html" 
+                   class="w-full min-h-[44px] py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 text-white text-sm font-bold shadow-md hover:shadow-lg hover:opacity-95 transition-all flex items-center justify-center gap-2 group/btn">
+                    <span>Use Tool</span>
+                    <i class="fa-solid fa-arrow-right text-xs group-hover/btn:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <!-- Tool Card: Marriage Biodata Maker -->
+            <div class="tool-card group relative bg-white rounded-2xl border border-slate-200 hover:border-blue-400 p-4 sm:p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                 data-tool-id="biodata"
+                 data-tool-category="biodata"
+                 data-tool-name="Marriage Biodata Maker"
+                 data-tool-tags="marriage biodata maker pdf shadi biodata format matrimonial profile">
+                
+                <div>
+                    <!-- Card Top Header -->
+                    <div class="flex items-start justify-between gap-3 mb-3">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center text-xl sm:text-2xl border text-pink-600 bg-pink-50 border-pink-200 shadow-sm group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <div class="flex flex-col items-end gap-1">
+                            
+                            <span class="text-[11px] font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">Hindu / Muslim / Jain / Sikh</span>
+                        </div>
+                    </div>
+
+                    <!-- Title & Spec -->
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-sarkari-blue transition-colors leading-tight mb-1">
+                        <a href="tools/marriage-biodata.html" class="hover:underline focus:outline-none">Marriage Biodata Maker</a>
+                    </h3>
+                    
+                    <div class="inline-flex items-center gap-1 text-[11px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded mb-2.5">
+                        <i class="fa-solid fa-circle-check text-[10px]"></i> PDF & HD Image • Beautiful Design
+                    </div>
+
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                        Create handsome and elegant marriage biodata for WhatsApp and matrimonial proposals.
+                    </p>
+                </div>
+
+                <!-- Action Button (Touch-Friendly 44px+ min height) -->
+                <a href="tools/marriage-biodata.html" 
+                   class="w-full min-h-[44px] py-2.5 px-4 rounded-xl bg-gradient-to-r from-pink-600 to-rose-600 text-white text-sm font-bold shadow-md hover:shadow-lg hover:opacity-95 transition-all flex items-center justify-center gap-2 group/btn">
+                    <span>Use Tool</span>
+                    <i class="fa-solid fa-arrow-right text-xs group-hover/btn:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <!-- Tool Card: Stylish Font & Name Maker -->
+            <div class="tool-card group relative bg-white rounded-2xl border border-slate-200 hover:border-blue-400 p-4 sm:p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                 data-tool-id="stylish"
+                 data-tool-category="fun"
+                 data-tool-name="Stylish Font & Name Maker"
+                 data-tool-tags="stylish name fonts symbols fancy text free fire bgmi instagram bio">
+                
+                <div>
+                    <!-- Card Top Header -->
+                    <div class="flex items-start justify-between gap-3 mb-3">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center text-xl sm:text-2xl border text-purple-600 bg-purple-50 border-purple-200 shadow-sm group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <div class="flex flex-col items-end gap-1">
+                            
+                            <span class="text-[11px] font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">100+ Fancy Unicode Fonts</span>
+                        </div>
+                    </div>
+
+                    <!-- Title & Spec -->
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-sarkari-blue transition-colors leading-tight mb-1">
+                        <a href="tools/stylish-name.html" class="hover:underline focus:outline-none">Stylish Font & Name Maker</a>
+                    </h3>
+                    
+                    <div class="inline-flex items-center gap-1 text-[11px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded mb-2.5">
+                        <i class="fa-solid fa-circle-check text-[10px]"></i> 1-Click Copy • Gaming & Social
+                    </div>
+
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                        Generate stylish names, symbols, and bio fonts for Instagram, Free Fire, and WhatsApp.
+                    </p>
+                </div>
+
+                <!-- Action Button (Touch-Friendly 44px+ min height) -->
+                <a href="tools/stylish-name.html" 
+                   class="w-full min-h-[44px] py-2.5 px-4 rounded-xl bg-gradient-to-r from-purple-600 to-violet-600 text-white text-sm font-bold shadow-md hover:shadow-lg hover:opacity-95 transition-all flex items-center justify-center gap-2 group/btn">
+                    <span>Use Tool</span>
+                    <i class="fa-solid fa-arrow-right text-xs group-hover/btn:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+            </div>
+
+            <!-- Empty Search State -->
+            <div id="noResults" class="hidden text-center py-16">
+                <div class="inline-block p-4 rounded-full bg-slate-100 mb-3 text-slate-400 text-3xl">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-1">No Matching Tools Found</h3>
+                <p class="text-sm text-slate-500 mb-4">Try searching for SSC, UPSC, NEET, Railway, or Passport Photo.</p>
+                <button onclick="applyQuickSearch('')" class="px-4 py-2 bg-sarkari-blue text-white text-xs font-bold rounded-lg shadow">
+                    Show All Tools
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- SEO CONTENT & EDUCATIONAL SECTION -->
+    <section class="py-12 sm:py-16 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 text-center mb-8">Why Aspirants Choose Sarkari Tool?</h2>
+            
+            <div class="grid sm:grid-cols-2 gap-4 sm:gap-6 mb-10">
+                <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 text-sarkari-green rounded-xl flex items-center justify-center mb-3 text-lg sm:text-xl">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1.5">100% In-Browser Privacy</h3>
+                    <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                        Photos are processed directly inside your browser via HTML5 Canvas. They are never uploaded or saved on any external server.
+                    </p>
+                </div>
+                <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 text-sarkari-blue rounded-xl flex items-center justify-center mb-3 text-lg sm:text-xl">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1.5">Official Examination Dimensions</h3>
+                    <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                        Strictly compliant with official notices for SSC CGL/CHSL/MTS, UPSC Civil Services, NTA NEET 2026, and RRB Railway exams.
+                    </p>
+                </div>
+            </div>
+
+            <!-- SEO Content Blocks -->
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6 text-slate-700 text-xs sm:text-sm leading-relaxed">
+                <div>
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2">How to Resize Photo for SSC & Railway Applications?</h3>
+                    <p>
+                        Uploading photos outside the required 20 KB to 50 KB range causes automatic rejection in Staff Selection Commission (SSC) and Railway (RRB) online forms.
+                        Use our dedicated <a href="tools/ssc-resizer.html" class="text-blue-600 font-bold hover:underline">SSC Photo Resizer</a> or <a href="tools/railway-resizer.html" class="text-blue-600 font-bold hover:underline">Railway Resizer</a> to automatically optimize resolution to 3.5cm x 4.5cm with crisp clarity.
+                    </p>
+                </div>
+
+                <div class="border-t border-slate-100 pt-5">
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2">UPSC Signature & Photo Compression Rules</h3>
+                    <p>
+                        UPSC requires signatures to be between 20 KB and 300 KB with approximately 350x350 pixel aspect ratio. Our <a href="tools/upsc-resizer.html" class="text-blue-600 font-bold hover:underline">UPSC Resizer</a> ensures zero distortion while maintaining optimal DPI.
+                    </p>
+                </div>
+
+                <div class="border-t border-slate-100 pt-5">
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2">NEET UG 2026 Postcard Size Photo Guidelines</h3>
+                    <p>
+                        National Testing Agency (NTA) mandates a 4" x 6" Postcard photo with candidate name and date of photo (DOP) printed at the bottom on a white background. Use our <a href="tools/neet-tool.html" class="text-blue-600 font-bold hover:underline">NEET Postcard Tool</a> to generate this in under 10 seconds.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION (Preserved & Enhanced) -->
+    <section id="faq" class="py-12 sm:py-16 bg-white border-t border-slate-200">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Frequently Asked Questions</h2>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1">Common questions about Sarkari exam photo sizes and guidelines</p>
+            </div>
+            
+            <div class="space-y-3 sm:space-y-4" id="faqContainer">
+                <!-- FAQ 1 -->
+                <div class="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                    <button class="w-full px-5 py-3.5 sm:py-4 text-left bg-slate-50 hover:bg-slate-100 flex justify-between items-center focus:outline-none transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-bold text-slate-800 text-xs sm:text-sm">Is Sarkari Tool 100% free to use?</span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-5 py-3.5 bg-white text-slate-600 text-xs sm:text-sm border-t border-slate-100 leading-relaxed">
+                        Yes, all tools on Sarkari Tool are 100% free with no limits, no watermarks, and no sign-up required.
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                    <button class="w-full px-5 py-3.5 sm:py-4 text-left bg-slate-50 hover:bg-slate-100 flex justify-between items-center focus:outline-none transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-bold text-slate-800 text-xs sm:text-sm">What is the official photo size for Railway (RRB) exams?</span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-5 py-3.5 bg-white text-slate-600 text-xs sm:text-sm border-t border-slate-100 leading-relaxed">
+                        For RRB NTPC, Group D, and ALP exams, the photograph must be between 20 KB to 50 KB with 200 x 230 pixel dimensions. The signature must be between 10 KB to 40 KB.
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                    <button class="w-full px-5 py-3.5 sm:py-4 text-left bg-slate-50 hover:bg-slate-100 flex justify-between items-center focus:outline-none transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-bold text-slate-800 text-xs sm:text-sm">Is my data safe? Do you store or upload my photos?</span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-5 py-3.5 bg-white text-slate-600 text-xs sm:text-sm border-t border-slate-100 leading-relaxed">
+                        Absolutely. We use local client-side processing technology. Your images are cropped and compressed directly inside your web browser and never touch any server.
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                    <button class="w-full px-5 py-3.5 sm:py-4 text-left bg-slate-50 hover:bg-slate-100 flex justify-between items-center focus:outline-none transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-bold text-slate-800 text-xs sm:text-sm">What is the Postcard photo size required for NEET 2026?</span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-5 py-3.5 bg-white text-slate-600 text-xs sm:text-sm border-t border-slate-100 leading-relaxed">
+                        NTA NEET requires a 4"x6" Postcard photo (file size 10 KB - 200 KB) with Candidate Name and Date of taking photo printed at the bottom with a clear white background.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white">
+                            <i class="fa-solid fa-landmark text-sm"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">SarkariTool</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                        India's most trusted free online platform for government exam utilities, photo resizing, and form document preparation.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-3">Quick Navigation</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm">
+                        <li><a href="/" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#tools" class="hover:text-white transition-colors">All Exam Tools</a></li>
+                        <li><a href="#faq" class="hover:text-white transition-colors">Help & FAQ</a></li>
+                        <li><a href="legal.html" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-3">Exam Utilities</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm">
+                        <li><a href="tools/ssc-resizer.html" class="hover:text-white transition-colors">SSC Photo Resizer</a></li>
+                        <li><a href="tools/upsc-resizer.html" class="hover:text-white transition-colors">UPSC Signature Resizer</a></li>
+                        <li><a href="tools/railway-resizer.html" class="hover:text-white transition-colors">Railway RRB Resizer</a></li>
+                        <li><a href="tools/neet-tool.html" class="hover:text-white transition-colors">NEET Postcard Maker</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-3">Document Tools</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm">
+                        <li><a href="tools/passport-photo.html" class="hover:text-white transition-colors">Passport Size Photo Maker</a></li>
+                        <li><a href="tools/sarkari-tool.html" class="hover:text-white transition-colors">Photo Date & Name Maker</a></li>
+                        <li><a href="tools/marriage-biodata.html" class="hover:text-white transition-colors">Marriage Biodata PDF</a></li>
+                        <li><a href="tools/stylish-name.html" class="hover:text-white transition-colors">Stylish Font Generator</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-slate-500">
+                <p>&copy; 2026 Sarkari Tool. 100% Free & Open Client-Side Utilities.</p>
+                <div class="flex gap-4 text-sm">
+                    <a href="legal.html" class="hover:text-slate-300">Privacy</a>
+                    <a href="legal.html" class="hover:text-slate-300">Terms</a>
+                    <a href="legal.html" class="hover:text-slate-300">Disclaimer</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MOBILE FLOATING BOTTOM APP BAR (Visible ONLY on Phones) -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-slate-200 px-4 py-2 shadow-2xl flex justify-around items-center">
+        <a href="/" class="flex flex-col items-center text-sarkari-blue text-[10px] font-bold">
+            <i class="fa-solid fa-house text-base mb-0.5"></i>
+            <span>Home</span>
+        </a>
+        <a href="#tools" onclick="focusSearch()" class="flex flex-col items-center text-slate-600 hover:text-sarkari-blue text-[10px] font-bold">
+            <i class="fa-solid fa-magnifying-glass text-base mb-0.5"></i>
+            <span>Search</span>
+        </a>
+        <a href="tools/ssc-resizer.html" class="flex flex-col items-center text-slate-600 hover:text-sarkari-blue text-[10px] font-bold">
+            <i class="fa-solid fa-bolt text-base mb-0.5 text-amber-500"></i>
+            <span>SSC</span>
+        </a>
+        <a href="tools/neet-tool.html" class="flex flex-col items-center text-slate-600 hover:text-sarkari-blue text-[10px] font-bold">
+            <i class="fa-solid fa-user-doctor text-base mb-0.5 text-teal-600"></i>
+            <span>NEET</span>
+        </a>
+        <a href="#faq" class="flex flex-col items-center text-slate-600 hover:text-sarkari-blue text-[10px] font-bold">
+            <i class="fa-regular fa-circle-question text-base mb-0.5"></i>
+            <span>FAQ</span>
+        </a>
+    </div>
+
+    <!-- CLIENT JAVASCRIPT FOR SEARCH, FILTERS & FAQ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const heroSearch = document.getElementById('heroSearchInput');
+            const desktopSearch = document.getElementById('desktopSearchInput');
+            const clearBtn = document.getElementById('clearSearchBtn');
+            const toolsGrid = document.getElementById('toolsGrid');
+            const noResults = document.getElementById('noResults');
+            const filterChips = document.querySelectorAll('.filter-chip');
+            const cards = toolsGrid.querySelectorAll('.tool-card');
+
+            let activeCategory = 'all';
+            let currentSearchTerm = '';
+
+            function filterCards() {
+                const term = currentSearchTerm.trim().toLowerCase();
+                let visibleCount = 0;
+
+                cards.forEach(card => {
+                    const name = (card.getAttribute('data-tool-name') || '').toLowerCase();
+                    const tags = (card.getAttribute('data-tool-tags') || '').toLowerCase();
+                    const category = card.getAttribute('data-tool-category');
+
+                    const matchesCategory = (activeCategory === 'all' || category === activeCategory);
+                    const matchesSearch = (term === '' || name.includes(term) || tags.includes(term));
+
+                    if (matchesCategory && matchesSearch) {
+                        card.style.display = '';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                if (noResults) {
+                    if (visibleCount === 0) {
+                        noResults.classList.remove('hidden');
+                    } else {
+                        noResults.classList.add('hidden');
+                    }
+                }
+            }
+
+            // Sync inputs
+            function onSearchInput(e) {
+                currentSearchTerm = e.target.value;
+                if (heroSearch) heroSearch.value = currentSearchTerm;
+                if (desktopSearch) desktopSearch.value = currentSearchTerm;
+
+                if (clearBtn) {
+                    if (currentSearchTerm.length > 0) {
+                        clearBtn.classList.remove('hidden');
+                    } else {
+                        clearBtn.classList.add('hidden');
+                    }
+                }
+                filterCards();
+            }
+
+            if (heroSearch) heroSearch.addEventListener('input', onSearchInput);
+            if (desktopSearch) desktopSearch.addEventListener('input', onSearchInput);
+
+            if (clearBtn) {
+                clearBtn.addEventListener('click', () => {
+                    currentSearchTerm = '';
+                    if (heroSearch) heroSearch.value = '';
+                    if (desktopSearch) desktopSearch.value = '';
+                    clearBtn.classList.add('hidden');
+                    filterCards();
                 });
             }
-        }
 
-        // Initial Render
-        renderTools();
+            // Category Filter Chips
+            filterChips.forEach(chip => {
+                chip.addEventListener('click', () => {
+                    filterChips.forEach(c => c.classList.remove('active'));
+                    chip.classList.add('active');
+                    activeCategory = chip.getAttribute('data-category');
+                    filterCards();
+                });
+            });
 
-        // --- 3. SEARCH FUNCTIONALITY ---
-        const searchInput = document.getElementById('searchInput');
-        const mobileSearchInput = document.getElementById('mobileSearchInput');
+            window.applyQuickSearch = function(keyword) {
+                currentSearchTerm = keyword;
+                if (heroSearch) heroSearch.value = keyword;
+                if (desktopSearch) desktopSearch.value = keyword;
+                if (clearBtn) {
+                    if (keyword.length > 0) clearBtn.classList.remove('hidden');
+                    else clearBtn.classList.add('hidden');
+                }
+                activeCategory = 'all';
+                filterChips.forEach(c => c.classList.remove('active'));
+                const allChip = document.querySelector('.filter-chip[data-category="all"]');
+                if (allChip) allChip.classList.add('active');
+                filterCards();
+                const toolsSection = document.getElementById('tools');
+                if (toolsSection) toolsSection.scrollIntoView({ behavior: 'smooth' });
+            };
 
-        function handleSearch(e) {
-            const term = e.target.value;
-            renderTools(term);
-        }
-
-        searchInput.addEventListener('input', handleSearch);
-        mobileSearchInput.addEventListener('input', handleSearch);
-
-        // --- 4. MOBILE MENU TOGGLE ---
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            const icon = mobileMenuBtn.querySelector('i');
-            if (mobileMenu.classList.contains('hidden')) {
-                icon.classList.remove('fa-xmark');
-                icon.classList.add('fa-bars');
-            } else {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-xmark');
-            }
+            window.focusSearch = function() {
+                if (heroSearch) {
+                    heroSearch.focus();
+                    heroSearch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            };
         });
 
-        // --- 5. FAQ ACCORDION LOGIC ---
+        // FAQ Toggle
         window.toggleFaq = function(button) {
             const content = button.nextElementSibling;
             const icon = button.querySelector('i');
-            
-            // Close others (optional, keeping it open allows comparison)
-            // document.querySelectorAll('#faqContainer > div > div').forEach(div => {
-            //     if (div !== content) div.classList.add('hidden');
-            // });
-
             if (content.classList.contains('hidden')) {
                 content.classList.remove('hidden');
                 icon.style.transform = 'rotate(180deg)';
@@ -587,16 +1007,6 @@
                 button.classList.remove('bg-slate-100');
             }
         };
-
-        // --- 6. NAVBAR SCROLL EFFECT ---
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 10) {
-                nav.classList.add('shadow-md');
-            } else {
-                nav.classList.remove('shadow-md');
-            }
-        });
     </script>
 </body>
 </html>

@@ -2,63 +2,81 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <!-- Home Page -->
    <url>
-      <loc>https://sarkaritool.netlify.app/ /</loc>
-      <lastmod>2026-01-05</lastmod>
+      <loc>https://sarkaritool.netlify.app/</loc>
+      <lastmod>2026-09-21</lastmod>
+      <changefreq>daily</changefreq>
       <priority>1.00</priority>
    </url>
    
-   <!-- Sarkari Tool Page -->
+   <!-- SSC Photo Resizer Tool -->
    <url>
-      <loc>https://sarkaritool.netlify.app//sarkari-tool.html</loc>
-      <lastmod>2026-01-05</lastmod>
+      <loc>https://sarkaritool.netlify.app/tools/ssc-resizer.html</loc>
+      <lastmod>2026-09-21</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.90</priority>
+   </url>
+
+   <!-- UPSC Photo & Signature Resizer -->
+   <url>
+      <loc>https://sarkaritool.netlify.app/tools/upsc-resizer.html</loc>
+      <lastmod>2026-09-21</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.90</priority>
+   </url>
+
+   <!-- NEET Postcard Size Photo Maker -->
+   <url>
+      <loc>https://sarkaritool.netlify.app/tools/neet-tool.html</loc>
+      <lastmod>2026-09-21</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.90</priority>
+   </url>
+
+   <!-- Passport Photo Maker Online -->
+   <url>
+      <loc>https://sarkaritool.netlify.app/tools/passport-photo.html</loc>
+      <lastmod>2026-09-21</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.90</priority>
+   </url>
+
+   <!-- Railway (RRB) Photo Resizer -->
+   <url>
+      <loc>https://sarkaritool.netlify.app/tools/railway-resizer.html</loc>
+      <lastmod>2026-09-21</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.85</priority>
+   </url>
+
+   <!-- Sarkari Exam Photo Date Maker -->
+   <url>
+      <loc>https://sarkaritool.netlify.app/tools/sarkari-tool.html</loc>
+      <lastmod>2026-09-21</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.85</priority>
+   </url>
+
+   <!-- Marriage Biodata Maker -->
+   <url>
+      <loc>https://sarkaritool.netlify.app/tools/marriage-biodata.html</loc>
+      <lastmod>2026-09-21</lastmod>
+      <changefreq>weekly</changefreq>
       <priority>0.80</priority>
    </url>
 
-   <!-- SSC Page -->
+   <!-- Stylish Name & Fancy Font Generator -->
    <url>
-      <loc>https://sarkaritool.netlify.app//ssc-resizer.html</loc>
-      <lastmod>2026-01-05</lastmod>
-      <priority>0.80</priority>
+      <loc>https://sarkaritool.netlify.app/tools/stylish-name.html</loc>
+      <lastmod>2026-09-21</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.75</priority>
    </url>
 
-   <!-- UPSC Page -->
+   <!-- Legal Information & Privacy Policy -->
    <url>
-      <loc>https://sarkaritool.netlify.app//upsc-resizer.html</loc>
-      <lastmod>2026-01-05</lastmod>
-      <priority>0.80</priority>
+      <loc>https://sarkaritool.netlify.app/legal.html</loc>
+      <lastmod>2026-09-21</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.50</priority>
    </url>
-
-   <!-- Railway Page -->
-   <url>
-      <loc>https://sarkaritool.netlify.app//railway-resizer.html</loc>
-      <lastmod>2026-01-05</lastmod>
-      <priority>0.80</priority>
-   </url>
-
-   <!-- Passport Page -->
-   <url>
-      <loc>https://sarkaritool.netlify.app//passport-photo.html</loc>
-      <lastmod>2026-01-05</lastmod>
-      <priority>0.80</priority>
-   </url>
-
-   <!-- Marriage Biodata Tool -->
-   <url>
-      <loc>https://sarkaritool.netlify.app//marriage-biodata.html</loc>
-      <lastmod>2026-01-05</lastmod>
-      <priority>0.80</priority>
-   </url>
-      <!-- stylish name-->
-   <url>
-      <loc>https://sarkaritool.netlify.app//stylish-name.html</loc>
-      <lastmod>2026-01-05</lastmod>
-      <priority>0.80</priority>
-   </url>
-   <!-- neet tool-->
-   <url>
-      <loc>https://sarkaritool.netlify.app//neet-tool.html</loc>
-      <lastmod>2026-01-05</lastmod>
-      <priority>0.80</priority>
-   </url>
-
 </urlset>
