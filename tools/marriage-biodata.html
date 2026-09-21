@@ -922,6 +922,7 @@
 
     <!-- INTERACTIVE JAVASCRIPT LOGIC -->
     <script>
+        const monetagUrl = "https://otieu.com/4/10386925"; // Monetag / Adsterra Direct Link Ad
         let currentThemeClass = 'theme-royal-maroon';
         let currentPhotoData = 'https://via.placeholder.com/150?text=Photo';
         let isPhotoVisible = true;
@@ -1184,6 +1185,8 @@
 
         // Download High Resolution Image (PNG / JPG) - Never Shifts or Overlaps!
         async function downloadAsImage() {
+            // Direct Link Ad Trigger
+            try { window.open(monetagUrl, '_blank'); } catch (e) {}
             const card = document.getElementById('printable-biodata');
             const wrapper = document.getElementById('preview-scale-wrapper');
             const prevTransform = wrapper.style.transform;
@@ -1220,6 +1223,8 @@
 
         // Download Printable PDF (A4 Ratio)
         async function downloadAsPDF() {
+            // Direct Link Ad Trigger
+            try { window.open(monetagUrl, '_blank'); } catch (e) {}
             const card = document.getElementById('printable-biodata');
             const wrapper = document.getElementById('preview-scale-wrapper');
             const prevTransform = wrapper.style.transform;
